@@ -13,6 +13,8 @@ import { Supplier } from "../Supplier/supplier.entity";
 import { Review } from "../Reviews/reviews.entity";
 import { Category } from "../Categories/categories.entity";
 
+type Itypes = "available" | "doing" | "finished";
+
 @Entity()
 export class Job {
   @PrimaryColumn("uuid")
@@ -24,14 +26,16 @@ export class Job {
   @Column()
   description: string;
 
-  @Column()
+  @Column("timestamp with time zone")
   delivery_date: Date;
 
   @Column()
   cep: string;
 
-  @Column()
-  type: string; //available - unavailable - doing - finished
+  @Column({
+    default: "available"
+  })
+  type: Itypes;
 
   @ManyToOne((type) => User, (user) => user.jobsRequired)
   client: User;

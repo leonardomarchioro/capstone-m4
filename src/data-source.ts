@@ -1,5 +1,4 @@
 import { DataSource } from "typeorm";
-
 require("dotenv").config();
 
 export const AppDataSource =
@@ -25,10 +24,12 @@ export const AppDataSource =
         migrations: ["src/migrations/*.ts"],
       });
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log("DataSource initialized");
-  })
-  .catch((err) => {
-    console.error("Error DataSource", err);
-  });
+export async function conectDatabase(){
+  return await AppDataSource.initialize()
+    .then(() => {
+      console.log("DataSource initialized");
+    })
+    .catch((err) => {
+      console.error("Error DataSource", err);
+    });
+}
