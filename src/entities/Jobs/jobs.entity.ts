@@ -13,8 +13,6 @@ import { Supplier } from "../Supplier/supplier.entity";
 import { Review } from "../Reviews/reviews.entity";
 import { Category } from "../Categories/categories.entity";
 
-type Itypes = "available" | "doing" | "finished";
-
 @Entity()
 export class Job {
   @PrimaryColumn("uuid")
@@ -33,9 +31,11 @@ export class Job {
   cep: string;
 
   @Column({
-    default: "available"
+    default: "available",
+    enum: ["available", "doing", "finished"],
+    enumName: "type_names"
   })
-  type: Itypes;
+  type: string;
 
   @ManyToOne((type) => User, (user) => user.jobsRequired)
   client: User;
