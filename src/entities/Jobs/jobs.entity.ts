@@ -5,7 +5,6 @@ import {
   OneToOne,
   JoinColumn,
   ManyToOne,
-  ManyToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "../User/user.entity";
@@ -13,7 +12,7 @@ import { Supplier } from "../Supplier/supplier.entity";
 import { Review } from "../Reviews/reviews.entity";
 import { Category } from "../Categories/categories.entity";
 
-@Entity()
+@Entity("jobs")
 export class Job {
   @PrimaryColumn("uuid")
   readonly id: string;

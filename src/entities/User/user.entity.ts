@@ -2,7 +2,7 @@ import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Job } from "../Jobs/jobs.entity";
 
-@Entity()
+@Entity("users")
 export class User {
   @PrimaryColumn("uuid")
   readonly id: string;
