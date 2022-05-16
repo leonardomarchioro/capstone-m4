@@ -1,6 +1,8 @@
 import { DataSource } from "typeorm";
 require("dotenv").config();
 
+console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA", process.env.DATABASE_URL)
+
 export const AppDataSource =
   process.env.DATABASE_URL 
     ? new DataSource({
