@@ -2,7 +2,7 @@ import { DataSource } from "typeorm";
 
 require("dotenv").config();
 
-export const AppDataSource =
+const conection =
   process.env.NODE_ENV === "test"
     ? new DataSource({
         type: "sqlite",
@@ -25,10 +25,13 @@ export const AppDataSource =
         migrations: ["src/migrations/*.ts"],
       });
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log("DataSource initialized");
-  })
-  .catch((err) => {
-    console.error("Error DataSource", err);
-  });
+export const AppDataSource = async () => {
+  await conection
+    .initialize()
+    .then(() => {
+      console.log("DataSource initialized");
+    })
+    .catch((err) => {
+      console.error("Error DataSource", err);
+    });
+};
