@@ -2,6 +2,11 @@ import { DataSource } from "typeorm";
 require("dotenv").config();
 
 export const AppDataSource =
+  process.env.DATABASE_URL 
+    ? new DataSource({
+      url: process.env.DATABASE_URL as string,
+      type: "postgres"
+  }) :
   process.env.NODE_ENV === "test"
     ? new DataSource({
         type: "sqlite",
