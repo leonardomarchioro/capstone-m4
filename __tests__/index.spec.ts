@@ -5,11 +5,18 @@ import {
   describe
 } from "@jest/globals"
 import request from "supertest"
-import { app } from "../src/app"
+import { app } from "app"
 
 describe("User routes", () => {
 
-  const userData = {
+  const userData: {
+    name: string
+    cpf: string
+    email: string
+    password: string
+    phone: string
+    id: string | null
+  } = {
     name: "Joao",
     cpf: "00000000000",
     email: "joao.exemplo@exemplo.com",
