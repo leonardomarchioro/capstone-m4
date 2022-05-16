@@ -7,9 +7,9 @@ export const AppDataSource =
       url: process.env.DATABASE_URL as string,
       type: "postgres",
       synchronize: true,
-      extra: {
-        ssl: true,
-      },
+      ssl:{
+        rejectUnauthorized: false
+      }
     }) :
   process.env.NODE_ENV === "test"
     ? new DataSource({
