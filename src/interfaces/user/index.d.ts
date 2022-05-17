@@ -4,10 +4,18 @@ export interface IUserCreate {
   password: string;
   phone: string;
 }
-<<<<<<< HEAD
-=======
 
 export interface IUserListOne {
   userId: string;
 }
->>>>>>> 0bf5388478c71caf128ec30006708e4646c3f4eb
+
+export interface IUserUpdate {
+  name?: string;
+  email?: string;
+  phone?: string;
+}
+
+export interface IPasswordUpdate {
+  userId: string;
+  newPassword: string;
+}
