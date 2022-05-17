@@ -7,7 +7,7 @@ const candidateDeleteController = async (
 ) => {
   const { jobId } = request.params;
 
-  await candidateDeleteService({ jobId });
+  await candidateDeleteService(jobId);
 
   return response.status(200).json({ message: "Deleted candidacy" });
 };

@@ -5,10 +5,10 @@ const candidateCreateController = async (
   request: Request,
   response: Response
 ) => {
-  const { job_id } = request.body;
-  const { userId } = request;
+  const { jobId } = request.body;
+  const userId = request.userId as string;
 
-  const newCandidate = await candidateCreateService({ userId, job_id });
+  const newCandidate = await candidateCreateService({ userId, jobId});
 
   return response.status(201).json(newCandidate);
 };
