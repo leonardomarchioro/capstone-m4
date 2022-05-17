@@ -6,7 +6,7 @@ const userDeleteController = async (request: Request, response: Response) => {
 
   await userDeleteService(userId);
 
-  return response.status(200).json({ message: "User deleted!" });
+  return response.sendStatus(204);
 };
 
 export default userDeleteController;
