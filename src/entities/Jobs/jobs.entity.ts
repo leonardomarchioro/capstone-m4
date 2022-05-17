@@ -24,7 +24,7 @@ export class Job {
 
   @Column({
     name: "delivery_date",
-    type: "timestamp with time zone"
+    type: "timestamp with time zone",
   })
   deliveryDate: Date;
 
@@ -34,7 +34,7 @@ export class Job {
   @Column({
     default: "available",
     enum: ["available", "doing", "finished"],
-    enumName: "type_names"
+    enumName: "type_names",
   })
   type: string;
 
@@ -42,13 +42,13 @@ export class Job {
   client: User;
 
   @ManyToOne((type) => User, (user) => user.id, {
-    nullable: true
+    nullable: true,
   })
   supplier: User | null;
 
   @OneToOne((type) => Review, {
     eager: true,
-    nullable: true
+    nullable: true,
   })
   @JoinColumn()
   review: Review | null;

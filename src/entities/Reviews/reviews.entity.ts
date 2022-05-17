@@ -1,7 +1,7 @@
-import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column } from "typeorm";
 import { v4 as uuid } from "uuid";
 
-@Entity()
+@Entity("reviews")
 export class Review {
   @PrimaryColumn("uuid")
   readonly id: string;
@@ -10,7 +10,7 @@ export class Review {
   score: number;
 
   @Column({
-    nullable: true
+    nullable: true,
   })
   comment: string | null;
 

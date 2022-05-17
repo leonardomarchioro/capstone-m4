@@ -2,7 +2,7 @@ import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Job } from "../Jobs/jobs.entity";
 
-@Entity()
+@Entity("users")
 export class User {
   @PrimaryColumn("uuid")
   readonly id: string;
@@ -20,9 +20,9 @@ export class User {
   phone: string;
 
   @Column({
-    enum: [ "client", "supplier" ],
+    enum: ["client", "supplier"],
     default: "client",
-    enumName: "role_enum"
+    enumName: "role_enum",
   })
   role: string;
 
