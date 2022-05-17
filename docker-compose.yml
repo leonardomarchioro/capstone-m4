@@ -8,6 +8,13 @@ services:
     ports:
       - 5432:5432
 
+  postgres-tests:
+    image: postgres:14.2-alpine
+    env_file:
+      - ./.env
+    ports:
+      - 5431:5432
+
   node:
     build: ./
     environment:

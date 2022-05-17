@@ -25,9 +25,9 @@ export const AppDataSource =
     }) :
   process.env.NODE_ENV === "test"
     ? new DataSource({
-        type: "sqlite",
-        database: ":memory:",
+        type: "postgres",
         synchronize: true,
+        url: "postgresql://application:password@localhost:5431/application?schema=sample",
         
         entities,
         migrations,
