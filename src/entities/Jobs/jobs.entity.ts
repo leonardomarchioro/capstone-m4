@@ -55,6 +55,7 @@ export class Job {
 
   @ManyToOne((type) => Category, (category) => category.name)
   category: Category;
+  job: Promise<User>;
 
   constructor() {
     if (!this.id) {
