@@ -9,8 +9,10 @@ export class Review {
   @Column("integer")
   score: number;
 
-  @Column()
-  comment: string;
+  @Column({
+    nullable: true
+  })
+  comment: string | null;
 
   constructor() {
     if (!this.id) {

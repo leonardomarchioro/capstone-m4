@@ -5,11 +5,9 @@ import {
   OneToOne,
   JoinColumn,
   ManyToOne,
-  ManyToMany,
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "../User/user.entity";
-import { Supplier } from "../Supplier/supplier.entity";
 import { Review } from "../Reviews/reviews.entity";
 import { Category } from "../Categories/categories.entity";
 
@@ -24,8 +22,11 @@ export class Job {
   @Column()
   description: string;
 
-  @Column("timestamp with time zone")
-  delivery_date: Date;
+  @Column({
+    name: "delivery_date",
+    type: "timestamp with time zone"
+  })
+  deliveryDate: Date;
 
   @Column()
   cep: string;
@@ -37,17 +38,20 @@ export class Job {
   })
   type: string;
 
-  @ManyToOne((type) => User, (user) => user.jobsRequired)
+  @ManyToOne((type) => User, (user) => user.id)
   client: User;
 
-  @ManyToOne((type) => Supplier, (supplier) => supplier.jobsTaken)
-  supplier: Supplier;
+  @ManyToOne((type) => User, (user) => user.id, {
+    nullable: true
+  })
+  supplier: User | null;
 
   @OneToOne((type) => Review, {
     eager: true,
+    nullable: true
   })
   @JoinColumn()
-  review: Review;
+  review: Review | null;
 
   @ManyToOne((type) => Category, (category) => category.name)
   category: Category;

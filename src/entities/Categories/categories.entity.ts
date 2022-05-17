@@ -1,17 +1,9 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
-import { v4 as uuid } from "uuid";
-
+import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Category {
-  @PrimaryColumn("uuid")
-  readonly id: string;
+  @PrimaryGeneratedColumn("increment")
+  readonly id: number;
 
   @Column()
   name: string;
-
-  constructor() {
-    if (!this.id) {
-      this.id = uuid();
-    }
-  }
 }
