@@ -14,7 +14,11 @@ const userUpdateService = async (
   email ? email : user.email;
   phone ? phone : user.phone;
 
-  const updatedUser = userRepository.update(userId, { name, email, phone });
+  const updatedUser = await userRepository.update(userId, {
+    name,
+    email,
+    phone,
+  });
 
   return updatedUser;
 };

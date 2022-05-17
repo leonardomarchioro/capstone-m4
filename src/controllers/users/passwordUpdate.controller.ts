@@ -10,9 +10,7 @@ const passwordUpdateController = async (
 
   await passwordUpdateService({ userId, newPassword });
 
-  return response
-    .status(200)
-    .json({ message: "Password updated!!!!!!!!!!!!!!!!!!!" });
+  return response.status(200).json({ message: "Password updated!" });
 };
 
 export default passwordUpdateController;
