@@ -15,7 +15,7 @@ const verifyDuplicatedEmail = async (
   });
 
   if (verify) {
-    return "Email already exists!";
+    return res.status(409).json({message: "Email already exists!"});
   }
   next();
 };

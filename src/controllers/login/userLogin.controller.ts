@@ -6,7 +6,7 @@ const userLoginController = async (request: Request, response: Response) => {
 
   const token = await userLoginService({ email, password });
 
-  return response.status(201).json(token);
+  return response.status(200).json(token);
 };
 
 export default userLoginController;

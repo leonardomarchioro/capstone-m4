@@ -9,19 +9,20 @@ const ensureAuth = async (
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    return response.status(401).json("Unauthorized");
+    return response.status(401).json({ message: "Unauthorized" });
   }
+
   const token = authHeader.split(" ")[1];
 
   if (!token) {
-    return response.status(401).json("Unauthorized");
+    return response.status(401).json({ message: "Unauthorized" });
   }
 
   const secret = process.env.SECRET_KEY;
 
   verify(token, secret, (err, decoded) => {
     if (!decoded) {
-      return response.status(401).json("Unauthorized");
+      return response.status(401).json({ message: "Unauthorized" });
     }
     const { userId } = <any>decoded;
 
