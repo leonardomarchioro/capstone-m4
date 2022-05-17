@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 
-const ensureAuth = (
+const ensureAuth = async (
   request: Request,
   response: Response,
   next: NextFunction
@@ -9,26 +9,24 @@ const ensureAuth = (
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    return "JWT is missing";
+    return response.status(401).json("Unauthorized");
   }
-
-  const [, token] = authHeader.split(" ");
+  const token = authHeader.split(" ")[1];
 
   if (!token) {
-    return "Token is missing";
+    return response.status(401).json("Unauthorized");
   }
 
-  const secret = process.env.SECRET_KEY || "default";
+  const secret = process.env.SECRET_KEY;
 
-  const decoded = verify(token, secret, (err, decoded) => {
+  verify(token, secret, (err, decoded) => {
     if (!decoded) {
-      return "Invalid token";
+      return response.status(401).json("Unauthorized");
     }
+    const { userId } = <any>decoded;
+
+    request.userId = userId;
   });
-
-  const { userId } = <any>decoded;
-
-  request.userId = userId;
 
   return next();
 };

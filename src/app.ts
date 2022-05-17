@@ -5,7 +5,7 @@ const app = express();
 
 app.use(express.json());
 
-app.use(userRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   return res.send("Hello world!!!!");

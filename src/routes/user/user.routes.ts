@@ -25,8 +25,8 @@ userRoutes.get("/suppliers", userListAllController);
 
 userRoutes.patch("/me", userUpdateController);
 userRoutes.patch("/password", verifyPassword, passwordUpdateController);
-userRoutes.patch("role", verifyPassword, roleUpdateController);
+userRoutes.patch("/role", verifyPassword, roleUpdateController);
 
-userRoutes.patch("/me", userDeleteController);
+userRoutes.delete("/me", userDeleteController);
 
 export default userRoutes;

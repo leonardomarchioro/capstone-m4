@@ -10,15 +10,11 @@ const userUpdateService = async (
 
   const user = await userRepository.findOne({ where: { id: userId } });
 
-  name ? name : user.name;
-  email ? email : user.email;
-  phone ? phone : user.phone;
+  user.name = name ? name : user.name;
+  user.email = email ? email : user.email;
+  user.phone = phone ? phone : user.phone;
 
-  const updatedUser = await userRepository.update(userId, {
-    name,
-    email,
-    phone,
-  });
+  const updatedUser = await userRepository.save(user);
 
   return updatedUser;
 };

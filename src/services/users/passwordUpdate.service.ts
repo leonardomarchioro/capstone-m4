@@ -5,12 +5,16 @@ import { AppDataSource } from "../../data-source";
 
 const passwordUpdateService = async ({
   userId,
-  newPassword,
+  new_password,
 }: IPasswordUpdate) => {
   const userRepository = AppDataSource.getRepository(User);
-  const hashPassword = await hash(newPassword, 10);
+  const hashPassword = await hash(new_password, 10);
 
-  await userRepository.update(userId, { password: hashPassword });
+  const user = await userRepository.findOne({ where: { id: userId } });
+
+  user.password = hashPassword;
+
+  await userRepository.save(user);
 
   return true;
 };

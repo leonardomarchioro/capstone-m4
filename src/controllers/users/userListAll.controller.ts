@@ -4,6 +4,6 @@ import userListAllService from "../../services/users/userListAll.service";
 const userListAllController = async (request: Request, response: Response) => {
   const userList = await userListAllService();
 
-  return response.json(200).json(userList);
+  return response.status(200).json(userList);
 };
 export default userListAllController;

@@ -7,24 +7,18 @@ import "dotenv/config";
 
 const userLoginService = async ({ email, password }: IUserLogin) => {
   const userRepository = AppDataSource.getRepository(User);
-  const users = await userRepository.find();
+  const user = await userRepository.findOne({ where: { email } });
 
-  const account = users.find((user) => user.email === email);
-
-  if (!account) {
+  if (!user) {
     return "Wrong email/password";
   }
-  if (!compare(password, account.password)) {
+  if (!compare(password, user.password)) {
     return "Wrong email/password";
   }
 
-  const token = jwt.sign(
-    { userId: account.id },
-    String(process.env.SECRET_KEY),
-    {
-      expiresIn: "1d",
-    }
-  );
+  const token = jwt.sign({ userId: user.id }, String(process.env.SECRET_KEY), {
+    expiresIn: "1d",
+  });
 
   return token;
 };
