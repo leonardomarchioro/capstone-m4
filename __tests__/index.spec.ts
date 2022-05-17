@@ -9,9 +9,6 @@ import { app } from "../src/app"
 
 describe("User routes", () => {
 
-<<<<<<< HEAD
-  const userData = {
-=======
   const userData: {
     name: string
     cpf: string
@@ -20,7 +17,6 @@ describe("User routes", () => {
     phone: string
     id: string | null
   } = {
->>>>>>> 31190111951efa073bf987d6037bacd1a15d8854
     name: "Joao",
     cpf: "00000000000",
     email: "joao.exemplo@exemplo.com",
