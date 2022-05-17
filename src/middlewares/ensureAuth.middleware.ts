@@ -12,7 +12,7 @@ const ensureAuth = (
     return "JWT is missing";
   }
 
-  const [, token] = authHeader.split(" ");
+  const token = authHeader.split(" ")[1];
 
   if (!token) {
     return "Token is missing";
