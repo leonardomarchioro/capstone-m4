@@ -9,20 +9,20 @@ const ensureAuth = (
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    return "JWT is missing";
+    return res.status(401).json({message: "Unauthorized"});
   }
 
   const token = authHeader.split(" ")[1];
 
   if (!token) {
-    return "Token is missing";
+    return res.status(401).json({message: "Unauthorized"});
   }
 
-  const secret = process.env.SECRET_KEY || "default";
+  const secret = process.env.SECRET_KEY;
 
   const decoded = verify(token, secret, (err, decoded) => {
     if (!decoded) {
-      return "Invalid token";
+      return res.status(401).json({message: "Unauthorized"});
     }
   });
 
