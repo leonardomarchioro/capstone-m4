@@ -19,6 +19,13 @@ export class User {
   @Column()
   phone: string;
 
+  @Column({
+    enum: [ "client", "supplier" ],
+    default: "client",
+    enumName: "role_enum"
+  })
+  role: string;
+
   @OneToMany((type) => Job, (Job) => Job.client, {
     eager: true,
   })
