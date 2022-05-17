@@ -4,3 +4,7 @@ export interface IUserCreate {
   password: string;
   phone: string;
 }
+
+export interface IUserListOne {
+  userId: string;
+}
