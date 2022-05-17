@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/User/user.entity";
 
-export const userListAllService = async () => {
+export const userListAllSuppliers = async () => {
   const userRepository = AppDataSource.getRepository(User);
 
   const users = await userRepository.find({
@@ -13,4 +13,4 @@ export const userListAllService = async () => {
   return users;
 };
 
-export default userListAllService;
+export default userListAllSuppliers;
