@@ -1,14 +1,36 @@
 import { DataSource } from "typeorm";
-
 require("dotenv").config();
 
+const entities = process.env.NODE_ENV === "production" 
+  ? [ "dist/src/entities/**/**.entity*{.js,.ts}" ]
+  : [ "src/entities/**/**.entity*{.js,.ts}" ]
+
+const migrations = process.env.NODE_ENV === "production" 
+  ? [ "dist/src/migrations/*{.js,.ts}" ]
+  : [ "src/migrations/*{.js,.ts}" ]
+
+
 export const AppDataSource =
+  process.env.DATABASE_URL 
+    ? new DataSource({
+      url: process.env.DATABASE_URL as string,
+      type: "postgres",
+      synchronize: false,
+      ssl:{
+        rejectUnauthorized: false
+      },
+
+      migrations,
+      entities
+    }) :
   process.env.NODE_ENV === "test"
     ? new DataSource({
         type: "sqlite",
         database: ":memory:",
-        entities: ["src/entities/**/*.ts"],
         synchronize: true,
+        
+        entities,
+        migrations,
       })
     : new DataSource({
         type: "postgres",
@@ -21,14 +43,13 @@ export const AppDataSource =
 
         synchronize: true,
         logging: true,
-        entities: ["src/entities/**/*.ts"],
-        migrations: ["src/migrations/*.ts"],
+        entities,
+        migrations
       });
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log("DataSource initialized");
-  })
-  .catch((err) => {
-    console.error("Error DataSource", err);
-  });
+export async function conectDatabase(){
+  return await AppDataSource.initialize()
+    .then(() => {
+      console.log("DataSource initialized");
+    })
+}

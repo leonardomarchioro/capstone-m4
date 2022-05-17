@@ -8,11 +8,10 @@ import {
 } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { User } from "../User/user.entity";
-import { Supplier } from "../Supplier/supplier.entity";
 import { Review } from "../Reviews/reviews.entity";
 import { Category } from "../Categories/categories.entity";
 
-@Entity("jobs")
+@Entity()
 export class Job {
   @PrimaryColumn("uuid")
   readonly id: string;
@@ -23,26 +22,36 @@ export class Job {
   @Column()
   description: string;
 
-  @Column()
-  delivery_date: Date;
+  @Column({
+    name: "delivery_date",
+    type: "timestamp with time zone"
+  })
+  deliveryDate: Date;
 
   @Column()
   cep: string;
 
-  @Column()
-  type: string; //available - unavailable - doing - finished
+  @Column({
+    default: "available",
+    enum: ["available", "doing", "finished"],
+    enumName: "type_names"
+  })
+  type: string;
 
-  @ManyToOne((type) => User, (user) => user.jobsRequired)
+  @ManyToOne((type) => User, (user) => user.id)
   client: User;
 
-  @ManyToOne((type) => Supplier, (supplier) => supplier.jobsTaken)
-  supplier: Supplier;
+  @ManyToOne((type) => User, (user) => user.id, {
+    nullable: true
+  })
+  supplier: User | null;
 
   @OneToOne((type) => Review, {
     eager: true,
+    nullable: true
   })
   @JoinColumn()
-  review: Review;
+  review: Review | null;
 
   @ManyToOne((type) => Category, (category) => category.name)
   category: Category;
