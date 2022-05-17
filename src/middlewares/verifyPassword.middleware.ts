@@ -10,17 +10,17 @@ const verifyPassword = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { current_password } = req.body;
+  const { currentPassword } = req.body;
 
   const userRepository = AppDataSource.getRepository(User);
   const user = await userRepository.findOne({ where: { id: req.userId } });
 
-  const comparePassword = await compare(current_password, user!.password);
+  const comparePassword = await compare(currentPassword, user.password);
 
   if (!comparePassword) {
-    return res.status(400).json({ message: "Email or password invalid!" });
+    return res.status(401).json({ message: "Unauthorized" });
   }
-  console.log("ok");
+
   next();
 };
 
