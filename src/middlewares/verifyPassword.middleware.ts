@@ -18,7 +18,7 @@ const verifyPassword = async (
   const comparePassword = await compare(current_password, user!.password);
 
   if (!comparePassword) {
-    return "Incorrect Password!";
+    return res.status(400).json({message: "Email or password invalid!"});
   }
 
   next();
