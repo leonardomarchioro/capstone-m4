@@ -1,6 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../errors/appError";
-import "express-async-errors";
 
 const errorHandler = (
   error: Error,
@@ -14,8 +13,6 @@ const errorHandler = (
       message: error.message,
     });
   }
-
-  console.log(error);
 
   return response.status(500).json({
     status: "error",
