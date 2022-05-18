@@ -1,3 +1,4 @@
+import "express-async-errors"
 import express from "express";
 import candidateRoutes from "./routes/candidates";
 import userRoutes from "./routes/user/user.routes";
