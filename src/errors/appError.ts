@@ -1,3 +1,5 @@
+import "express-async-errors";
+
 class AppError {
   statusCode: number;
   message: string;
