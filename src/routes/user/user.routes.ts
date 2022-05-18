@@ -19,6 +19,7 @@ import createUserSchema from "../../validations/User/crateUser.validation";
 import loginUserSchema from "../../validations/User/loginUser.validation";
 import updateRoleSchema from "../../validations/User/updateRoleUser.validation";
 import updateUserSchema from "../../validations/User/updateUser.validation";
+import updatePasswordSchema from "../../validations/User/updatePassword.validation";
 
 const userRoutes = Router();
 
@@ -46,7 +47,7 @@ userRoutes.patch(
 );
 userRoutes.patch(
   "/password",
-  expressYupMiddleware({ schemaValidator: "" }),
+  expressYupMiddleware({ schemaValidator: updatePasswordSchema }),
   verifyPassword,
   passwordUpdateController
 );
