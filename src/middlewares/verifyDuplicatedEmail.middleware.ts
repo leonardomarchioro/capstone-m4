@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/User/user.entity";
+import AppError from "../errors/appError";
 
 const verifyDuplicatedEmail = async (
   req: Request,
@@ -15,7 +16,7 @@ const verifyDuplicatedEmail = async (
   });
 
   if (verify) {
-    return res.status(409).json({message: "Email already exists!"});
+    throw new AppError("Email already exists!", 409);
   }
   next();
 };

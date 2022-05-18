@@ -1,7 +1,8 @@
 import express, { Request, Response, NextFunction } from "express";
-import { AppError } from "./errors/appError";
+import AppError from "./errors/appError";
 import candidateRoutes from "./routes/candidates";
 import userRoutes from "./routes/user/user.routes";
+import "express-async-errors";
 
 const app = express();
 
@@ -15,18 +16,22 @@ app.get("/", (req, res) => {
   return res.send("Hello world!!!!");
 });
 
-app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
-  if (err instanceof AppError) {
-    return response.status(err.statusCode).json({
+app.use(
+  (err: Error, request: Request, response: Response, next: NextFunction) => {
+    if (err instanceof AppError) {
+      return response.status(err.statusCode).json({
+        status: "error",
+        message: err.message,
+      });
+    }
+
+    console.log(err);
+
+    return response.status(500).json({
       status: "error",
-      message: err.message,
+      message: "Internal Server Error",
     });
   }
-
-  return response.status(500).json({
-    status: "error",
-    message: "Internal server error",
-  });
-});
+);
 
 export { app };
