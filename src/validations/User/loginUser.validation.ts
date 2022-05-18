@@ -1,15 +1,13 @@
 import * as yup from "yup";
 
-const createUserSchema = {
+const loginUserSchema = {
   schema: {
     body: {
       yupSchema: yup
         .object()
         .shape({
-          name: yup.string().required("name is required"),
           email: yup.string().required("email is required"),
           password: yup.string().required("password is required"),
-          phone: yup.string().required("Phone is required"),
         })
         .noUnknown(true),
       validateOptions: {
@@ -20,4 +18,4 @@ const createUserSchema = {
   },
 };
 
-export default createUserSchema;
+export default loginUserSchema;
