@@ -1,13 +1,12 @@
-import * as yup from "yup";
+import { string, object, boolean } from "yup";
 
 const updateRoleSchema = {
   schema: {
     body: {
-      yupSchema: yup
-        .object()
+      yupSchema: object()
         .shape({
-          currentPassword: yup.string().required("password is required"),
-          role: yup.boolean().required("role is required"),
+          currentPassword: string().required("password is required"),
+          role: boolean().required("role is required"),
         })
         .noUnknown(true),
       validateOptions: {

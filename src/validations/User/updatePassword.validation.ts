@@ -1,13 +1,12 @@
-import * as yup from "yup";
+import { object, string } from "yup";
 
 const updatePasswordSchema = {
   schema: {
     body: {
-      yupSchema: yup
-        .object()
+      yupSchema: object()
         .shape({
-          currentPassword: yup.string().required("currentPassword is required"),
-          newPassword: yup.string().required("newPassword is required"),
+          currentPassword: string().required("currentPassword is required"),
+          newPassword: string().required("newPassword is required"),
         })
         .noUnknown(true),
       validateOptions: {

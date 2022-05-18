@@ -1,18 +1,16 @@
-import * as yup from "yup";
+import { string, object } from "yup";
 
 const createUserSchema = {
   schema: {
     body: {
-      yupSchema: yup
-        .object()
+      yupSchema: object()
         .shape({
-          name: yup.string().required("name is required"),
-          email: yup
-            .string()
+          name: string().required("name is required"),
+          email: string()
             .required("email is required")
             .email("Invalid email format"),
-          password: yup.string().required("password is required"),
-          phone: yup.string().required("Phone is required"),
+          password: string().required("password is required"),
+          phone: string().required("Phone is required"),
         })
         .noUnknown(true),
       validateOptions: {

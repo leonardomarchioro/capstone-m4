@@ -1,14 +1,13 @@
-import * as yup from "yup";
+import { object, string } from "yup";
 
 const updateUserSchema = {
   schema: {
     body: {
-      yupSchema: yup
-        .object()
+      yupSchema: object()
         .shape({
-          name: yup.string(),
-          email: yup.string().email("Invalid email format"),
-          phone: yup.string(),
+          name: string(),
+          email: string().email("Invalid email format"),
+          phone: string(),
         })
         .noUnknown(true),
       validateOptions: {
