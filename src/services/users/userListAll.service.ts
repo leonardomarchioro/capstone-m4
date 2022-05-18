@@ -1,16 +1,16 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/User/user.entity";
 
-export const userListAllSuppliers = async () => {
+export const userListAllService = async () => {
   const userRepository = AppDataSource.getRepository(User);
 
   const users = await userRepository.find({
     where: {
-      IsSupplier: true,
+      role: "supplier",
     },
   });
 
   return users;
 };
 
-export default userListAllSuppliers;
+export default userListAllService;

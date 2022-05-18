@@ -17,5 +17,5 @@ export interface IUserUpdate {
 
 export interface IPasswordUpdate {
   userId: string;
-  new_password: string;
+  newPassword: string;
 }

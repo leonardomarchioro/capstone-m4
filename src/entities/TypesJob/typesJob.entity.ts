@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
-@Entity("categories")
-export class Category {
+@Entity("types_jobs")
+export class TypesJob {
   @PrimaryGeneratedColumn("increment")
   readonly id: number;
 

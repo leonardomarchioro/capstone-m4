@@ -19,14 +19,10 @@ export class User {
   @Column()
   phone: string;
 
-  @Column({
-    enum: ["client", "supplier"],
-    default: "client",
-    enumName: "role_enum",
-  })
-  role: string;
+  @Column({ default: false })
+  IsSupplier: boolean;
 
-  @OneToMany((type) => Job, (Job) => Job.client, {
+  @OneToMany((type) => Job, (Job) => Job.user, {
     eager: true,
   })
   jobsRequired: Job[];

@@ -1,5 +1,5 @@
 import { AppDataSource } from "../../data-source";
-import { Candidate } from "../../entities/candidates/candidate.entity";
+import { Candidate } from "../../entities/Candidates/candidate.entity";
 
 const candidateDeleteService = async (jobId: string) => {
   const candidateRepository = AppDataSource.getRepository(Candidate);
