@@ -11,14 +11,12 @@ describe("User routes", () => {
 
   const userData: {
     name: string
-    cpf: string
     email: string
     password: string
     phone: string
     id: string | null
   } = {
     name: "Joao",
-    cpf: "00000000000",
     email: "joao.exemplo@exemplo.com",
     password: "123456",
     phone: "00000000",
@@ -26,13 +24,12 @@ describe("User routes", () => {
   }
 
   it("Should create a user", async () => {
-    const response = await request(app).post("/users").send(userData)
+    const response = await request(app).post("/user/signup").send(userData)
     
     const expectedUserProps = [
       "phone",
       "email",
       "name",
-      "cep",
       "id",
     ]
 
@@ -51,7 +48,7 @@ describe("User routes", () => {
   it("Should get a user with a id", async () => {
     expect(userData.id).not.toBeNull()
 
-    const response = await request(app).get(`/users/${userData.id}`)
+    const response = await request(app).get(`/user/${userData.id}`)
 
     const expectedProps = [
       "email",
@@ -66,5 +63,33 @@ describe("User routes", () => {
     expectedProps.forEach(prop => {
       expect(response.body).toHaveProperty(prop)
     })
+  })
+
+  it("Should update user data", async () => {
+    const newUserData:{
+      name: string
+      phone: string
+      password?: string
+    } = {
+      name: "Teste da silva",
+      phone: "00001000",
+      password: "987654321"
+    }
+
+    const response = await request(app).patch(`/user/${userData.id}`).send(newUserData)
+
+    delete newUserData.password;
+
+    const { name, phone } = response.body
+
+    expect(response.status).toBe(200)
+    expect(response.body).not.toHaveProperty("password")
+    expect(response.body).toMatchObject(newUserData)
+
+    expect(name).toBeDefined()
+    expect(name).toBe(newUserData.name)
+    
+    expect(phone).toBeDefined()
+    expect(phone).toBe(newUserData.phone)
   })
 })
