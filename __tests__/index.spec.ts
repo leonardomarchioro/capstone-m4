@@ -2,94 +2,124 @@ import {
   beforeAll,
   expect,
   it,
-  describe
+  describe,
+  afterAll
 } from "@jest/globals"
 import request from "supertest"
 import { app } from "../src/app"
+import { conectDatabase, AppDataSource } from "../src/data-source"
 
 describe("User routes", () => {
 
-  const userData: {
-    name: string
-    email: string
-    password: string
-    phone: string
-    id: string | null
-  } = {
-    name: "Joao",
-    email: "joao.exemplo@exemplo.com",
-    password: "123456",
-    phone: "00000000",
-    id: null
-  }
+  beforeAll( async () => {
+    await conectDatabase()
+  })
 
-  it("Should create a user", async () => {
-    const response = await request(app).post("/user/signup").send(userData)
+  afterAll(async () => {
+    await AppDataSource.query(`
+      DELETE FROM users;
+      DELETE FROM job;
+      DELETE FROM reviews;
+      DELETE FROM candidates;
+      DELETE FROM category;
+    `)
+
+    await AppDataSource.destroy()
+  })
+
+  describe("Happy end", () => {
     
-    const expectedUserProps = [
-      "phone",
-      "email",
-      "name",
-      "id",
-    ]
-
-    expect(response.status).toBe(201)
-    expect(response.body).toHaveProperty("accessToken")
-    expect(response.body).toHaveProperty("user")
-    expect(response.body.user).toHaveProperty("id")
-
-    expectedUserProps.forEach( props => {
-      expect(response.body.user).toHaveProperty(props)
-    })
-
-    userData.id = response.body.user.id
-  })
-
-  it("Should get a user with a id", async () => {
-    expect(userData.id).not.toBeNull()
-
-    const response = await request(app).get(`/user/${userData.id}`)
-
-    const expectedProps = [
-      "email",
-      "name",
-      "type",
-      "cep",
-      "id",
-    ]
-
-    expect(response.body).not.toHaveProperty("password")
-
-    expectedProps.forEach(prop => {
-      expect(response.body).toHaveProperty(prop)
-    })
-  })
-
-  it("Should update user data", async () => {
-    const newUserData:{
+    const userData: {
       name: string
+      email: string
+      password: string
       phone: string
-      password?: string
+      id: string | null
+      token: string | null
     } = {
-      name: "Teste da silva",
-      phone: "00001000",
-      password: "987654321"
+      name: "Joao",
+      email: "joao.exemplo@exemplo.com",
+      password: "123456",
+      phone: "00000000",
+      id: null,
+      token: null,
     }
+  
+    it.only("Should create a user", async () => {
+      const response = await request(app).post("/user/signup").send(userData)
+      
+      const expectedUserProps = [
+        "phone",
+        "email",
+        "name",
+        "role",
+        "id",
+      ]
+  
+      expect(response.status).toBe(201)
 
-    const response = await request(app).patch(`/user/${userData.id}`).send(newUserData)
+      expectedUserProps.forEach( props => {
+        expect(response.body).toHaveProperty(props)
+      })
+  
+      userData.id = response.body.id
+    })
+  
+    it("Should update a user by id", async () => {
+      const newData = {
+        name: "Teste da silva",
+        email: "newTeste@exemplo.com",
+        password: "987654321",
+        phone: "00001000"
+      }
 
-    delete newUserData.password;
+      const response = await request(app).patch("/user/me").send(newData)
 
-    const { name, phone } = response.body
+      expect(response.status).toBe(200)
+      expect(response.body).not.toHaveProperty("password")
 
-    expect(response.status).toBe(200)
-    expect(response.body).not.toHaveProperty("password")
-    expect(response.body).toMatchObject(newUserData)
+      for( let [key, value] of Object.entries(newData)) {
+        expect(response.body).toHaveProperty(key)
+        expect(response.body[key]).toBe(value)
+      }
+    })
 
-    expect(name).toBeDefined()
-    expect(name).toBe(newUserData.name)
-    
-    expect(phone).toBeDefined()
-    expect(phone).toBe(newUserData.phone)
+    it("Should return a token(JWT)", async () => {
+      const credentials = {
+        email: userData.email,
+        password: userData.password
+      }
+
+      const response = await request(app).post("/user/signin").send(credentials)
+
+      expect(response.status).toBe(200)
+      expect(response.body).toHaveProperty("token")
+
+      userData.token = response.body.token
+    })
+
+    it("Should get my own data by token", async () => {
+      expect(userData.token).toBeDefined()
+
+      const expectedProps = [
+        "id",
+        "name",
+        "role",
+        "phone",
+        "email",
+      ]
+
+      const response = await request(app).get("/user/me")
+        .auth(userData.token, { type: 'bearer' })
+
+      expect(response.status).toBe(200)
+      expect(response.body).toHaveProperty("id")
+      expect(response.body).not.toHaveProperty("password")
+
+      expectedProps.forEach( prop => {
+        expect(response.body).toHaveProperty(prop)
+      })
+    })
   })
+
 })
