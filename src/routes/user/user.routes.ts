@@ -18,6 +18,7 @@ import { expressYupMiddleware } from "express-yup-middleware";
 import createUserSchema from "../../validations/User/crateUser.validation";
 import loginUserSchema from "../../validations/User/loginUser.validation";
 import updateRoleSchema from "../../validations/User/updateRoleUser.validation";
+import updateUserSchema from "../../validations/User/updateUser.validation";
 
 const userRoutes = Router();
 
@@ -40,7 +41,7 @@ userRoutes.get("/suppliers", userListAllSuppliersController);
 
 userRoutes.patch(
   "/me",
-  expressYupMiddleware({ schemaValidator: "" }),
+  expressYupMiddleware({ schemaValidator: updateUserSchema }),
   userUpdateController
 );
 userRoutes.patch(

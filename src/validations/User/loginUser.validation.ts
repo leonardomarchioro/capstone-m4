@@ -6,7 +6,10 @@ const loginUserSchema = {
       yupSchema: yup
         .object()
         .shape({
-          email: yup.string().required("email is required"),
+          email: yup
+            .string()
+            .required("email is required")
+            .email("Invalid email format"),
           password: yup.string().required("password is required"),
         })
         .noUnknown(true),
