@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
+import AppError from "../errors/appError";
 
 const ensureAuth = async (
   request: Request,
@@ -9,20 +10,20 @@ const ensureAuth = async (
   const authHeader = request.headers.authorization;
 
   if (!authHeader) {
-    return response.status(401).json({ message: "Unauthorized" });
+    throw new AppError(401, "Unauthorized");
   }
 
   const token = authHeader.split(" ")[1];
 
   if (!token) {
-    return response.status(401).json({ message: "Unauthorized" });
+    throw new AppError(401, "Unauthorized");
   }
 
   const secret = process.env.SECRET_KEY;
 
   verify(token, secret, (err, decoded) => {
     if (!decoded) {
-      return response.status(401).json({ message: "Unauthorized" });
+      throw new AppError(401, "Unauthorized");
     }
     const { userId } = <any>decoded;
 

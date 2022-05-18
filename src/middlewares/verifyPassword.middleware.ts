@@ -4,7 +4,7 @@ import { User } from "../entities/User/user.entity";
 import { compare } from "bcryptjs";
 
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../errors/appError";
+import AppError from "../errors/appError";
 
 const verifyPassword = async (
   req: Request,

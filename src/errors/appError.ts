@@ -1,10 +1,11 @@
-export default class AppError {
-  public readonly message: string;
+class AppError {
+  statusCode: number;
+  message: string;
 
-  public readonly statusCode: number;
-
-  constructor(message: string, statusCode = 400) {
-    this.message = message;
+  constructor(statusCode = 400, message: string) {
     this.statusCode = statusCode;
+    this.message = message;
   }
 }
+
+export default AppError;
