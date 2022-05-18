@@ -13,9 +13,18 @@ import ensureAuth from "../../middlewares/ensureAuth.middleware";
 import verifyDuplicatedEmail from "../../middlewares/verifyDuplicatedEmail.middleware";
 import verifyPassword from "../../middlewares/verifyPassword.middleware";
 
+import { expressYupMiddleware } from "express-yup-middleware";
+
+import createUserSchema from "../../validations/User/crateUser.validation";
+
 const userRoutes = Router();
 
-userRoutes.post("/signup", verifyDuplicatedEmail, userCreateController);
+userRoutes.post(
+  "/signup",
+  expressYupMiddleware({ schemaValidator: createUserSchema }),
+  verifyDuplicatedEmail,
+  userCreateController
+);
 userRoutes.post("/signin", userLoginController);
 
 userRoutes.use(ensureAuth);
