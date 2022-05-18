@@ -29,6 +29,7 @@ userRoutes.post(
   verifyDuplicatedEmail,
   userCreateController
 );
+
 userRoutes.post(
   "/signin",
   expressYupMiddleware({ schemaValidator: loginUserSchema }),
@@ -45,12 +46,14 @@ userRoutes.patch(
   expressYupMiddleware({ schemaValidator: updateUserSchema }),
   userUpdateController
 );
+
 userRoutes.patch(
   "/password",
   expressYupMiddleware({ schemaValidator: updatePasswordSchema }),
   verifyPassword,
   passwordUpdateController
 );
+
 userRoutes.patch(
   "/role",
   expressYupMiddleware({ schemaValidator: updateRoleSchema }),
