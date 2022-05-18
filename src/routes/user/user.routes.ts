@@ -17,6 +17,7 @@ import { expressYupMiddleware } from "express-yup-middleware";
 
 import createUserSchema from "../../validations/User/crateUser.validation";
 import loginUserSchema from "../../validations/User/loginUser.validation";
+import updateRoleSchema from "../../validations/User/updateRoleUser.validation";
 
 const userRoutes = Router();
 
@@ -37,9 +38,23 @@ userRoutes.use(ensureAuth);
 userRoutes.get("/me", userListOneController);
 userRoutes.get("/suppliers", userListAllSuppliersController);
 
-userRoutes.patch("/me", userUpdateController);
-userRoutes.patch("/password", verifyPassword, passwordUpdateController);
-userRoutes.patch("/role", verifyPassword, roleUpdateController);
+userRoutes.patch(
+  "/me",
+  expressYupMiddleware({ schemaValidator: "" }),
+  userUpdateController
+);
+userRoutes.patch(
+  "/password",
+  expressYupMiddleware({ schemaValidator: "" }),
+  verifyPassword,
+  passwordUpdateController
+);
+userRoutes.patch(
+  "/role",
+  expressYupMiddleware({ schemaValidator: updateRoleSchema }),
+  verifyPassword,
+  roleUpdateController
+);
 
 userRoutes.delete("/me", userDeleteController);
 
