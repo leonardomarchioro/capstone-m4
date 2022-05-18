@@ -5,8 +5,6 @@ const userUpdateController = async (request: Request, response: Response) => {
   const { name, email, phone } = request.body;
   const { userId } = request;
 
-  console.log("service");
-
   const updatedUser = await userUpdateService(userId, {
     name,
     email,
