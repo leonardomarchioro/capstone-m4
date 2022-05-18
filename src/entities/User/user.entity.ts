@@ -19,8 +19,11 @@ export class User {
   @Column()
   phone: string;
 
-  @Column({ default: false })
-  IsSupplier: boolean;
+  @Column({ 
+    default: false,
+    name: "is_supplier"
+  })
+  isSupplier: boolean;
 
   @OneToMany((type) => Job, (Job) => Job.user, {
     eager: true,

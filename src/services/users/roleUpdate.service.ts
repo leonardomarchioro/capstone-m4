@@ -6,7 +6,7 @@ const roleUpdateService = async (userId: string, isSupplier: boolean) => {
 
   const user = await userRepository.findOne({ where: { id: userId } });
 
-  user.IsSupplier = isSupplier;
+  user.isSupplier = isSupplier;
 
   await userRepository.save(user);
 
