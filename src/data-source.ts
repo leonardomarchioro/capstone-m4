@@ -11,6 +11,7 @@ const migrations =
     ? ["dist/src/migrations/*{.js,.ts}"]
     : ["src/migrations/*{.js,.ts}"];
 
+
 const testUser = process.env.POSTGRES_USER;
 const testDB = process.env.POSTGRES_DB;
 const testPassword = process.env.POSTGRES_PASSWORD;
@@ -39,7 +40,7 @@ export const AppDataSource = process.env.DATABASE_URL
   : new DataSource({
       type: "postgres",
       host: "localhost",
-      port: 5433,
+      port: 5432,
 
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
