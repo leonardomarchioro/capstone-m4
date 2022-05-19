@@ -1,6 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Job } from "../../entities/Jobs/jobs.entity";
-import { IUserListOne } from "../../interface/user";
+import { IUserListOne } from "../../interfaces/user";
 
 const listMeJobsService = async ({ userId }: IUserListOne) => {
   const jobsRepository = AppDataSource.getRepository(Job);

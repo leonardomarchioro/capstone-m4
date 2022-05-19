@@ -1,6 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Job } from "../../entities/Jobs/jobs.entity";
-import { IUpdate } from "../../interface/jobs";
+import { IUpdate } from "../../interfaces/jobs";
 
 const UpdateJobInfoService = async ({ id }: { id: string }, info: IUpdate) => {
   const jobsRepository = AppDataSource.getRepository(Job);
