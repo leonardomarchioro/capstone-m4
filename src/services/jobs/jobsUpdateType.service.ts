@@ -1,4 +1,3 @@
-import { finished } from "stream";
 import { AppDataSource } from "../../data-source";
 import { Job } from "../../entities/Jobs/jobs.entity";
 
@@ -7,7 +6,7 @@ const updateJobTypeCandidateService = async ({ id }: { id: string }) => {
 
   const job = await jobsRepository.findOne({
     where: {
-      id: id,
+      id,
     },
   });
 

@@ -12,17 +12,19 @@ const updateJobCandidateService = async ({
   const jobsRepository = AppDataSource.getRepository(Job);
   const userRepository = AppDataSource.getRepository(User);
 
-  let job = await jobsRepository.findOne({
+  let jobPromise = jobsRepository.findOne({
     where: {
       id: id,
     },
   });
 
-  const user = await userRepository.findOne({
+  const userPromise = userRepository.findOne({
     where: {
       id: userId,
     },
   });
+
+  const [ job, user ] = await Promise.all([jobPromise, userPromise])
 
   user ? (job.supplier = user) : job.supplier;
 

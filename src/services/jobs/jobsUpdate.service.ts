@@ -17,7 +17,7 @@ const UpdateJobInfoService = async ({ id }: { id: string }, info: IUpdate) => {
   info.cep ? (job.cep = info.cep) : job.cep;
   info.deliveryDate ? (job.deliveryDate = info.deliveryDate) : job.deliveryDate;
 
-  return jobsRepository.save(job);
+  return await jobsRepository.save(job);
 };
 
 export default UpdateJobInfoService;

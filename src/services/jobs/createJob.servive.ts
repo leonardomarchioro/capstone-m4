@@ -2,30 +2,14 @@ import { AppDataSource } from "../../data-source";
 import { Job } from "../../entities/Jobs/jobs.entity";
 import { IJobsCreate } from "../../interface/jobs";
 
-const jobsCreateService = async ({
-  title,
-  description,
-  deliveryDate,
-  cep,
-
-  client,
-  category,
-}: IJobsCreate) => {
+const jobsCreateService = async (jobData: IJobsCreate) => {
   const jobsRepository = AppDataSource.getRepository(Job);
 
-  const service = {
-    title,
-    description,
-    deliveryDate,
-    cep,
-    client,
-    category,
-  };
+  const newJob = jobsRepository.create(jobData);
 
-  jobsRepository.create(service);
-  await jobsRepository.save(service);
+  await jobsRepository.save(newJob);
 
-  return service;
+  return newJob;
 };
 
 export default jobsCreateService;
