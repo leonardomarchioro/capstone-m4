@@ -1,7 +1,6 @@
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/User/user.entity";
 import { Request, Response, NextFunction } from "express";
 import AppError from "../errors/appError";
+import { prisma } from "@PrismaClient";
 
 const verifyIsSupplier = async (
   request: Request,
@@ -10,9 +9,9 @@ const verifyIsSupplier = async (
 ) => {
   const { userId } = request;
 
-  const userRepository = AppDataSource.getRepository(User);
 
-  const user = await userRepository.findOne({
+
+  const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },

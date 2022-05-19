@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --transpile-only --watch --ignore-watch node_modules ./src/index.ts",
+    "dev": "ts-node-dev -r tsconfig-paths/register --transpile-only --watch --ignore-watch node_modules .",
     "build": "tsc",
     "start": "node ./dist/src/index.js",
     "test": "cross-env NODE_ENV=test jest",
@@ -17,6 +17,7 @@
     "express-async-errors": "^3.1.1",
     "express-yup-middleware": "^1.2.3",
     "jsonwebtoken": "^8.5.1",
+    "tsconfig-paths": "^4.0.0",
     "uuid": "^8.3.2",
     "yup": "^0.32.11"
   },
