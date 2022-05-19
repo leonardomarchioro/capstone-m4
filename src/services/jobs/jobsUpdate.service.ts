@@ -1,21 +1,24 @@
 import { AppDataSource } from "../../data-source";
+import { Category } from "../../entities/Categories/categories.entity";
 import { Job } from "../../entities/Jobs/jobs.entity";
-import { IUpdate } from "../../interfaces/jobs";
+import { IUpdateSend } from "../../interfaces/jobs";
 
-const UpdateJobInfoService = async ({ id }: { id: string }, info: IUpdate) => {
+const UpdateJobInfoService = async (
+  id: string,
+  { title, description, category, cep, deliveryDate }: IUpdateSend
+) => {
   const jobsRepository = AppDataSource.getRepository(Job);
+  const cetegoriesRepository = AppDataSource.getRepository(Category);
 
   const job = await jobsRepository.findOne({
     where: {
-      id: id,
+      id,
     },
   });
 
-  info.title ? (job.title = info.title) : job.title;
-  info.description ? (job.description = info.description) : job.description;
-  info.category ? (job.category = info.category) : job.category;
-  info.cep ? (job.cep = info.cep) : job.cep;
-  info.deliveryDate ? (job.deliveryDate = info.deliveryDate) : job.deliveryDate;
+  const categoryData = await cetegoriesRepository.findOne({
+    where: { name: category },
+  });
 
   return await jobsRepository.save(job);
 };

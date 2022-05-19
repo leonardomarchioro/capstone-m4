@@ -7,7 +7,7 @@ const listMeJobsService = async ({ userId }: IUserListOne) => {
 
   const allJobs = await jobsRepository.find({
     where: {
-      id: userId,
+      user: [{ id: userId }],
     },
   });
 

@@ -19,6 +19,7 @@ const userCreateService = async ({
   };
 
   const newUser = userRepository.create(userData);
+
   await userRepository.save(newUser);
 
   return newUser;

@@ -1,7 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { Job } from "../../entities/Jobs/jobs.entity";
 
-const listJobsService = async (id: string) => {
+const listOneJobService = async (id: string) => {
   const jobsRepository = AppDataSource.getRepository(Job);
 
   const especifiedJob = jobsRepository.findOne({
@@ -13,4 +13,4 @@ const listJobsService = async (id: string) => {
   return especifiedJob;
 };
 
-export default listJobsService;
+export default listOneJobService;
