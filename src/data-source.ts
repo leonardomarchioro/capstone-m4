@@ -11,9 +11,9 @@ const migrations =
     ? ["dist/src/migrations/*{.js,.ts}"]
     : ["src/migrations/*{.js,.ts}"];
 
-const testUser = process.env.POSTGRES_USER
-const testDB = process.env.POSTGRES_DB
-const testPassword = process.env.POSTGRES_PASSWORD
+const testUser = process.env.POSTGRES_USER;
+const testDB = process.env.POSTGRES_DB;
+const testPassword = process.env.POSTGRES_PASSWORD;
 
 export const AppDataSource = process.env.DATABASE_URL
   ? new DataSource({

@@ -6,7 +6,7 @@ export const userListAllSuppliers = async () => {
 
   const users = await userRepository.find({
     where: {
-      role: "supplier",
+      isSupplier: true,
     },
   });
 

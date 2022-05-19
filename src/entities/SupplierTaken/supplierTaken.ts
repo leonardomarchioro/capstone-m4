@@ -7,9 +7,10 @@ import {
 } from "typeorm";
 import { Job } from "../Jobs/jobs.entity";
 import { User } from "../User/user.entity";
+import { v4 as uuid } from "uuid";
 
-@Entity("candidates")
-export class Candidate {
+@Entity("supplier_taken")
+export class SupplierTaken {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
@@ -24,4 +25,10 @@ export class Candidate {
   })
   @JoinColumn()
   job: Job;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }

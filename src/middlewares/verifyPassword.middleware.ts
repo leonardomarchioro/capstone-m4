@@ -4,6 +4,7 @@ import { User } from "../entities/User/user.entity";
 import { compare } from "bcryptjs";
 
 import { Request, Response, NextFunction } from "express";
+import AppError from "../errors/appError";
 
 const verifyPassword = async (
   req: Request,
@@ -18,7 +19,7 @@ const verifyPassword = async (
   const comparePassword = await compare(currentPassword, user.password);
 
   if (!comparePassword) {
-    return res.status(401).json({ message: "Unauthorized" });
+    throw new AppError(401, "Unauthorized!");
   }
 
   next();
