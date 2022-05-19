@@ -1,19 +1,16 @@
-import { User } from "../../entities/User/user.entity";
-import { Category } from "../../entities/Categories/categories.entity";
-
 export interface IJobsCreate {
-  client: User;
+  clientId: string;
   title: string;
   description: string;
   deliveryDate: Date;
   cep: string;
-  category: Category;
+  categoryId: string;
 }
 
 export interface IUpdate {
   title: string;
   description: string;
-  category: Category;
+  categoryId: string;
   cep: string;
   deliveryDate: Date;
 }
