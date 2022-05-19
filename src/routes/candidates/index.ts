@@ -4,7 +4,7 @@ import candidateDeleteController from "../../controllers/candidates/candidateDel
 
 const candidateRoutes = Router()
 
-candidateRoutes.post("", candidateCreateController)
+candidateRoutes.post("/", candidateCreateController)
 candidateRoutes.delete("/:jobId", candidateDeleteController)
 
 export default candidateRoutes
