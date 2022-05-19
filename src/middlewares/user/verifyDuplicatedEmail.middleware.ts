@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/User/user.entity";
-import AppError from "../errors/appError";
+import { AppDataSource } from "../../data-source";
+import { User } from "../../entities/User/user.entity";
+import AppError from "../../errors/appError";
 
 const verifyDuplicatedEmail = async (
   req: Request,

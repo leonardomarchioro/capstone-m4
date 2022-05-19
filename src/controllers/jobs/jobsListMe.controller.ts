@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import listMeJobsService from "../../services/jobs/jobsListMe.service.ts";
+import listMeJobsService from "../../services/jobs/jobsListMe.service";
 
 const listMeJobsController = async (request: Request, response: Response) => {
   const { userId } = request;

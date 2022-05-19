@@ -1,12 +1,12 @@
 import { AppDataSource } from "../../data-source";
 import { Job } from "../../entities/Jobs/jobs.entity";
 
-const listJobsService = async ({ id }: { id: string }) => {
+const listJobsService = async (id: string) => {
   const jobsRepository = AppDataSource.getRepository(Job);
 
   const especifiedJob = jobsRepository.findOne({
     where: {
-      id: id,
+      id,
     },
   });
 

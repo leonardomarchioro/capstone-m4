@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import UpdateJobInfoService from "../../services/jobs/jobsUpdate.service";
-import { IUpdate } from "../../interface/jobs";
+import { IUpdate } from "../../interfaces/jobs";
 
 const UpdateJobInfoController = async (
   request: Request,

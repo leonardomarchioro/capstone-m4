@@ -45,7 +45,7 @@ export class Job {
   @JoinColumn()
   review: Review | null;
 
-  @ManyToOne((type) => Category, (category) => category.name)
+  @ManyToOne((type) => Category, (category) => category.id)
   category: Category;
   job: Promise<User>;
 

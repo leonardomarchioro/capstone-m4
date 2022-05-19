@@ -1,19 +1,20 @@
 import listJobsService from "../../services/jobs/jobsListOne.service";
 import { Response, Request } from "express";
+import AppError from "../../errors/appError";
 
-const listJobController = async (request: Request, response: Response) => {
+const listOneJobController = async (request: Request, response: Response) => {
   const { id } = request.params;
 
-  const jobs = await listJobsService({ id });
+  const job = await listJobsService(id);
 
-  if (!jobs) {
-    return response.status(400).json({
-      message: "Bad request",
-    });
+  if (!job) {
+    throw new AppError(404, "Job not found");
   }
 
   return response.status(200).json({
     message: "Job are listed",
-    jobs,
+    job,
   });
 };
+
+export default listOneJobController;
