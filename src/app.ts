@@ -5,6 +5,8 @@ import userRoutes from "./routes/user/user.routes";
 import errorHandler from "./middlewares/errorHandler.middleware";
 import swaggerUi from "swagger-ui-express";
 
+import * as swaggerJson from "./";
+
 const app = express();
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup());
