@@ -1,6 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import { Candidate } from "../../entities/Candidates/candidate.entity";
 import { Job } from "../../entities/Jobs/jobs.entity";
+import { ICandidateCreate } from "../../interfaces/candidate";
 
 const getAllCandidatesService = async (jobId: string) => {
   const candidateRepository = AppDataSource.getRepository(Candidate);
@@ -13,7 +14,11 @@ const getAllCandidatesService = async (jobId: string) => {
     },
   });
 
-  const candidates = await candidateRepository.find({ where: { job: jobId } });
+  const candidates = await candidateRepository.find({
+    where: {
+      job: job
+    },
+  });
 
   return candidates;
 };
