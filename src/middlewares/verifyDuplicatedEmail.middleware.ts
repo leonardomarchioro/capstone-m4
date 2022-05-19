@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import { AppDataSource } from "../data-source";
-import { User } from "../entities/User/user.entity";
 import AppError from "../errors/appError";
+import { prisma } from "@PrismaClient"
 
 const verifyDuplicatedEmail = async (
   req: Request,
@@ -10,9 +9,11 @@ const verifyDuplicatedEmail = async (
 ) => {
   const { email } = req.body;
 
-  const userRepository = AppDataSource.getRepository(User);
-  const verify = await userRepository.findOne({
-    where: { email },
+  
+  const verify = await prisma.user.findUnique({
+    where: { 
+      email
+    },
   });
 
   if (verify) {
