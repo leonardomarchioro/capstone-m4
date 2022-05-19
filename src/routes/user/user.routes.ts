@@ -1,6 +1,7 @@
 import { Router } from "express";
 
-// import userLoginController from "../../controllers/login/userLogin.controller";
+import userCreateController from "../../controllers/users/userCreate.controller";
+import userLoginController from "../../controllers/login/userLogin.controller";
 // import userDeleteController from "../../controllers/users/deleteUser.controller";
 // import passwordUpdateController from "../../controllers/users/passwordUpdate.controller";
 // import roleUpdateController from "../../controllers/users/roleUpdate.controller";
@@ -10,17 +11,15 @@ import { Router } from "express";
 
 // import ensureAuth from "../../middlewares/ensureAuth.middleware";
 // import verifyPassword from "../../middlewares/verifyPassword.middleware";
-import userCreateController from "../../controllers/users/userCreate.controller";
 // import verifyDuplicatedEmail from "../../middlewares/verifyDuplicatedEmail.middleware";
-
 
 import { expressYupMiddleware } from "express-yup-middleware";
 
 import createUserSchema from "../../validations/User/crateUser.validation";
-// import loginUserSchema from "../../validations/User/loginUser.validation";
-// import updateRoleSchema from "../../validations/User/updateRoleUser.validation";
-// import updateUserSchema from "../../validations/User/updateUser.validation";
-// import updatePasswordSchema from "../../validations/User/updatePassword.validation";
+import loginUserSchema from "../../validations/User/loginUser.validation";
+import updateRoleSchema from "../../validations/User/updateRoleUser.validation";
+import updateUserSchema from "../../validations/User/updateUser.validation";
+import updatePasswordSchema from "../../validations/User/updatePassword.validation";
 
 const userRoutes = Router();
 
@@ -31,11 +30,11 @@ userRoutes.post(
   userCreateController
 );
 
-// userRoutes.post(
-//   "/signin",
-//   expressYupMiddleware({ schemaValidator: loginUserSchema }),
-//   userLoginController
-// );
+userRoutes.post(
+  "/signin",
+  expressYupMiddleware({ schemaValidator: loginUserSchema }),
+  userLoginController
+);
 
 // userRoutes.use(ensureAuth);
 
