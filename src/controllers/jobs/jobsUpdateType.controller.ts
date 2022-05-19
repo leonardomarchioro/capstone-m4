@@ -7,7 +7,7 @@ const updateJobTypeCandidateController = async (
 ) => {
   const { id } = request.params;
 
-  const supplier = await updateJobTypeCandidateService({ id });
+  const supplier = await updateJobTypeCandidateService(id);
 
   return response.status(200).json({
     message: "Type updated!",
