@@ -1,12 +1,21 @@
 import { AppDataSource } from "../../data-source";
 import { Candidate } from "../../entities/Candidates/candidate.entity";
+import { Job } from "../../entities/Jobs/jobs.entity";
 
-const getAllCandidatesService = async (job_id: string) => {
+const getAllCandidatesService = async (jobId: string) => {
   const candidateRepository = AppDataSource.getRepository(Candidate);
 
-  const candidates = candidateRepository.find({
+  const jobRepository = AppDataSource.getRepository(Job);
+
+  const job = await jobRepository.findOne({
     where: {
-      id: job_id,
+      id: jobId,
+    },
+  });
+
+  const candidates = await candidateRepository.find({
+    where: {
+      job
     },
   });
 
