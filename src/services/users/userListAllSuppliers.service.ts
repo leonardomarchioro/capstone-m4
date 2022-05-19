@@ -1,10 +1,7 @@
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entities/User/user.entity";
+import { prisma } from "../../prisma/client";
 
 export const userListAllSuppliers = async () => {
-  const userRepository = AppDataSource.getRepository(User);
-
-  const users = await userRepository.find({
+  const users = await prisma.user.findMany({
     where: {
       isSupplier: true,
     },
