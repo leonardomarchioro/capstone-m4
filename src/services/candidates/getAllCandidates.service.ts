@@ -13,11 +13,7 @@ const getAllCandidatesService = async (jobId: string) => {
     },
   });
 
-  const candidates = await candidateRepository.find({
-    where: {
-      job
-    },
-  });
+  const candidates = await candidateRepository.find({ where: { job: jobId } });
 
   return candidates;
 };

@@ -19,7 +19,7 @@ export class Candidate {
   @JoinColumn()
   user: User;
 
-  @OneToOne((type) => Job, (job) => job.id, {
+  @ManyToOne((type) => Job, (job) => job.id, {
     eager: true,
   })
   @JoinColumn()

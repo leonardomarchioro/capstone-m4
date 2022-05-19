@@ -6,7 +6,7 @@ const listAllJobsService = async () => {
 
   const avaiableJobs = await jobsRepository.find({
     where: {
-      type: "avaiable",
+      name: "avaiable",
     },
   });
 
