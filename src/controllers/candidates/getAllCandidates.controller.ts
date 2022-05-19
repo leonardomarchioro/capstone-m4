@@ -5,11 +5,14 @@ const getAllCandidatesController = async (
   request: Request,
   response: Response
 ) => {
-  const candidates = await getAllCandidatesService();
+  const { jobId } = request.params;
+  const candidates = await getAllCandidatesService(jobId);
 
-  const candidatesLenght = candidates.length
+  const candidatesLenght = candidates.length;
 
-  return response.status(200).json({candidatesQuantity: candidatesLenght, candidates});
+  return response
+    .status(200)
+    .json({ candidatesQuantity: candidatesLenght, candidates });
 };
 
 export default getAllCandidatesController;
