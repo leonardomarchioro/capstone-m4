@@ -10,8 +10,9 @@ import { v4 as uuid } from "uuid";
 import { User } from "../User/user.entity";
 import { Review } from "../Reviews/reviews.entity";
 import { Category } from "../Categories/categories.entity";
+import { TypesJob } from "../TypesJob/typesJob.entity";
 
-@Entity()
+@Entity("jobs")
 export class Job {
   @PrimaryColumn("uuid")
   readonly id: string;
@@ -31,20 +32,11 @@ export class Job {
   @Column()
   cep: string;
 
-  @Column({
-    default: "available",
-    enum: ["available", "doing", "finished"],
-    enumName: "type_names",
-  })
-  type: string;
+  @ManyToOne((type) => TypesJob, (type) => type.name)
+  type: TypesJob;
 
   @ManyToOne((type) => User, (user) => user.id)
-  client: User;
-
-  @ManyToOne((type) => User, (user) => user.id, {
-    nullable: true,
-  })
-  supplier: User | null;
+  user: User;
 
   @OneToOne((type) => Review, {
     eager: true,
@@ -53,8 +45,9 @@ export class Job {
   @JoinColumn()
   review: Review | null;
 
-  @ManyToOne((type) => Category, (category) => category.name)
+  @ManyToOne((type) => Category, (category) => category.id)
   category: Category;
+  job: Promise<User>;
 
   constructor() {
     if (!this.id) {
