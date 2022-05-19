@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../errors/appError";
 import { prisma } from "@PrismaClient";
+import { User } from "@prisma/client";
 
 const verifyDuplicatedEmail = async (
   req: Request,
@@ -21,12 +22,9 @@ const verifyDuplicatedEmail = async (
       throw new AppError(409, "Email already exists!");
     }
   } else {
-    const user = await prisma.user.findUnique({ where: { id: userId } });
-    const allUsers = await prisma.user.findMany();
-
-    const others = allUsers.filter(({ id }: { id: string }) => id !== user.id);
-
-    if (others.find(({ email }: { email: string }) => email === user.email)) {
+    const users = await prisma.user.findMany({ where: { email } });
+    
+    if (users.find((user: User) => email === user.email && user.id !== userId)) {
       throw new AppError(409, "Email already exists!");
     }
   }
