@@ -1,4 +1,4 @@
 export interface ICreateReview {
-  score: string;
+  score: number;
   comment?: string;
 }

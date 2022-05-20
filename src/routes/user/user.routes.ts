@@ -1,17 +1,17 @@
 import { Router } from "express";
 
+import userCreateController from "../../controllers/users/userCreate.controller";
 import userLoginController from "../../controllers/login/userLogin.controller";
 import userDeleteController from "../../controllers/users/deleteUser.controller";
 import passwordUpdateController from "../../controllers/users/passwordUpdate.controller";
 import roleUpdateController from "../../controllers/users/roleUpdate.controller";
-import userCreateController from "../../controllers/users/userCreate.controller";
 import userListAllSuppliersController from "../../controllers/users/userListAllSuppliers.controller";
 import userListOneController from "../../controllers/users/userListOne.controller";
 import userUpdateController from "../../controllers/users/userUpdate.controller";
 
 import ensureAuth from "../../middlewares/ensureAuth.middleware";
-import verifyDuplicatedEmail from "../../middlewares/verifyDuplicatedEmail.middleware";
 import verifyPassword from "../../middlewares/verifyPassword.middleware";
+import verifyDuplicatedEmail from "../../middlewares/verifyDuplicatedEmail.middleware";
 
 import { expressYupMiddleware } from "express-yup-middleware";
 
@@ -44,6 +44,7 @@ userRoutes.get("/suppliers", userListAllSuppliersController);
 userRoutes.patch(
   "/me",
   expressYupMiddleware({ schemaValidator: updateUserSchema }),
+  verifyDuplicatedEmail,
   userUpdateController
 );
 

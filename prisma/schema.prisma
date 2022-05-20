@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Candidate {
+  id     String  @id() @default(uuid()) @db.Uuid
+  userId String? @db.Uuid @map("user_id")
+  jobId  String? @unique() @db.Uuid @map("job_id")
+
+  jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users  User?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("candidates")
+}
+
+model Category {
+  id   Int    @id() @default(autoincrement())
+  name String @db.VarChar
+
+  jobs Job[]
+
+  @@map("categories")
+}
+
+model Job {
+  id             String          @id() @db.Uuid @default(uuid())
+  title          String          @db.VarChar
+  description    String          @db.VarChar
+  deliveryDate   DateTime        @db.Timestamptz(6) @map("delivery_date")
+  cep            String          @db.VarChar
+
+  status         jobStatus?      @default(available)
+  userId         String?         @db.Uuid @map("user_id")
+  reviewId       String?         @unique() @db.Uuid @map("review_id")
+  categoryId     Int?            @map("category_id")
+
+  categories     Category?      @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reviews        Review?        @relation(fields: [reviewId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  users          User?          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  candidates     Candidate?
+  supplierTaken SupplierTaken?
+
+  @@map("jobs")
+}
+
+enum jobStatus{
+  available
+  doing
+  finished
+}
+
+
+
+
+model Review {
+  id      String  @id() @db.Uuid  @default(uuid())
+  score   Int
+  comment String? @db.VarChar
+  jobs    Job?
+
+  @@map("reviews")
+}
+
+model SupplierTaken {
+  id      String  @id() @default(uuid()) @db.Uuid
+  jobId   String? @unique() @db.Uuid @map("job_id")
+  userId  String? @unique() @db.Uuid @map("user_id")
+
+  jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction) 
+  users  User?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("supplier_taken")
+}
+
+
+
+model User {
+  id             String           @id() @default(uuid()) @db.Uuid
+  name           String           @db.VarChar
+  email          String           @db.VarChar @unique
+  password       String           @db.VarChar
+  phone          String           @db.VarChar
+  isSupplier     Boolean          @default(false) @map("is_supplier")
+
+  candidates     Candidate[] 
+  jobs           Job[]
+  SupplierTaken  SupplierTaken[]
+
+  @@map("users")
+}
