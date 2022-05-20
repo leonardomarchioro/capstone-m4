@@ -24,12 +24,13 @@ jobRoutes.post("/", createJobController);
 
 jobRoutes.get("/me", listMyJobsController);
 jobRoutes.get("/all", verifyIsSupplier, listAllJobsController);
-jobRoutes.get("/one/:id", listOneJobController);
+jobRoutes.get("/one/:jobId", listOneJobController);
 
 jobRoutes.patch("/:id", UpdateInfosJobController);
 
-// jobRoutes.patch(":id/supplier", updateCandidateJobController);
-// jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
+jobRoutes.patch("/:jobId/supplier", updateCandidateJobController);
+
+jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
 
 jobRoutes.patch("/:id/end", updateFinishJobController);
 

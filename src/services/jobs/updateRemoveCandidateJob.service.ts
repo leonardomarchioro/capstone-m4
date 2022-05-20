@@ -1,22 +1,9 @@
 import { prisma } from "@PrismaClient";
 
-const updateRemoveCandidateJobService = async ({ id }: { id: string }) => {
-  const jobPromise = prisma.job.update({
-    where: {
-      id: id,
-    },
-    data: {
-      supplier_taken: null,
-    },
-  });
+const updateRemoveCandidateJobService = async (id: string) => {
+  await prisma.job.update({ where: { id }, data: { status: "available" } });
 
-  const supplierTaken = prisma.supplierTaken.delete({
-    where: {
-      userId: id,
-    },
-  });
-
-  await Promise.all([jobPromise, supplierTaken]);
+  await prisma.supplierTaken.delete({ where: { jobId: id } });
 
   return true;
 };

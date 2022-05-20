@@ -10,7 +10,7 @@ datasource db {
 model Candidate {
   id     String  @id() @default(uuid()) @db.Uuid
   userId String? @db.Uuid @map("user_id")
-  jobId  String? @unique() @db.Uuid @map("job_id")
+  jobId  String? @db.Uuid @map("job_id")
 
   jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users  User?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -69,7 +69,7 @@ model Review {
 model SupplierTaken {
   id      String  @id() @default(uuid()) @db.Uuid
   jobId   String? @unique() @db.Uuid @map("job_id")
-  userId  String? @unique() @db.Uuid @map("user_id")
+  userId  String? @db.Uuid @map("user_id")
 
   jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction) 
   users  User?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
