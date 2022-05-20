@@ -14,3 +14,8 @@ export interface IUpdate {
   cep: string;
   deliveryDate: Date;
 }
+
+export interface ISupplier {
+  supplierId: string;
+  jobId: string;
+}

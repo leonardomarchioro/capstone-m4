@@ -1,6 +1,8 @@
 import "express-async-errors";
+
 import express from "express";
-// import candidateRoutes from "./routes/candidates";
+
+import candidateRoutes from "./routes/candidates/candidates.routes";
 import userRoutes from "./routes/user/user.routes";
 import errorHandler from "./middlewares/errorHandler.middleware";
 import jobRoutes from "./routes/jobs/jobs.routes";
@@ -12,6 +14,7 @@ app.use(express.json());
 
 app.use("/user", userRoutes);
 app.use("/job", jobRoutes);
+app.use("/candidate", candidateRoutes);
 app.use("/review", reviewRouter);
 // app.use("/candidate", candidateRoutes);
 

@@ -1,22 +1,34 @@
 import { prisma } from "@PrismaClient";
 
-const updateCandidateJobService = async ({
-  userId,
-  id,
-}: {
-  userId: string;
-  id: string;
-}) => {
+import { ISupplier } from "src/interfaces/jobs";
+
+const updateCandidateJobService = async ({ supplierId, jobId }: ISupplier) => {
   const job = await prisma.job.update({
-    where: {
-      id,
-    },
-    data: {
-      userId,
+    where: { id: jobId },
+    data: { status: "doing" },
+  });
+
+  const supplierTaken = await prisma.supplierTaken.create({
+    data: { userId: supplierId, jobId },
+    select: {
+      jobs: {
+        select: {
+          categories: true,
+          cep: true,
+          deliveryDate: true,
+          description: true,
+          id: true,
+          reviews: true,
+          status: true,
+          title: true,
+          users: { select: { name: true, id: true, email: true, phone: true } },
+        },
+      },
+      users: true,
     },
   });
 
-  return job;
+  return supplierTaken;
 };
 
 export default updateCandidateJobService;

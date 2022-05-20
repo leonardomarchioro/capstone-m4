@@ -14,6 +14,7 @@ import updateFinishJobController from "src/controllers/jobs/updateFinishJob.cont
 import deleteJobController from "src/controllers/jobs/deleteJob.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
+import verifyIsSupplier from "src/middlewares/jobsMiddlewares/verifyIsSupplier.middleware";
 
 const jobRoutes = Router();
 
@@ -22,13 +23,14 @@ jobRoutes.use(ensureAuth);
 jobRoutes.post("/", createJobController);
 
 jobRoutes.get("/me", listMyJobsController);
-jobRoutes.get("/all", listAllJobsController);
-jobRoutes.get("/:id", listOneJobController);
+jobRoutes.get("/all", verifyIsSupplier, listAllJobsController);
+jobRoutes.get("/one/:jobId", listOneJobController);
 
 jobRoutes.patch("/:id", UpdateInfosJobController);
 
-// jobRoutes.patch(":id/supplier", updateCandidateJobController);
-// jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
+jobRoutes.patch("/:jobId/supplier", updateCandidateJobController);
+
+jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
 
 jobRoutes.patch("/:id/end", updateFinishJobController);
 

@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import AppError from "../errors/appError";
+import AppError from "../../errors/appError";
 import { prisma } from "@PrismaClient";
 
 const verifyIsSupplier = async (
@@ -9,15 +9,13 @@ const verifyIsSupplier = async (
 ) => {
   const { userId } = request;
 
-
-
   const user = await prisma.user.findUnique({
     where: {
       id: userId,
     },
   });
 
-  if (user.isSupplier == false) {
+  if (!user.isSupplier) {
     throw new AppError(401, "Unauthorized!");
   }
 

@@ -7,11 +7,10 @@ const updateRemoveCandidateJobController = async (
 ) => {
   const { id } = request.params;
 
-  const supplier = await updateRemoveCandidateJobService({ id });
+  await updateRemoveCandidateJobService(id);
 
   return response.status(200).json({
     message: "Supplier removed!",
-    supplier,
   });
 };
 
