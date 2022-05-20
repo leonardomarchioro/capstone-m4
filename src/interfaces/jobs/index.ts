@@ -12,5 +12,5 @@ export interface IUpdate {
   description: string;
   categoryId: number;
   cep: string;
-  deliveryDate: string;
+  deliveryDate: Date;
 }
