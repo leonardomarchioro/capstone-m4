@@ -7,8 +7,7 @@ const listAllJobsService = async (userId: string) => {
       status: "available",
     },
   });
-
-  return avaiableJobs.filter((job: Job) => job.userId !== userId);
+  return avaiableJobs.filter((job: Job) => job.userId === userId);
 };
 
 export default listAllJobsService;

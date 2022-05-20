@@ -7,14 +7,13 @@ const UpdateInfosJobController = async (
   response: Response
 ) => {
   const { id } = request.params;
-  const { title, description, categoryId, cep, deliveryDate } = request.body;
-
+  const { title, description, categoryId, cep } = request.body;
   const info: IUpdate = {
     title,
     description,
     categoryId,
     cep,
-    deliveryDate: new Date(deliveryDate),
+    deliveryDate: new Date(),
   };
 
   const updatedJob = await UpdateInfosJobService(id, info);
