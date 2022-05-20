@@ -14,6 +14,13 @@ const userUpdateService = async (
   const updatedUser = await prisma.user.update({
     where: { id: userId },
     data: { name, email, phone },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      isSupplier: true,
+    },
   });
 
   return updatedUser;

@@ -5,6 +5,13 @@ export const userListAllSuppliers = async () => {
     where: {
       isSupplier: true,
     },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      isSupplier: true,
+    },
   });
 
   return users;

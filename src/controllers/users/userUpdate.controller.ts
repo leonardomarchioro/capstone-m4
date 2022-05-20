@@ -11,7 +11,9 @@ const userUpdateController = async (request: Request, response: Response) => {
     phone,
   });
 
-  return response.status(200).json({ message: "Profile updated!" });
+  return response
+    .status(200)
+    .json({ message: "Profile updated!", updatedUser });
 };
 
 export default userUpdateController;
