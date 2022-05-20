@@ -34,6 +34,7 @@
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.2",
     "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.4"
+    "typescript": "^4.6.4",
+    "nodemon": "^2.0.16"
   }
 }
