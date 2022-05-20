@@ -17,3 +17,5 @@ const listJobController = async (request: Request, response: Response) => {
     jobs,
   });
 };
+
+export default listJobController;

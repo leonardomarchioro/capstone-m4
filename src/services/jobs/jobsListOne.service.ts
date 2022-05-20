@@ -1,12 +1,9 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
+import { prisma } from "@PrismaClient";
 
 const listJobsService = async ({ id }: { id: string }) => {
-  const jobsRepository = AppDataSource.getRepository(Job);
-
-  const especifiedJob = jobsRepository.findOne({
+  const especifiedJob = prisma.job.findUnique({
     where: {
-      id: id,
+      id,
     },
   });
 

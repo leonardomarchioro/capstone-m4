@@ -1,12 +1,9 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
+import { prisma } from "@PrismaClient";
 
 const listAllJobsService = async () => {
-  const jobsRepository = AppDataSource.getMongoRepository(Job);
-
-  const avaiableJobs = await jobsRepository.find({
+  const avaiableJobs = await prisma.job.findMany({
     where: {
-      name: "avaiable",
+      status: "available",
     },
   });
 

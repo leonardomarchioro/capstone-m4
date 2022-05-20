@@ -1,18 +1,24 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
+import { prisma } from "@PrismaClient";
 
 const updateJobRemoveCandidateService = async ({ id }: { id: string }) => {
-  const jobsRepository = AppDataSource.getRepository(Job);
-
-  const job = await jobsRepository.findOne({
+  const jobPromise = prisma.job.update({
     where: {
       id: id,
     },
+    data: {
+      supplier_taken: null
+    }
   });
 
-  job.supplier = null;
+  const supplierTaken = prisma.supplierTaken.delete({
+    where: {
+      userId: id
+    }
+  })
 
-  return jobsRepository.save(job);
+  await Promise.all([jobPromise, supplierTaken])
+
+  return true;
 };
 
 export default updateJobRemoveCandidateService;

@@ -43,7 +43,7 @@ model Job {
   reviews        Review?        @relation(fields: [reviewId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   users          User?          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   candidates     Candidate?
-  supplier_taken SupplierTaken?
+  supplierTaken SupplierTaken?
 
   @@map("jobs")
 }

@@ -1,18 +1,17 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
+import { prisma } from "@PrismaClient";
 
 const updateJobTypeCandidateService = async ({ id }: { id: string }) => {
-  const jobsRepository = AppDataSource.getRepository(Job);
 
-  const job = await jobsRepository.findOne({
+  const job = await prisma.job.update({
     where: {
       id,
     },
+    data: {
+      status: "finished"
+    }
   });
 
-  job.type = "finished";
-
-  return jobsRepository.save(job);
+  return job;
 };
 
 export default updateJobTypeCandidateService;

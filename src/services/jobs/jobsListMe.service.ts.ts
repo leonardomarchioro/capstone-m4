@@ -1,11 +1,8 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
-import { IUserListOne } from "../../interface/user";
+import { prisma } from "@PrismaClient";
 
-const listMeJobsService = async ({ userId }: IUserListOne) => {
-  const jobsRepository = AppDataSource.getRepository(Job);
+const listMeJobsService = async (userId: string) => {
 
-  const allJobs = await jobsRepository.find({
+  const allJobs = await prisma.job.findMany({
     where: {
       id: userId,
     },

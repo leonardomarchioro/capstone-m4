@@ -1,6 +1,5 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
-import { User } from "../../entities/User/user.entity";
+import { prisma } from "@PrismaClient";
+
 
 const updateJobCandidateService = async ({
   userId,
@@ -9,26 +8,17 @@ const updateJobCandidateService = async ({
   userId: string;
   id: string;
 }) => {
-  const jobsRepository = AppDataSource.getRepository(Job);
-  const userRepository = AppDataSource.getRepository(User);
 
-  let jobPromise = jobsRepository.findOne({
+  const job = await prisma.job.update({
     where: {
-      id: id,
+      id
     },
+    data: {
+      userId
+    }
   });
 
-  const userPromise = userRepository.findOne({
-    where: {
-      id: userId,
-    },
-  });
-
-  const [ job, user ] = await Promise.all([jobPromise, userPromise])
-
-  user ? (job.supplier = user) : job.supplier;
-
-  return jobsRepository.save(job);
+  return job;
 };
 
 export default updateJobCandidateService;

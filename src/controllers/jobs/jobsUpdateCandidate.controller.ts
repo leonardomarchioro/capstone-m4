@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { IJobsCreate } from "../../interface/jobs";
 import updateJobCandidateService from "../../services/jobs/jobsUpdateCandidate.service";
 
 const updateJobCandidateController = async (

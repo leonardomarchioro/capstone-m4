@@ -5,10 +5,6 @@ export interface IUserCreate {
   phone: string;
 }
 
-export interface IUserListOne {
-  userId: string;
-}
-
 export interface IUserUpdate {
   name?: string;
   email?: string;

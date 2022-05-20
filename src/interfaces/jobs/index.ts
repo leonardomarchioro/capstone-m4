@@ -10,7 +10,7 @@ export interface IJobsCreate {
 export interface IUpdate {
   title: string;
   description: string;
-  categoryId: string;
+  categoryId: number;
   cep: string;
   deliveryDate: string;
 }

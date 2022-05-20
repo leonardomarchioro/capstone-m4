@@ -1,21 +1,23 @@
 import { Request, Response } from "express";
+import { IUpdate } from "src/interfaces/jobs";
 import UpdateJobInfoService from "../../services/jobs/jobsUpdate.service";
-import { IUpdate } from "../../interface/jobs";
 
 const UpdateJobInfoController = async (
   request: Request,
   response: Response
 ) => {
   const { id } = request.params;
-  const { title, description, category, cep, deliveryDate } = request.body;
+  const { title, description, categoryId, cep, deliveryDate } = request.body;
+
   const info: IUpdate = {
     title,
     description,
-    category,
+    categoryId,
     cep,
     deliveryDate,
   };
-  const updatedJob = UpdateJobInfoService({ id }, info);
+  
+  const updatedJob = await UpdateJobInfoService(id, info);
 
   return response.status(200).json({
     message: "Job updated",

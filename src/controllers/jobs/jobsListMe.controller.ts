@@ -4,7 +4,7 @@ import listMeJobsService from "../../services/jobs/jobsListMe.service.ts";
 const listMeJobsController = async (request: Request, response: Response) => {
   const { userId } = request;
 
-  const myJobs = await listMeJobsService({ userId });
+  const myJobs = await listMeJobsService(userId);
 
   if (!myJobs) {
     return response.status(400).json({
@@ -17,3 +17,5 @@ const listMeJobsController = async (request: Request, response: Response) => {
     myJobs,
   });
 };
+
+export default listMeJobsController;
