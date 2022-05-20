@@ -14,7 +14,7 @@ const UpdateInfosJobController = async (
     description,
     categoryId,
     cep,
-    deliveryDate,
+    deliveryDate: new Date(deliveryDate),
   };
 
   const updatedJob = await UpdateInfosJobService(id, info);
