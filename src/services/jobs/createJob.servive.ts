@@ -1,13 +1,24 @@
-import { AppDataSource } from "../../data-source";
-import { Job } from "../../entities/Jobs/jobs.entity";
-import { IJobsCreate } from "../../interface/jobs";
+import { IJobsCreate } from "src/interfaces/jobs";
+import { prisma } from "@PrismaClient";
 
-const jobsCreateService = async (jobData: IJobsCreate) => {
-  const jobsRepository = AppDataSource.getRepository(Job);
+const jobsCreateService = async ({
+  title,
+  description,
+  deliveryDate,
+  cep,
+  userId,
+  categoryId,
+}: IJobsCreate) => {
+  const jobData = {
+    title,
+    description,
+    deliveryDate: new Date(deliveryDate),
+    cep,
+    userId,
+    categoryId,
+  };
 
-  const newJob = jobsRepository.create(jobData);
-
-  await jobsRepository.save(newJob);
+  const newJob = await prisma.job.create({ data: jobData });
 
   return newJob;
 };
