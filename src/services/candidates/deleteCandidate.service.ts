@@ -1,10 +1,9 @@
-import { AppDataSource } from "../../data-source";
-import { Candidate } from "../../entities/Candidates/candidate.entity";
+import { prisma } from "@PrismaClient";
 
 const candidateDeleteService = async (jobId: string) => {
-  const candidateRepository = AppDataSource.getRepository(Candidate);
 
-  const deletedCandidate = candidateRepository.delete(jobId);
+  const deletedCandidate = await prisma.candidate.delete({ where: { jobId } });
+
   return deletedCandidate;
 };
 

@@ -1,14 +1,9 @@
-import { AppDataSource } from "../../data-source";
-import { Candidate } from "../../entities/Candidates/candidate.entity";
+import { prisma } from "@PrismaClient";
 
 const getAllCandidatesService = async (jobId: string) => {
-  const candidateRepository = AppDataSource.getRepository(Candidate);
-
-  const candidates = await candidateRepository.find({
+  const candidates = await prisma.candidate.findMany({
     where: {
-      job: [{
-        id: jobId
-      }]
+      jobId,
     },
   });
 
