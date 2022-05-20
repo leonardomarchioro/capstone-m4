@@ -15,9 +15,29 @@ const createJobController = async (request: Request, response: Response) => {
     categoryId: category,
   });
 
+  const { users } = newJob;
+
+  const jobData = {
+    id: newJob.id,
+    title: newJob.title,
+    description: newJob.description,
+    category: newJob.categories.name,
+    deliveryDate: newJob.deliveryDate,
+    cep: newJob.cep,
+    status: newJob.status,
+  };
+
+  const userData = {
+    id: users.id,
+    name: users.name,
+    email: users.email,
+    phone: users.phone,
+  };
+
   return response.status(201).json({
     message: "jobs has been sucessfully created!",
-    newJob,
+    Job: jobData,
+    Client: userData,
   });
 };
 
