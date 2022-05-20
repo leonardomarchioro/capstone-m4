@@ -7,7 +7,6 @@ import {
 } from "@jest/globals"
 import request from "supertest"
 import { app } from "../src/app"
-import { conectDatabase, AppDataSource } from "../src/data-source"
 
 describe("User routes", () => {
 
