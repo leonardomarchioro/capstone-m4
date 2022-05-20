@@ -3,7 +3,7 @@ import { prisma } from "@PrismaClient";
 
 const candidateCreateService = async ({ userId, jobId }: ICandidateCreate) => {
 
-  const candidate = prisma.candidate.create({
+  const candidate = await prisma.candidate.create({
     data: { jobId, userId },
   });
 
