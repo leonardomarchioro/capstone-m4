@@ -2,7 +2,7 @@ import { compare } from "bcryptjs";
 import { prisma } from "@PrismaClient";
 
 import { Request, Response, NextFunction } from "express";
-import AppError from "../errors/appError";
+import AppError from "../../errors/appError";
 
 const verifyPassword = async (
   req: Request,
