@@ -1,7 +1,6 @@
 import { prisma } from "@PrismaClient";
 
-const listMeJobsService = async (userId: string) => {
-
+const listMyJobsService = async (userId: string) => {
   const allJobs = await prisma.job.findMany({
     where: {
       id: userId,
@@ -11,4 +10,4 @@ const listMeJobsService = async (userId: string) => {
   return allJobs;
 };
 
-export default listMeJobsService;
+export default listMyJobsService;

@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { IUpdate } from "src/interfaces/jobs";
-import UpdateJobInfoService from "../../services/jobs/jobsUpdate.service";
+import UpdateInfosJobService from "../../services/jobs/updateInfoJob.service";
 
-const UpdateJobInfoController = async (
+const UpdateInfosJobController = async (
   request: Request,
   response: Response
 ) => {
@@ -16,8 +16,8 @@ const UpdateJobInfoController = async (
     cep,
     deliveryDate,
   };
-  
-  const updatedJob = await UpdateJobInfoService(id, info);
+
+  const updatedJob = await UpdateInfosJobService(id, info);
 
   return response.status(200).json({
     message: "Job updated",
@@ -25,4 +25,4 @@ const UpdateJobInfoController = async (
   });
 };
 
-export default UpdateJobInfoController;
+export default UpdateInfosJobController;

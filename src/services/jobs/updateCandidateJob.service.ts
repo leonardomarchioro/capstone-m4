@@ -1,24 +1,22 @@
 import { prisma } from "@PrismaClient";
 
-
-const updateJobCandidateService = async ({
+const updateCandidateJobService = async ({
   userId,
   id,
 }: {
   userId: string;
   id: string;
 }) => {
-
   const job = await prisma.job.update({
     where: {
-      id
+      id,
     },
     data: {
-      userId
-    }
+      userId,
+    },
   });
 
   return job;
 };
 
-export default updateJobCandidateService;
+export default updateCandidateJobService;

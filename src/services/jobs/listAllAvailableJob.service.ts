@@ -6,7 +6,6 @@ const listAllJobsService = async () => {
       status: "available",
     },
   });
-
   return avaiableJobs;
 };
 

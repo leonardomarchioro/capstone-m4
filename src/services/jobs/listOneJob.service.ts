@@ -1,6 +1,6 @@
 import { prisma } from "@PrismaClient";
 
-const listJobsService = async ({ id }: { id: string }) => {
+const listOneJobsService = async ({ id }: { id: string }) => {
   const especifiedJob = prisma.job.findUnique({
     where: {
       id,
@@ -10,4 +10,4 @@ const listJobsService = async ({ id }: { id: string }) => {
   return especifiedJob;
 };
 
-export default listJobsService;
+export default listOneJobsService;

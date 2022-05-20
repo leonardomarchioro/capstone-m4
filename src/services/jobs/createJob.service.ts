@@ -1,7 +1,7 @@
 import { IJobsCreate } from "src/interfaces/jobs";
 import { prisma } from "@PrismaClient";
 
-const jobsCreateService = async ({
+const createJobService = async ({
   title,
   description,
   deliveryDate,
@@ -23,4 +23,4 @@ const jobsCreateService = async ({
   return newJob;
 };
 
-export default jobsCreateService;
+export default createJobService;

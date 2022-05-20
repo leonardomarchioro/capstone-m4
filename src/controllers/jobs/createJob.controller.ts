@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import jobsCreateService from "../../services/jobs/createJob.servive";
+import createJobService from "../../services/jobs/createJob.service";
 
-const jobsCreateController = async (request: Request, response: Response) => {
+const createJobController = async (request: Request, response: Response) => {
   const { title, description, deliveryDate, cep, category } = request.body;
 
   const { userId } = request;
 
-  const newJob = await jobsCreateService({
+  const newJob = await createJobService({
     title,
     description,
     deliveryDate,
@@ -21,4 +21,4 @@ const jobsCreateController = async (request: Request, response: Response) => {
   });
 };
 
-export default jobsCreateController;
+export default createJobController;

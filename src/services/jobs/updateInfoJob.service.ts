@@ -1,14 +1,10 @@
 import { prisma } from "@PrismaClient";
 import { IUpdate } from "../../interfaces/jobs";
 
-const UpdateJobInfoService = async (id: string, {
-  cep,
-  title,
-  categoryId,
-  description,
-  deliveryDate,
-}: IUpdate) => {
-
+const UpdateInfosJobService = async (
+  id: string,
+  { cep, title, categoryId, description, deliveryDate }: IUpdate
+) => {
   const job = await prisma.job.update({
     where: {
       id,
@@ -18,12 +14,11 @@ const UpdateJobInfoService = async (id: string, {
       title,
       categoryId,
       description,
-      deliveryDate
-    }
+      deliveryDate,
+    },
   });
-
 
   return job;
 };
 
-export default UpdateJobInfoService;
+export default UpdateInfosJobService;

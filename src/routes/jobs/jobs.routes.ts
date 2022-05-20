@@ -1,14 +1,17 @@
 import { Router } from "express";
 
-import jobsCreateController from "src/controllers/jobs/jobsCreate.controller";
-import jobDeleteController from "src/controllers/jobs/jobsDelete.controller";
-import listAllJobsController from "src/controllers/jobs/jobsListAll.controller";
-import listMeJobsController from "src/controllers/jobs/jobsListMe.controller";
-import listJobController from "src/controllers/jobs/jobsListOne.controller";
-import UpdateJobInfoController from "src/controllers/jobs/jobsUpdate.controller";
-import updateJobCandidateController from "src/controllers/jobs/jobsUpdateCandidate.controller";
-import updateJobRemoveCandidateController from "src/controllers/jobs/jobsUpdateRemoveCandidate.controller";
-import updateJobTypeCandidateController from "src/controllers/jobs/jobsUpdateType.controller";
+import createJobController from "src/controllers/jobs/createJob.controller";
+
+import listMyJobsController from "src/controllers/jobs/ListMyJobs.controller";
+import listAllJobsController from "src/controllers/jobs/ListAvailableJobs.controller";
+import listOneJobController from "src/controllers/jobs/listOneJob.controller";
+
+import UpdateInfosJobController from "src/controllers/jobs/updateInfoJob.controller";
+import updateCandidateJobController from "src/controllers/jobs/updateCandidateJob.controller";
+import updateRemoveCandidateJobController from "src/controllers/jobs/updateRemoveCandidateJob.controller";
+import updateFinishJobController from "src/controllers/jobs/updateFinishJob.controller";
+
+import deleteJobController from "src/controllers/jobs/deleteJob.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
 
@@ -16,17 +19,19 @@ const jobRoutes = Router();
 
 jobRoutes.use(ensureAuth);
 
-jobRoutes.post("/", jobsCreateController);
+jobRoutes.post("/", createJobController);
 
-jobRoutes.get("/me", listMeJobsController);
+jobRoutes.get("/me", listMyJobsController);
 jobRoutes.get("/all", listAllJobsController);
-jobRoutes.get("/:id", listJobController);
+jobRoutes.get("/:id", listOneJobController);
 
-jobRoutes.patch("/:id", UpdateJobInfoController);
-jobRoutes.patch(":id/supplier", updateJobCandidateController);
-jobRoutes.patch("/:id/remove/supplier", updateJobRemoveCandidateController);
-jobRoutes.patch("/:id/end", updateJobTypeCandidateController);
+jobRoutes.patch("/:id", UpdateInfosJobController);
 
-jobRoutes.delete("/:id", jobDeleteController);
+// jobRoutes.patch(":id/supplier", updateCandidateJobController);
+// jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
+
+jobRoutes.patch("/:id/end", updateFinishJobController);
+
+jobRoutes.delete("/:id", deleteJobController);
 
 export default jobRoutes;

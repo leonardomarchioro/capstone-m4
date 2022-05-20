@@ -1,14 +1,14 @@
 import { Request, Response } from "express";
-import updateJobCandidateService from "../../services/jobs/jobsUpdateCandidate.service";
+import updateCandidateJobService from "../../services/jobs/updateCandidateJob.service";
 
-const updateJobCandidateController = async (
+const updateCandidateJobController = async (
   request: Request,
   response: Response
 ) => {
   const { userId } = request;
   const { id } = request.params;
 
-  const supplier = await updateJobCandidateService({ userId, id });
+  const supplier = await updateCandidateJobService({ userId, id });
 
   return response.status(200).json({
     message: "Supplier updated!",
@@ -16,4 +16,4 @@ const updateJobCandidateController = async (
   });
 };
 
-export default updateJobCandidateController;
+export default updateCandidateJobController;
