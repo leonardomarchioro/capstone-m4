@@ -29,7 +29,6 @@ const ensureAuth = async (
 
     request.userId = userId;
   });
-
   return next();
 };
 export default ensureAuth;

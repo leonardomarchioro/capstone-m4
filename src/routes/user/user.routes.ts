@@ -10,8 +10,8 @@ import userListOneController from "../../controllers/users/userListOne.controlle
 import userUpdateController from "../../controllers/users/userUpdate.controller";
 
 import ensureAuth from "../../middlewares/ensureAuth.middleware";
-import verifyPassword from "../../middlewares/verifyPassword.middleware";
-import verifyDuplicatedEmail from "../../middlewares/verifyDuplicatedEmail.middleware";
+import verifyPassword from "../../middlewares/userMiddlewares/verifyPassword.middleware";
+import verifyDuplicatedEmail from "../../middlewares/userMiddlewares/verifyDuplicatedEmail.middleware";
 
 import { expressYupMiddleware } from "express-yup-middleware";
 

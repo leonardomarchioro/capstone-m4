@@ -2,7 +2,7 @@
 // import { User } from "../../entities/User/user.entity";
 import { IUserCreate } from "../../interfaces/user";
 import { hash } from "bcryptjs";
-import { prisma } from "../../prisma/client"
+import { prisma } from "../../prisma/client";
 
 const userCreateService = async ({
   name,
@@ -10,7 +10,6 @@ const userCreateService = async ({
   password,
   phone,
 }: IUserCreate) => {
-
   const hashPassword = await hash(password, 10);
 
   const newUser = await prisma.user.create({
@@ -18,10 +17,9 @@ const userCreateService = async ({
       email,
       name,
       password: hashPassword,
-      phone
-    }
-  })
-
+      phone,
+    },
+  });
 
   return newUser;
 };
