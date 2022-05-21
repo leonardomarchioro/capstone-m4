@@ -1,10 +1,10 @@
-import listJobsService from "../../services/jobs/jobsListOne.service";
+import listOneJobsService from "../../services/jobs/listOneJob.service";
 import { Response, Request } from "express";
 
-const listJobController = async (request: Request, response: Response) => {
+const listOneJobController = async (request: Request, response: Response) => {
   const { id } = request.params;
 
-  const jobs = await listJobsService({ id });
+  const jobs = await listOneJobsService({ id });
 
   if (!jobs) {
     return response.status(400).json({
@@ -17,3 +17,5 @@ const listJobController = async (request: Request, response: Response) => {
     jobs,
   });
 };
+
+export default listOneJobController;

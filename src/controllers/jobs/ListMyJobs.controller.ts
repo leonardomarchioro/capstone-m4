@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import listMeJobsService from "../../services/jobs/jobsListMe.service.ts";
+import listMyJobsService from "../../services/jobs/listMyJobs.service";
 
-const listMeJobsController = async (request: Request, response: Response) => {
+const listMyJobsController = async (request: Request, response: Response) => {
   const { userId } = request;
 
-  const myJobs = await listMeJobsService({ userId });
+  const myJobs = await listMyJobsService(userId);
 
   if (!myJobs) {
     return response.status(400).json({
@@ -17,3 +17,5 @@ const listMeJobsController = async (request: Request, response: Response) => {
     myJobs,
   });
 };
+
+export default listMyJobsController;

@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import jobDeleteService from "../../services/jobs/jobsDelete.service";
+import deleteJobService from "../../services/jobs/deleteJob.service";
 
-const jobDeleteController = async (request: Request, response: Response) => {
+const deleteJobController = async (request: Request, response: Response) => {
   const { id } = request.params;
 
-  const isDeleted = await jobDeleteService({ id });
+  const isDeleted = await deleteJobService({ id });
 
   if (!isDeleted) {
     return response.status(400).json({
@@ -17,4 +17,4 @@ const jobDeleteController = async (request: Request, response: Response) => {
   });
 };
 
-export default jobDeleteController;
+export default deleteJobController;

@@ -1,4 +1,9 @@
 export interface ICreateReview {
-  score: string;
+  score: number;
+  comment?: string;
+}
+
+export interface IUpdateReview {
+  score?: number;
   comment?: string;
 }

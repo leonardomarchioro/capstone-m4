@@ -1,16 +1,16 @@
 export interface IJobsCreate {
-  clientId: string;
+  userId: string;
   title: string;
   description: string;
-  deliveryDate: Date;
+  deliveryDate: string;
   cep: string;
-  categoryId: string;
+  categoryId: number;
 }
 
 export interface IUpdate {
   title: string;
   description: string;
-  categoryId: string;
+  categoryId: number;
   cep: string;
   deliveryDate: Date;
 }

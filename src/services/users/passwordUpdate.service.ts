@@ -1,20 +1,18 @@
-import { IPasswordUpdate, IUserUpdate } from "../../interfaces/user";
+import { IPasswordUpdate } from "../../interfaces/user";
 import { hash } from "bcryptjs";
-import { User } from "../../entities/User/user.entity";
-import { AppDataSource } from "../../data-source";
+import { prisma } from "@PrismaClient";
 
 const passwordUpdateService = async ({
   userId,
   newPassword,
 }: IPasswordUpdate) => {
-  const userRepository = AppDataSource.getRepository(User);
-  const hashPassword = await hash(newPassword, 10);
+  const user = await prisma.user.findUnique({ where: { id: userId } });
 
-  const user = await userRepository.findOne({ where: { id: userId } });
+  const hashPassword = await hash(newPassword, 10);
 
   user.password = hashPassword;
 
-  await userRepository.save(user);
+  await prisma.user.update({ where: { id: userId }, data: user });
 
   return true;
 };
