@@ -15,8 +15,9 @@ import deleteJobController from "src/controllers/jobs/deleteJob.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
 import verifyIsSupplier from "src/middlewares/jobsMiddlewares/verifyIsSupplier.middleware";
-import { expressYupMiddleware } from "express-yup-middleware";
+import verifyIsCandidate from "src/middlewares/jobsMiddlewares/verifyIsCandidate.middleware";
 
+import { expressYupMiddleware } from "express-yup-middleware";
 import createJobSchema from "src/validations/jobs/createJob.validation";
 import updateJobInfoSchema from "src/validations/jobs/jobsUpdate.validation";
 import updateCandidateJobSchema from "src/validations/jobs/updateCandidateJob.validation";
@@ -44,6 +45,7 @@ jobRoutes.patch(
 jobRoutes.patch(
   "/:jobId/supplier",
   expressYupMiddleware({ schemaValidator: updateCandidateJobSchema }),
+  verifyIsCandidate,
   updateCandidateJobController
 );
 

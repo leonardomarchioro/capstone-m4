@@ -9,7 +9,7 @@ const createJobSchema = {
           description: string().required("description "),
           deliveryDate: string().required("deliveryDate is required"),
           cep: string().required("cep is required"),
-          category: string().required("userId is required"),
+          category: string().required("category is required"),
         })
         .noUnknown(true),
       validateOptions: {
