@@ -23,9 +23,9 @@ reviewRouter.post(
   createReviewController
 );
 reviewRouter.get("/:idJob", listReviewController);
-reviewRouter.get("/:idSupplier", listReviewsSupplierController);
+reviewRouter.get("/supplier/:idSupplier", listReviewsSupplierController);
 
-reviewRouter.patch("/:idReview", generalCheckReview,updateReviewController);
-reviewRouter.delete("/:idReview", generalCheckReview,deleteReviewController);
+reviewRouter.patch("/:idReview", generalCheckReview, updateReviewController);
+reviewRouter.delete("/:idReview", generalCheckReview, deleteReviewController);
 
 export default reviewRouter;

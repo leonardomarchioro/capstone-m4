@@ -16,8 +16,6 @@ const verifyIfExistsReview = async (
     select: { reviews: true },
   });
 
-  console.log(verifyIfExistsReview.reviews);
-
   if (verifyIfExistsReview.reviews) {
     throw new AppError(409, "Review already exists!");
   }
