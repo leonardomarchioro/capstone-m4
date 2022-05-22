@@ -10,21 +10,27 @@
 
 O objeto User é definido como:
 
-| Campo    | Tipo    | Descrição                                    |
-| -------- | ------- | -------------------------------------------- |
-| id       | string  | Identificador único do usuário               |
-| name     | string  | O nome do usuário.                           |
-| email    | string  | O e-mail do usuário.                         |
-| password | string  | A senha de acesso do usuário                 |
-| isAdm    | boolean | Define se um usuário é Administrador ou não. |
+| Campo      | Tipo    | Descrição                         |
+| ---------- | ------- | --------------------------------- |
+| id         | string  | Identificador único do usuário    |
+| name       | string  | O nome do usuário.                |
+| email      | string  | O e-mail do usuário.              |
+| password   | string  | A senha de acesso do usuário      |
+| phone      | string  | O telefone do usuário             |
+| isSupplier | boolean | Informa se o usuário é fornecedor |
 
 ### Endpoints
 
-| Método | Rota            | Descrição                                     |
-| ------ | --------------- | --------------------------------------------- |
-| POST   | /users          | Criação de um usuário.                        |
-| GET    | /users          | Lista todos os usuários                       |
-| GET    | /users/:user_id | Lista um usuário usando seu ID como parâmetro |
+| Método | Rota            | Descrição                                                           |
+| ------ | --------------- | ------------------------------------------------------------------- |
+| POST   | /user/signup    | Criação de um usuário.                                              |
+| POST   | /user/signin    | Login do usuário.                                                   |
+| GET    | /user/me        | Lista um usuário usando seu token como parâmetro.                   |
+| GET    | /user/suppliers | Lista todos os fornecedores usando o token de login como parâmetro. |
+| PATCH  | /user/me        | Atualizar nome e email de um usuário.                               |
+| PATCH  | /user/password  | Atualizar senha de um usuário.                                      |
+| PATCH  | /user/role      | Atualizar função de um usuário.                                     |
+| DELETE | /user/me        | Deletar um usuário.                                                 |
 
 ---
 
@@ -37,8 +43,8 @@ O objeto User é definido como:
 ### Exemplo de Request:
 
 ```
-POST /users
-Host: http://suaapi.com/v1
+POST /user/signup
+Host: http://localhost:3000
 Authorization: None
 Content-type: application/json
 ```
@@ -47,38 +53,34 @@ Content-type: application/json
 
 ```json
 {
-  "name": "eDuArDo",
-  "email": "edu@mail.com",
+  "name": "Bico",
+  "email": "bico@mail.com",
   "password": "1234",
-  "isAdm": true
+  "phone": "1234-5678"
 }
 ```
 
 ### Schema de Validação com Yup:
 
 ```javascript
-name: yup
-        .string()
-	.required()
-	.transform((value, originalValue) => {
-		return titlelify(originalValue)
-	}),
-email: yup
-        .string()
-	.email()
-	.required()
-	.transform((value, originalValue) => {
-		return originalValue.toLowerCase()
-	}),
-password: yup
-        .string()
-	.required()
-	.transform((value, originalValue) => {
-		return bcrypt.hashSync(originalValue, 10)
-	}),
-isAdm: yup
-        .boolean()
-	.required(),
+schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          name: string().required("name is required"),
+          email: string()
+            .required("email is required")
+            .email("Invalid email format"),
+          password: string().required("password is required"),
+          phone: string().required("Phone is required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
 ```
 
 OBS.: Chaves não presentes no schema serão removidas.
@@ -91,18 +93,28 @@ OBS.: Chaves não presentes no schema serão removidas.
 
 ```json
 {
-  "id": "9cda28c9-e540-4b2c-bf0c-c90006d37893",
-  "name": "Eduardo",
-  "email": "edu@mail.com",
-  "isAdm": true
+  "id": "abfe0aca-f0f4-43d6-be13-2419fa172f19",
+  "name": "Bico",
+  "email": "bico@email.com",
+  "phone": "1234-5678",
+  "isSupplier": false
 }
 ```
 
 ### Possíveis Erros:
 
-| Código do Erro | Descrição                 |
-| -------------- | ------------------------- |
-| 409 Conflict   | Email already registered. |
+| Código do Erro  | Descrição                 |
+| --------------- | ------------------------- |
+| 409 Conflict    | Email already registered. |
+| 400 Bad Request | Key is required.          |
+
+---
+
+### 1.2. **Login do usuário**
+
+[ Voltar aos Endpoints ](#5-endpoints)
+
+### `/user/signin`
 
 ---
 
