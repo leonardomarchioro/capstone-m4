@@ -3,7 +3,6 @@ import { compare } from "bcryptjs";
 import { sign as signJWT } from "jsonwebtoken";
 import AppError from "../../errors/appError";
 import { prisma } from "../../prisma/client";
-import { verify } from "crypto";
 
 const userLoginService = async ({ email, password }: IUserLogin) => {
   const user = await prisma.user.findUnique({ where: { email } });
