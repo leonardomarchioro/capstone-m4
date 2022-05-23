@@ -12,7 +12,7 @@ export interface IUpdate {
   description: string;
   categoryId: number;
   cep: string;
-  deliveryDate: Date;
+  deliveryDate?: Date;
 }
 
 export interface ISupplier {
