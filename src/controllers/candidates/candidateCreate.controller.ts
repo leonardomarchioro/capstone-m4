@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import candidateCreateService from "../../services/candidates/createCandidacyJob.service";
+import createCandidacyJobService from "src/services/candidates/createCandidacyJob.service";
 
 const candidateCreateController = async (
   request: Request,
@@ -8,7 +8,7 @@ const candidateCreateController = async (
   const { jobId } = request.body;
   const { userId } = request;
 
-  const newCandidate = await candidateCreateService({ userId, jobId });
+  const newCandidate = await createCandidacyJobService({ userId, jobId });
 
   const Job = {
     id: newCandidate.jobs.id,
