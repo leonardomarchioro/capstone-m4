@@ -1,10 +1,15 @@
 import { Request, Response } from "express";
+import AppError from "src/errors/appError";
 import listReviewService from "src/services/reviews/listReviewJob.service";
 
 const listReviewController = async (request: Request, response: Response) => {
   const { idJob } = request.params;
 
   const { reviews, supplierTaken, id } = await listReviewService(idJob);
+
+  if (reviews === null) {
+    throw new AppError(404, "Review does not exists!");
+  }
 
   const formatReview = {
     id,
@@ -16,13 +21,11 @@ const listReviewController = async (request: Request, response: Response) => {
     delete formatReview.comment;
   }
 
-  return response
-    .status(200)
-    .json({
-      jobId: id,
-      review: formatReview,
-      supplier: supplierTaken.users || {},
-    });
+  return response.status(200).json({
+    jobId: id,
+    review: formatReview,
+    supplier: supplierTaken.users || {},
+  });
 };
 
 export default listReviewController;

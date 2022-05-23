@@ -10,6 +10,9 @@ import ensureAuth from "src/middlewares/ensureAuth.middleware";
 import generalCheckReview from "src/middlewares/reviewsMiddlewares/generalCheckReview.middleware";
 import verifyJobIsFinished from "src/middlewares/reviewsMiddlewares/verifyJobIsFinished.middleware";
 import verifyIfExistsReview from "src/middlewares/reviewsMiddlewares/verifyIfExistsReview.middleware";
+import createReviewSchema from "src/validations/review/createReview.validation";
+import { expressYupMiddleware } from "express-yup-middleware";
+import updateReviewSchema from "src/validations/review/updateReviewSchema";
 
 const reviewRouter = Router();
 
@@ -17,6 +20,7 @@ reviewRouter.use(ensureAuth);
 
 reviewRouter.post(
   "/:idJob",
+  expressYupMiddleware({ schemaValidator: createReviewSchema }),
   verifyJobIsFinished,
   verifyIfExistsReview,
   generalCheckReview,
@@ -25,7 +29,12 @@ reviewRouter.post(
 reviewRouter.get("/:idJob", listReviewController);
 reviewRouter.get("/supplier/:idSupplier", listReviewsSupplierController);
 
-reviewRouter.patch("/:idReview", generalCheckReview, updateReviewController);
+reviewRouter.patch(
+  "/:idReview",
+  expressYupMiddleware({ schemaValidator: updateReviewSchema }),
+  generalCheckReview,
+  updateReviewController
+);
 reviewRouter.delete("/:idReview", generalCheckReview, deleteReviewController);
 
 export default reviewRouter;

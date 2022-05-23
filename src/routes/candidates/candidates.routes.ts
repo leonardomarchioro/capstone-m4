@@ -23,7 +23,7 @@ candidateRoutes.post(
   verifyJobExists,
   verifyCandidateNotExists,
   verifyIsSupplier,
-  //verifyOwnJob, /* Apenas para testes manuais ( lembrar de abilitar novamente nos testes com jest ) */
+  verifyOwnJob,
   candidateCreateController
 );
 
