@@ -108,7 +108,7 @@
     - [Corpo da Requisição:](#corpo-da-requisição-11)
     - [Exemplo de Response:](#exemplo-de-response-11)
     - [Possíveis Erros:](#possíveis-erros-11)
-  - [6. **JSON**](#6-json)
+  - [7. **JSON**](#7-json)
 
 ---
 
@@ -935,7 +935,7 @@ Vazio
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-## 6. **JSON**
+## 7. **JSON**
 
 [ Voltar para os Endpoints ](#5-endpoints)
 
