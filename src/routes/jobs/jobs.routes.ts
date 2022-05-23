@@ -33,7 +33,7 @@ jobRoutes.post(
 );
 
 jobRoutes.get("/me", listMyJobsController);
-jobRoutes.get("/all", verifyIsSupplier, listAllJobsController);
+jobRoutes.get("/all", verifyIsSupplier, listAllJobsController); ///
 jobRoutes.get("/one/:jobId", listOneJobController);
 
 jobRoutes.patch(

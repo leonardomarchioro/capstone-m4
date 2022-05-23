@@ -16,6 +16,14 @@ const UpdateInfosJobService = async (
       description,
       deliveryDate,
     },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      categories: { select: { name: true } },
+      deliveryDate: true,
+      cep: true,
+    },
   });
 
   return job;
