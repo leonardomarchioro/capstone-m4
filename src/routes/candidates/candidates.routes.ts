@@ -8,6 +8,7 @@ import candidateDeleteController from "../../controllers/candidates/candidateDel
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
 import verifyOwnJob from "src/middlewares/candidateMiddlewares/verifyOwnJobId.middleware";
 import verifyIsSupplier from "src/middlewares/verifyIsSupplier.middleware";
+import verifyCandidateNotExists from "src/middlewares/candidateMiddlewares/verifyCandidateNotExists";
 
 const candidateRoutes = Router();
 
@@ -15,6 +16,7 @@ candidateRoutes.use(ensureAuth);
 
 candidateRoutes.post(
   "/",
+  verifyCandidateNotExists,
   verifyIsSupplier,
   //verifyOwnJob,
   candidateCreateController

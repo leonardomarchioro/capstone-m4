@@ -12,9 +12,7 @@ const deleteJobController = async (request: Request, response: Response) => {
     });
   }
 
-  return response.status(200).json({
-    message: "Jobs has been deleted",
-  });
+  return response.sendStatus(204);
 };
 
 export default deleteJobController;
