@@ -57,7 +57,7 @@ jobRoutes.patch(
 jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
 
 jobRoutes.patch(
-  "/:id/end",
+  "/:jobId/end",
   verifyJobAlreadyUpToFinish,
   updateFinishJobController
 );

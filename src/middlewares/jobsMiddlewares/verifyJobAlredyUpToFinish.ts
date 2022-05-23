@@ -7,10 +7,10 @@ const verifyJobAlreadyUpToFinish = async (
   response: Response,
   next: NextFunction
 ) => {
-  const { id } = request.params;
+  const { jobId } = request.params;
   const job = await prisma.job.findUnique({
     where: {
-      id,
+      id: jobId,
     },
   });
 
