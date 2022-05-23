@@ -1,11 +1,11 @@
 import { string, object } from "yup";
 
-const updateCandidateJobSchema = {
+const createCandidateJobSchema = {
   schema: {
     body: {
       yupSchema: object()
         .shape({
-          supplierId: string().required("supplier id is required"),
+          jobId: string().required("job id is required"),
         })
         .noUnknown(true),
       validateOptions: {
@@ -16,4 +16,4 @@ const updateCandidateJobSchema = {
   },
 };
 
-export default updateCandidateJobSchema;
+export default createCandidateJobSchema;

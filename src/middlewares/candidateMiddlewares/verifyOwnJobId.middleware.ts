@@ -16,13 +16,10 @@ const verifyOwnJob = async (
       id: jobId,
     },
   });
-
-  // para nao deixar ele se candidatar ao proprio servico requisitado
   if (job.userId === userId) {
     throw new AppError(401, "Unauthorized!");
   }
 
-  // verificar se ha vaga para se candidatar ao trabalho
   if (job.status !== "available") {
     throw new AppError(401, "Unauthorized!");
   }

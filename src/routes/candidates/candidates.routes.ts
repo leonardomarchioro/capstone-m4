@@ -10,6 +10,8 @@ import verifyOwnJob from "src/middlewares/candidateMiddlewares/verifyOwnJobId.mi
 import verifyIsSupplier from "src/middlewares/verifyIsSupplier.middleware";
 import verifyCandidateNotExists from "src/middlewares/candidateMiddlewares/verifyCandidateNotExists";
 import verifyJobExists from "src/middlewares/candidateMiddlewares/verifyJobExists";
+import createCandidateJobSchema from "src/validations/candidate/createCandidate.valiation";
+import { expressYupMiddleware } from "express-yup-middleware";
 
 const candidateRoutes = Router();
 
@@ -17,10 +19,11 @@ candidateRoutes.use(ensureAuth);
 
 candidateRoutes.post(
   "/",
+  expressYupMiddleware({ schemaValidator: createCandidateJobSchema }),
   verifyJobExists,
   verifyCandidateNotExists,
   verifyIsSupplier,
-  //verifyOwnJob,
+  //verifyOwnJob, /* Apenas para testes manuais ( lembrar de abilitar novamente nos testes com jest ) */
   candidateCreateController
 );
 
