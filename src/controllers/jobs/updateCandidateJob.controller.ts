@@ -26,9 +26,14 @@ const updateCandidateJobController = async (
       deliveryDate,
       cep,
       status,
-      Client: jobs.users,
     },
-    Supplier: users,
+    Client: jobs.users,
+    Supplier: {
+      id: users.id,
+      name: users.name,
+      email: users.email,
+      phone: users.phone,
+    },
   });
 };
 

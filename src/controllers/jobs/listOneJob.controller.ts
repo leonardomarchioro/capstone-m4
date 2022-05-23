@@ -25,6 +25,8 @@ const listOneJobController = async (request: Request, response: Response) => {
     users,
   } = jobs;
 
+  const Supplier = supplierTaken === null ? {} : supplierTaken.users;
+
   return response.status(200).json({
     message: "Job are listed",
     job: {
@@ -37,7 +39,7 @@ const listOneJobController = async (request: Request, response: Response) => {
       title,
     },
     Client: users,
-    Supplier: supplierTaken || {},
+    Supplier,
     Review: reviews || {},
   });
 };
