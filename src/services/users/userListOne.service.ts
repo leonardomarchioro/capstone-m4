@@ -1,4 +1,4 @@
-// import { IUserListOne } from "../../interfaces/user";
+import AppError from "src/errors/appError";
 import { prisma } from "../../prisma/client";
 
 const userListOneService = async (userId: string) => {
@@ -14,6 +14,10 @@ const userListOneService = async (userId: string) => {
       isSupplier: true,
     },
   });
+
+  if (!user) {
+    throw new AppError(404, "User does not exists!");
+  }
 
   return user;
 };

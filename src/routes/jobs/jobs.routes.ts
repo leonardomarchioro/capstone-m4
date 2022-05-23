@@ -14,13 +14,16 @@ import updateFinishJobController from "src/controllers/jobs/updateFinishJob.cont
 import deleteJobController from "src/controllers/jobs/deleteJob.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
-import verifyIsSupplier from "src/middlewares/jobsMiddlewares/verifyIsSupplier.middleware";
+import verifyIsSupplier from "src/middlewares/candidateMiddlewares/verifyIsSupplier.middleware";
 import verifyIsCandidate from "src/middlewares/jobsMiddlewares/verifyIsCandidate.middleware";
 
 import { expressYupMiddleware } from "express-yup-middleware";
 import createJobSchema from "src/validations/jobs/createJob.validation";
 import updateJobInfoSchema from "src/validations/jobs/jobsUpdate.validation";
 import updateCandidateJobSchema from "src/validations/jobs/updateCandidateJob.validation";
+import verifyJobAlreadyUpToFinish from "src/middlewares/jobsMiddlewares/verifyJobAlredyUpToFinish";
+import verifyAlreadySupplier from "src/middlewares/jobsMiddlewares/verifyAlreadySupplier";
+import verifyAlreadyStarted from "src/middlewares/jobsMiddlewares/verifyJobAlredyStarted";
 
 const jobRoutes = Router();
 
@@ -39,19 +42,25 @@ jobRoutes.get("/one/:jobId", listOneJobController);
 jobRoutes.patch(
   "/:id",
   expressYupMiddleware({ schemaValidator: updateJobInfoSchema }),
+  verifyAlreadyStarted,
   UpdateInfosJobController
 );
 
 jobRoutes.patch(
   "/:jobId/supplier",
   expressYupMiddleware({ schemaValidator: updateCandidateJobSchema }),
+  verifyAlreadySupplier,
   verifyIsCandidate,
   updateCandidateJobController
 );
 
 jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
 
-jobRoutes.patch("/:id/end", updateFinishJobController);
+jobRoutes.patch(
+  "/:jobId/end",
+  verifyJobAlreadyUpToFinish,
+  updateFinishJobController
+);
 
 jobRoutes.delete("/:id", deleteJobController);
 

@@ -14,14 +14,21 @@ const UpdateInfosJobController = async (
     description,
     categoryId,
     cep,
-    deliveryDate: new Date(),
+    deliveryDate: deliveryDate ? new Date(deliveryDate) : undefined,
   };
 
   const updatedJob = await UpdateInfosJobService(id, info);
 
   return response.status(200).json({
     message: "Job updated",
-    updatedJob,
+    Job: {
+      id: updatedJob.id,
+      title: updatedJob.title,
+      description: updatedJob.description,
+      category: updatedJob.categories.name,
+      cep: updatedJob.cep,
+      deliveryDate: updatedJob.deliveryDate,
+    },
   });
 };
 

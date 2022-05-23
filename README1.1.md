@@ -41,6 +41,8 @@
     - [Corpo da Requisição:](#corpo-da-requisição-2)
     - [Exemplo de Response:](#exemplo-de-response-3)
     - [Possiveis erros:](#possiveis-erros-2)
+- [<<<<<<< HEAD](#-head)
+  - [6.5 Atualizacao](#65-atualizacao)
 
 ---
 
@@ -377,3 +379,9 @@ Vazio
 | ------------------ | -------------- |
 | 401 Unauthorized   | Unauthorized.  |
 | 404 Page not found | Job not found! |
+
+# <<<<<<< HEAD
+
+## 6.5 Atualizacao
+
+> > > > > > > bug-hunt

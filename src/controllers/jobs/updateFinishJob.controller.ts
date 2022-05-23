@@ -5,13 +5,35 @@ const updateFinishJobController = async (
   request: Request,
   response: Response
 ) => {
-  const { id } = request.params;
+  const { jobId } = request.params;
 
-  const supplier = await updateFinishJobService({ id });
+  const supplier = await updateFinishJobService({ jobId });
+
+  const {
+    supplierTaken,
+    categories,
+    cep,
+    deliveryDate,
+    description,
+    id,
+    status,
+    title,
+    users,
+  } = supplier;
 
   return response.status(200).json({
-    message: "status updated!",
-    supplier,
+    message: "Job finished!",
+    job: {
+      category: categories.name,
+      cep,
+      deliveryDate,
+      description,
+      id,
+      status,
+      title,
+    },
+    Client: users,
+    Supplier: supplierTaken.users,
   });
 };
 

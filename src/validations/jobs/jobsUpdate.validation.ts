@@ -1,4 +1,4 @@
-import { string, object } from "yup";
+import { string, object, number } from "yup";
 
 const updateJobInfoSchema = {
   schema: {
@@ -7,7 +7,7 @@ const updateJobInfoSchema = {
         .shape({
           title: string(),
           description: string(),
-          categoryId: string(),
+          categoryId: number(),
           cep: string(),
           deliveryDate: string(),
         })

@@ -1,3 +1,4 @@
+import { prisma } from "@PrismaClient";
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import AppError from "../errors/appError";
@@ -29,6 +30,15 @@ const ensureAuth = async (
 
     request.userId = userId;
   });
+
+  const userExists = await prisma.user.findUnique({
+    where: { id: request.userId },
+  });
+
+  if (!userExists) {
+    throw new AppError(401, "Unauthorized");
+  }
+
   return next();
 };
 export default ensureAuth;

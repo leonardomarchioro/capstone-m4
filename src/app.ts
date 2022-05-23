@@ -15,7 +15,6 @@ app.use("/user", userRoutes);
 app.use("/job", jobRoutes);
 app.use("/candidate", candidateRoutes);
 app.use("/review", reviewRouter);
-// app.use("/candidate", candidateRoutes);
 
 app.get("/", (req, res) => {
   return res.send("Hello world!!!!");
