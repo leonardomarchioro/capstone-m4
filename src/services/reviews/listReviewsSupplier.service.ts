@@ -3,7 +3,7 @@ import { prisma } from "@PrismaClient";
 const listReviewsSupplierService = async (idSupplier: string) => {
   const reviews = await prisma.supplierTaken.findMany({
     where: { userId: idSupplier },
-    select: { jobs: { select: { reviews: true } } },
+    select: { jobs: { select: { reviews: true, id: true } } },
   });
 
   const changedReview = reviews.filter(

@@ -12,8 +12,8 @@ model Candidate {
   userId String? @db.Uuid @map("user_id")
   jobId  String? @db.Uuid @map("job_id")
 
-  jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users  User?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  users  User?  @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@map("candidates")
 }
@@ -40,8 +40,8 @@ model Job {
   categoryId     Int?            @map("category_id")
 
   categories     Category?      @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  reviews        Review?        @relation(fields: [reviewId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  users          User?          @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  reviews        Review?        @relation(fields: [reviewId], references: [id], onDelete: SetNull, onUpdate: Cascade)
+  users          User?          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   candidates     Candidate?
   supplierTaken SupplierTaken?
 
@@ -71,8 +71,8 @@ model SupplierTaken {
   jobId   String? @unique() @db.Uuid @map("job_id")
   userId  String? @db.Uuid @map("user_id")
 
-  jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: NoAction, onUpdate: NoAction) 
-  users  User?  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  jobs   Job?   @relation(fields: [jobId], references: [id], onDelete: SetNull, onUpdate: Cascade) 
+  users  User?  @relation(fields: [userId], references: [id], onDelete: SetNull, onUpdate: Cascade)
 
   @@map("supplier_taken")
 }

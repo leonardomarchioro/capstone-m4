@@ -18,7 +18,7 @@ const listMyJobsController = async (request: Request, response: Response) => {
         status: job.status,
         cep: job.cep,
       },
-      supplier: job.supplierTaken || {},
+      supplier: job.supplierTaken === null ? {} : job.supplierTaken.users,
       review: job.reviews || {},
     };
   });

@@ -20,7 +20,7 @@ candidateRoutes.post(
   verifyJobExists,
   verifyCandidateNotExists,
   verifyIsSupplier,
-  verifyOwnJob,
+  //verifyOwnJob,
   candidateCreateController
 );
 
