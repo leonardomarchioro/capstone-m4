@@ -3,6 +3,7 @@ import { compare } from "bcryptjs";
 import { sign as signJWT } from "jsonwebtoken";
 import AppError from "../../errors/appError";
 import { prisma } from "../../prisma/client";
+import { verify } from "crypto";
 
 const userLoginService = async ({ email, password }: IUserLogin) => {
   const user = await prisma.user.findUnique({ where: { email } });
@@ -10,7 +11,8 @@ const userLoginService = async ({ email, password }: IUserLogin) => {
   if (!user) {
     throw new AppError(401, "Wrong email/password");
   }
-  if (!compare(password, user.password)) {
+  const verify = await compare(password, user.password);
+  if (!verify) {
     throw new AppError(401, "Wrong email/password");
   }
 
