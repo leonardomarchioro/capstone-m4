@@ -26,6 +26,21 @@
     - [Schema de validacao com Yup:](#schema-de-validacao-com-yup)
     - [Exemplo de response:](#exemplo-de-response)
     - [Possiveis erros de requisicao:](#possiveis-erros-de-requisicao)
+  - [6.2 Listagem dos meus servicos:](#62-listagem-dos-meus-servicos)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição)
+    - [Corpo da Requisição:](#corpo-da-requisição)
+    - [Exemplo de Response:](#exemplo-de-response-1)
+    - [Possiveis erros:](#possiveis-erros)
+  - [6.3 Listagem de todos os jobs](#63-listagem-de-todos-os-jobs)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-1)
+    - [Corpo da Requisição:](#corpo-da-requisição-1)
+    - [Exemplo de Response:](#exemplo-de-response-2)
+    - [Possiveis erros:](#possiveis-erros-1)
+  - [6.4 Listagem de um job especifico pelo id.](#64-listagem-de-um-job-especifico-pelo-id)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-2)
+    - [Corpo da Requisição:](#corpo-da-requisição-2)
+    - [Exemplo de Response:](#exemplo-de-response-3)
+    - [Possiveis erros:](#possiveis-erros-2)
 
 ---
 
@@ -199,3 +214,166 @@ Content-type: application/json
 | Código do Erro  | Descrição        |
 | --------------- | ---------------- |
 | 400 Bad Request | Key is required. |
+
+## 6.2 Listagem dos meus servicos:
+
+```
+GET /job/me
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "User jobs.",
+  "myJobs": [
+    // aqui vao os jobs do usuario, caso existam.
+  ]
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 6.3 Listagem de todos os jobs
+
+```
+GET /job/all
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+**Importante ressaltar que essa rota passa por um middleware de verificacao alem do bearer token**
+
+```typescript
+// esse middleware verifica se o user logado e um supplier
+
+{
+	"id": "3177dc8a-75d8-42bf-80be-20fd79cd945f",
+	"name": "Bico Updated",
+	"email": "bico_updated@kenzie.com",
+	"phone": "5678-1234",
+	"isSupplier": true // <- deve ser true
+}
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+  {
+    "id": "dd6bfccb-bd19-46ba-8696-a94a9b833453",
+    "title": "Formatar um computador velho.",
+    "description": "Preciso de alguem que consiga formatar meu computador e instalar o windows 11 nele.",
+    "deliveryDate": "2022-07-21T00:00:00.000Z",
+    "cep": "12345-123",
+    "status": "available",
+    "userId": "250bbb89-38b4-4239-b7c5-df69e6d5d158",
+    "reviewId": null,
+    "categoryId": 5
+  }
+  // ... Todos os jobs cadastrados estarao registrados aqui
+]
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 6.4 Listagem de um job especifico pelo id.
+
+```
+GET /job/one/:jobId
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "Job are listed",
+  "job": {
+    "category": "Manutenção",
+    "cep": "12345-123",
+    "deliveryDate": "2022-07-21T00:00:00.000Z",
+    "description": "Preciso de alguem que consiga formatar meu computador e instalar o windows 11 nele.",
+    "id": "92c02fd0-76a6-4fe6-93cd-86a9e60112f8",
+    "status": "available",
+    "title": "Formatar um computador velho."
+  },
+  "Client": {
+    "name": "Gabriel",
+    "id": "3e9d23c8-35a4-45ab-8dbd-87adaabc382b",
+    "email": "biel@mail.com",
+    "phone": "1234-5678"
+  },
+  "Supplier": {},
+  "Review": {}
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro     | Descrição      |
+| ------------------ | -------------- |
+| 401 Unauthorized   | Unauthorized.  |
+| 404 Page not found | Job not found! |
