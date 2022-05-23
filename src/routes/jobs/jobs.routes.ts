@@ -14,7 +14,7 @@ import updateFinishJobController from "src/controllers/jobs/updateFinishJob.cont
 import deleteJobController from "src/controllers/jobs/deleteJob.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
-import verifyIsSupplier from "src/middlewares/jobsMiddlewares/verifyIsSupplier.middleware";
+import verifyIsSupplier from "src/middlewares/candidateMiddlewares/verifyIsSupplier.middleware";
 import verifyIsCandidate from "src/middlewares/jobsMiddlewares/verifyIsCandidate.middleware";
 
 import { expressYupMiddleware } from "express-yup-middleware";

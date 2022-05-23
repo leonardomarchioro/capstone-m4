@@ -6,17 +6,28 @@ import listAllCandidatesJobController from "../../controllers/candidates/lisAllC
 import candidateDeleteController from "../../controllers/candidates/candidateDelete.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
+import verifyOwnJob from "src/middlewares/candidateMiddlewares/verifyOwnJobId.middleware";
+import verifyIsSupplier from "src/middlewares/verifyIsSupplier.middleware";
 
 const candidateRoutes = Router();
 
 candidateRoutes.use(ensureAuth);
 
-candidateRoutes.post("/", candidateCreateController);
+candidateRoutes.post(
+  "/",
+  verifyIsSupplier,
+  //verifyOwnJob,
+  candidateCreateController
+);
 
 candidateRoutes.get("/job/:idJob", listAllCandidatesJobController);
 
-candidateRoutes.get("/me", listAllCandidacyController);
+candidateRoutes.get("/me", verifyIsSupplier, listAllCandidacyController);
 
-candidateRoutes.delete("/job/:idJob", candidateDeleteController);
+candidateRoutes.delete(
+  "/job/:idJob",
+  verifyIsSupplier,
+  candidateDeleteController
+);
 
 export default candidateRoutes;

@@ -9,16 +9,16 @@ const verifyOwnJob = async (
 ) => {
   const { userId } = request;
 
-  const { id } = request.params;
+  const { jobId } = request.body;
 
   const job = await prisma.job.findUnique({
     where: {
-      id,
+      id: jobId,
     },
   });
 
   // para nao deixar ele se candidatar ao proprio servico requisitado
-  if (job.userId !== userId) {
+  if (job.userId === userId) {
     throw new AppError(401, "Unauthorized!");
   }
 
@@ -29,3 +29,5 @@ const verifyOwnJob = async (
 
   next();
 };
+
+export default verifyOwnJob;
