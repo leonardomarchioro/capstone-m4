@@ -57,7 +57,7 @@ describe("User routes", () => {
 
     describe("GET", () => {
       it("Should list my data", async () => {
-        const { status, body } = await userRequests.listMe(userData);
+        const { status, body } = await userRequests.listProfile(userData);
 
         expect(status).toBe(200);
         expect(body).toBeDefined();

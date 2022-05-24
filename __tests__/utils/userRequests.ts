@@ -24,12 +24,12 @@ export class UserRequests {
     return await request(this.app).post("/user/signin").send(loginData);
   }
 
-  async listMe(userData: IUserCreate) {
-    const token = await this.signIn(userData);
-    console.log(token.body);
+  async listProfile(userData: IUserCreate) {
+    const { body } = await this.signIn(userData);
+
     const response = await request(this.app)
       .get("/user/me")
-      .set("Authorization", `Bearer ${token.body.token}`);
+      .set("Authorization", `Bearer ${body.token}`);
 
     return response;
   }
