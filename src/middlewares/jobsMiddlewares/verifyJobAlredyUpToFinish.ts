@@ -19,10 +19,10 @@ const verifyJobAlreadyUpToFinish = async (
   }
 
   if (job.status === "available") {
-    throw new AppError(409, "service cannot be finished without a supplier");
+    throw new AppError(409, "Job cannot be finished without a supplier");
   }
   if (job.status === "finished") {
-    throw new AppError(409, "service already finished");
+    throw new AppError(409, "Job already finished");
   }
 
   next();
