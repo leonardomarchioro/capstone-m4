@@ -64,7 +64,34 @@ describe("User routes", () => {
         expect(body).toHaveProperty("user");
       });
     });
+    describe("PATCH", () => {
+      it("Should update user role", async () => {
+        const { status, body } = await userRequests.updateRole(userData);
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("message");
+      });
+    });
+    describe("GET", () => {
+      it("Should list all Suppliers", async () => {
+        const { status, body } = await userRequests.listAllSuppliers(userData);
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveLength(1);
+      });
+    });
+
+    describe("PATCH", () => {
+      it("Should update profile", async () => {
+        const { status, body } = await userRequests.updateProfile(userData);
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("updatedUser");
+      });
+    });
     describe("DELETE", () => {});
-    describe("PATCH", () => {});
   });
 });

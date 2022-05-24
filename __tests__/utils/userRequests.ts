@@ -2,6 +2,8 @@ import request from "supertest";
 import { Express } from "express";
 import { IUserCreate } from "../../src/interfaces/user";
 
+let token: string;
+
 export class UserRequests {
   app: Express;
 
@@ -14,14 +16,19 @@ export class UserRequests {
   }
 
   async signIn(userData: IUserCreate) {
-    const { body } = await this.signUp(userData);
+    await this.signUp(userData);
 
     const loginData = {
-      email: body.email,
-      password: "123456",
+      email: userData.email,
+      password: userData.password,
     };
 
-    return await request(this.app).post("/user/signin").send(loginData);
+    const response = await request(this.app)
+      .post("/user/signin")
+      .send(loginData);
+
+    token = response.body.token;
+    return response;
   }
 
   async listProfile(userData: IUserCreate) {
@@ -32,5 +39,37 @@ export class UserRequests {
       .set("Authorization", `Bearer ${body.token}`);
 
     return response;
+  }
+
+  async updateRole(userData: IUserCreate) {
+    await this.signIn(userData);
+
+    const updatedRole = {
+      currentPassword: userData.password,
+      role: true,
+    };
+
+    const response = await request(this.app)
+      .patch("/user/role")
+      .send(updatedRole)
+      .set("Authorization", `Bearer ${token}`);
+
+    return response;
+  }
+
+  async listAllSuppliers(userData: IUserCreate) {
+    await this.updateRole(userData);
+
+    return await request(this.app)
+      .get("/user/suppliers")
+      .set("Authorization", `Bearer ${token}`);
+  }
+
+  async updateProfile(userData: IUserCreate) {
+    await this.signIn(userData);
+
+    return await request(this.app)
+      .patch("/user/me")
+      .set("Authorization", `Bearer ${token}`);
   }
 }
