@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 import { ICreateReview } from "../../interfaces/review/index";
 
 const createReviewService = async (

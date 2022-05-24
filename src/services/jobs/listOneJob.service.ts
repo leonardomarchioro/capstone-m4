@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const listOneJobsService = async ({ id }: { id: string }) => {
   const especifiedJob = prisma.job.findUnique({

@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import createCandidacyJobService from "src/services/candidates/createCandidacyJob.service";
+import createCandidacyJobService from "../../services/candidates/createCandidacyJob.service";
 
 const candidateCreateController = async (
   request: Request,

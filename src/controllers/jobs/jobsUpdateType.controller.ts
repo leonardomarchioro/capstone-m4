@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import updateJobTypeCandidateService from "../../services/jobs/jobsUpdateType.service";
+import updateRemoveCandidateJob from "../../services/jobs/updateRemoveCandidateJob.service";
 
 const updateJobTypeCandidateController = async (
   request: Request,
@@ -7,7 +7,7 @@ const updateJobTypeCandidateController = async (
 ) => {
   const { id } = request.params;
 
-  const supplier = await updateJobTypeCandidateService(id);
+  const supplier = await updateRemoveCandidateJob(id);
 
   return response.status(200).json({
     message: "Type updated!",

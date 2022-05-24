@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 import { Request, Response, NextFunction } from "express";
 import AppError from "../../errors/appError";
 

@@ -1,29 +1,29 @@
 import { Router } from "express";
 
-import createJobController from "src/controllers/jobs/createJob.controller";
+import createJobController from "../../controllers/jobs/createJob.controller";
 
-import listMyJobsController from "src/controllers/jobs/ListMyJobs.controller";
-import listAllJobsController from "src/controllers/jobs/ListAvailableJobs.controller";
-import listOneJobController from "src/controllers/jobs/listOneJob.controller";
+import listMyJobsController from "../../controllers/jobs/ListMyJobs.controller";
+import listAllJobsController from "../../controllers/jobs/ListAvailableJobs.controller";
+import listOneJobController from "../../controllers/jobs/listOneJob.controller";
 
-import UpdateInfosJobController from "src/controllers/jobs/updateInfoJob.controller";
-import updateCandidateJobController from "src/controllers/jobs/updateCandidateJob.controller";
-import updateRemoveCandidateJobController from "src/controllers/jobs/updateRemoveCandidateJob.controller";
-import updateFinishJobController from "src/controllers/jobs/updateFinishJob.controller";
+import UpdateInfosJobController from "../../controllers/jobs/updateInfoJob.controller";
+import updateCandidateJobController from "../../controllers/jobs/updateCandidateJob.controller";
+import updateRemoveCandidateJobController from "../../controllers/jobs/updateRemoveCandidateJob.controller";
+import updateFinishJobController from "../../controllers/jobs/updateFinishJob.controller";
 
-import deleteJobController from "src/controllers/jobs/deleteJob.controller";
+import deleteJobController from "../../controllers/jobs/deleteJob.controller";
 
-import ensureAuth from "src/middlewares/ensureAuth.middleware";
-import verifyIsSupplier from "src/middlewares/candidateMiddlewares/verifyIsSupplier.middleware";
-import verifyIsCandidate from "src/middlewares/jobsMiddlewares/verifyIsCandidate.middleware";
+import ensureAuth from "../../middlewares/ensureAuth.middleware";
+import verifyIsSupplier from "../../middlewares/candidateMiddlewares/verifyIsSupplier.middleware";
+import verifyIsCandidate from "../../middlewares/jobsMiddlewares/verifyIsCandidate.middleware";
 
 import { expressYupMiddleware } from "express-yup-middleware";
-import createJobSchema from "src/validations/jobs/createJob.validation";
-import updateJobInfoSchema from "src/validations/jobs/jobsUpdate.validation";
-import updateCandidateJobSchema from "src/validations/jobs/updateCandidateJob.validation";
-import verifyAlreadySupplier from "src/middlewares/jobsMiddlewares/verifyAlreadySupplier";
-import verifyAlreadyStarted from "src/middlewares/jobsMiddlewares/verifyJobAlredyStarted";
-import verifyJobAlreadyUpToFinish from "src/middlewares/jobsMiddlewares/verifyJobAlredyUpToFinish";
+import createJobSchema from "../../validations/jobs/createJob.validation";
+import updateJobInfoSchema from "../../validations/jobs/jobsUpdate.validation";
+import updateCandidateJobSchema from "../../validations/jobs/updateCandidateJob.validation";
+import verifyAlreadySupplier from "../../middlewares/jobsMiddlewares/verifyAlreadySupplier";
+import verifyAlreadyStarted from "../../middlewares/jobsMiddlewares/verifyJobAlredyStarted";
+import verifyJobAlreadyUpToFinish from "../../middlewares/jobsMiddlewares/verifyJobAlredyUpToFinish";
 
 const jobRoutes = Router();
 

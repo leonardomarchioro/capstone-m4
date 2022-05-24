@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import deleteReviewService from "src/services/reviews/deleteReview.service";
+import deleteReviewService from "../../services/reviews/deleteReview.service";
 
 const deleteReviewController = async (request: Request, response: Response) => {
   const { idReview } = request.params;

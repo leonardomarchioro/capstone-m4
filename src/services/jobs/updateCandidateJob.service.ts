@@ -1,6 +1,6 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
-import { ISupplier } from "src/interfaces/jobs";
+import { ISupplier } from "../../interfaces/jobs";
 
 const updateCandidateJobService = async ({ supplierId, jobId }: ISupplier) => {
   const job = await prisma.job.update({

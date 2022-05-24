@@ -1,5 +1,5 @@
-import { IJobsCreate } from "src/interfaces/jobs";
-import { prisma } from "@PrismaClient";
+import { IJobsCreate } from "../../interfaces/jobs";
+import { prisma } from "../../prisma/client";
 
 const createJobService = async ({
   title,

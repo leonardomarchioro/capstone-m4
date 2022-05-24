@@ -1,4 +1,4 @@
-import AppError from "src/errors/appError";
+import AppError from "../../errors/appError";
 import { prisma } from "../../prisma/client";
 
 const userListOneService = async (userId: string) => {

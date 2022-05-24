@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import AppError from "src/errors/appError";
-import listReviewService from "src/services/reviews/listReviewJob.service";
+import AppError from "../../errors/appError";
+import listReviewService from "../../services/reviews/listReviewJob.service";
 
 const listReviewController = async (request: Request, response: Response) => {
   const { idJob } = request.params;

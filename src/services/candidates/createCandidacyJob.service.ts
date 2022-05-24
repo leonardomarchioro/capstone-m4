@@ -1,5 +1,5 @@
 import { ICandidateCreate } from "../../interfaces/candidate";
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const createCandidacyJobService = async ({
   userId,

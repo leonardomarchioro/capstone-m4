@@ -1,5 +1,5 @@
-import { prisma } from "@PrismaClient";
-import { IUpdateReview } from "src/interfaces/review";
+import { prisma } from "../../prisma/client";
+import { IUpdateReview } from "../../interfaces/review";
 
 const updateReviewService = async (
   idReview: string,
