@@ -37,7 +37,7 @@ describe("User routes", () => {
 
   describe("Happy end", () => {
     describe("POST", () => {
-      it("Should create a user", async () => {
+      it.only("Should create a user", async () => {
         const { status, body } = await userRequests.signUp(userData);
 
         expect(status).toBe(201);
@@ -47,7 +47,7 @@ describe("User routes", () => {
     });
 
     describe("LOGIN", () => {
-      it("Should login", async () => {
+      it.only("Should login", async () => {
         const { status, body } = await userRequests.signIn(userData);
         expect(status).toBe(200);
         expect(body).toBeDefined();
@@ -56,7 +56,7 @@ describe("User routes", () => {
     });
 
     describe("GET", () => {
-      it("Should list my data", async () => {
+      it.only("Should list my profile", async () => {
         const { status, body } = await userRequests.listProfile(userData);
 
         expect(status).toBe(200);
@@ -65,7 +65,7 @@ describe("User routes", () => {
       });
     });
     describe("PATCH", () => {
-      it("Should update user role", async () => {
+      it.only("Should update user role", async () => {
         const { status, body } = await userRequests.updateRole(userData);
 
         expect(status).toBe(200);
@@ -74,7 +74,7 @@ describe("User routes", () => {
       });
     });
     describe("GET", () => {
-      it("Should list all Suppliers", async () => {
+      it.only("Should list all Suppliers", async () => {
         const { status, body } = await userRequests.listAllSuppliers(userData);
 
         expect(status).toBe(200);
@@ -84,7 +84,7 @@ describe("User routes", () => {
     });
 
     describe("PATCH", () => {
-      it("Should update profile", async () => {
+      it.only("Should update profile", async () => {
         const { status, body } = await userRequests.updateProfile(userData);
 
         expect(status).toBe(200);
@@ -92,6 +92,22 @@ describe("User routes", () => {
         expect(body).toHaveProperty("updatedUser");
       });
     });
-    describe("DELETE", () => {});
+    describe("PATCH", () => {
+      it.only("Should update password", async () => {
+        const { status, body } = await userRequests.updatePassword(userData);
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("message");
+      });
+    });
+    describe("DELETE", () => {
+      it.only("Should delete user", async () => {
+        const { status, body } = await userRequests.deleteUser(userData);
+
+        expect(status).toBe(204);
+        expect(body).toBeDefined();
+      });
+    });
   });
 });

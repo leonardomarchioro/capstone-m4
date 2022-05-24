@@ -1,5 +1,5 @@
 export interface IJobsCreate {
-  userId: string;
+  userId?: string;
   title: string;
   description: string;
   deliveryDate: string;

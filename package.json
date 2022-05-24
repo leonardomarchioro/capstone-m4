@@ -8,6 +8,7 @@
     "build": "tsc",
     "postbuild": "prisma migrate deploy",
     "start": "node ./dist/src/index.js",
+    "migratetest": "dotenv -e .env.test prisma migrate dev",
     "test": "dotenv -e .env.test jest",
     "typeorm": "typeorm-ts-node-commonjs"
   },

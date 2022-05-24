@@ -70,6 +70,27 @@ export class UserRequests {
 
     return await request(this.app)
       .patch("/user/me")
+      .send({ name: "João" })
+      .set("Authorization", `Bearer ${token}`);
+  }
+
+  async updatePassword(userData: IUserCreate) {
+    await this.signIn(userData);
+
+    return await request(this.app)
+      .patch("/user/password")
+      .send({
+        currentPassword: userData.password,
+        newPassword: "13579",
+      })
+      .set("Authorization", `Bearer ${token}`);
+  }
+
+  async deleteUser(userData: IUserCreate) {
+    await this.signIn(userData);
+
+    return await request(this.app)
+      .delete("/user/me")
       .set("Authorization", `Bearer ${token}`);
   }
 }
