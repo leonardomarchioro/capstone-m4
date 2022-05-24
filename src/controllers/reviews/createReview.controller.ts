@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import createReviewService from "src/services/reviews/createReview.service";
+import createReviewService from "../../services/reviews/createReview.service";
 
 const createReviewController = async (request: Request, response: Response) => {
   const { idJob } = request.params;

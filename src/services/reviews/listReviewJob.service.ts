@@ -1,5 +1,5 @@
-import { prisma } from "@PrismaClient";
-import AppError from "src/errors/appError";
+import { prisma } from "../../prisma/client";
+import AppError from "../../errors/appError";
 
 const listReviewService = async (idJob: string) => {
   const review = await prisma.job.findUnique({

@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const updateFinishJobService = async ({ jobId }: { jobId: string }) => {
   const job = await prisma.job.update({

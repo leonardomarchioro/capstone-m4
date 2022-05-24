@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const deleteReviewService = async (idReview: string) => {
   await prisma.review.delete({ where: { id: idReview } });

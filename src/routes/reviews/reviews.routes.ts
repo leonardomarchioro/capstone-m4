@@ -1,18 +1,18 @@
 import { Router } from "express";
 
-import createReviewController from "src/controllers/reviews/createReview.controller";
-import deleteReviewController from "src/controllers/reviews/deleteReview.controller";
-import listReviewController from "src/controllers/reviews/listReview.controller";
-import listReviewsSupplierController from "src/controllers/reviews/listReviewsSupplier.controller";
-import updateReviewController from "src/controllers/reviews/updateReview.controller";
+import createReviewController from "../../controllers/reviews/createReview.controller";
+import deleteReviewController from "../../controllers/reviews/deleteReview.controller";
+import listReviewController from "../../controllers/reviews/listReview.controller";
+import listReviewsSupplierController from "../../controllers/reviews/listReviewsSupplier.controller";
+import updateReviewController from "../../controllers/reviews/updateReview.controller";
 
-import ensureAuth from "src/middlewares/ensureAuth.middleware";
-import generalCheckReview from "src/middlewares/reviewsMiddlewares/generalCheckReview.middleware";
-import verifyJobIsFinished from "src/middlewares/reviewsMiddlewares/verifyJobIsFinished.middleware";
-import verifyIfExistsReview from "src/middlewares/reviewsMiddlewares/verifyIfExistsReview.middleware";
-import createReviewSchema from "src/validations/review/createReview.validation";
+import ensureAuth from "../../middlewares/ensureAuth.middleware";
+import generalCheckReview from "../../middlewares/reviewsMiddlewares/generalCheckReview.middleware";
+import verifyJobIsFinished from "../../middlewares/reviewsMiddlewares/verifyJobIsFinished.middleware";
+import verifyIfExistsReview from "../../middlewares/reviewsMiddlewares/verifyIfExistsReview.middleware";
+import createReviewSchema from "../../validations/review/createReview.validation";
 import { expressYupMiddleware } from "express-yup-middleware";
-import updateReviewSchema from "src/validations/review/updateReviewSchema";
+import updateReviewSchema from "../../validations/review/updateReviewSchema";
 
 const reviewRouter = Router();
 

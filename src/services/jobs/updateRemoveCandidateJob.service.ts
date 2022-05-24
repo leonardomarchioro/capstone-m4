@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const updateRemoveCandidateJobService = async (id: string) => {
   await prisma.job.update({ where: { id }, data: { status: "available" } });

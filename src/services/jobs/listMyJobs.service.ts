@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const listMyJobsService = async (userId: string) => {
   const allJobs = await prisma.job.findMany({

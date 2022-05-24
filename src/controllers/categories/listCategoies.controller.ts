@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import listAllCategoriesService from "src/services/categoies/listAllCategories.service";
+import listAllCategoriesService from "../../services/categoies/listAllCategories.service";
 
 const listAllCategoriesController = async (
   reques: Request,

@@ -1,6 +1,6 @@
 import { IPasswordUpdate } from "../../interfaces/user";
 import { hash } from "bcryptjs";
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const passwordUpdateService = async ({
   userId,

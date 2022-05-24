@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 import { IUpdate } from "../../interfaces/jobs";
 
 const UpdateInfosJobService = async (

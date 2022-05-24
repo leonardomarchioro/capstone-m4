@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import AppError from "../../errors/appError";
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const verifyIfExistsReview = async (
   req: Request,

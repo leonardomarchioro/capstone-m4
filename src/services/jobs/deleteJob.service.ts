@@ -1,4 +1,4 @@
-import { prisma } from "@PrismaClient";
+import { prisma } from "../../prisma/client";
 
 const deleteJobService = async ({ id }: { id: string }) => {
   await prisma.job.delete({
