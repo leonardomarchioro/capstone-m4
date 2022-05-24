@@ -1,11 +1,29 @@
-import express from "express"
+import "express-async-errors";
+import express from "express";
 
-const app = express()
+import candidateRoutes from "./routes/candidates/candidates.routes";
+import userRoutes from "./routes/user/user.routes";
+import errorHandler from "./middlewares/errorHandler.middleware";
+import jobRoutes from "./routes/jobs/jobs.routes";
+import reviewRouter from "./routes/reviews/reviews.routes";
+import categoriesRoutes from "./routes/categories/categories.routes";
 
-app.use(express.json())
+const app = express();
+
+app.use(express.json());
+
+app.use("/user", userRoutes);
+app.use("/job", jobRoutes);
+
+app.use("/category", categoriesRoutes);
+
+app.use("/candidate", candidateRoutes);
+app.use("/review", reviewRouter);
 
 app.get("/", (req, res) => {
-  return res.send("Hello world!!!!")
-})
+  return res.send("Hello world!!!!");
+});
 
-export { app }
+app.use(errorHandler);
+
+export { app };

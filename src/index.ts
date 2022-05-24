@@ -1,12 +1,14 @@
-import { app } from "./app"
-import { conectDatabase } from "./data-source"
+import { app } from "./app";
+import { prisma } from "./prisma/client";
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000;
 
 async function bootstrap() {
-  await conectDatabase()
+  await prisma.$connect();
 
-  app.listen(PORT, () => console.log(`App running at http://localhost:${PORT}`))
+  app.listen(PORT, () =>
+    console.log(`App running at http://localhost:${PORT}`)
+  );
 }
 
-bootstrap()
+bootstrap();
