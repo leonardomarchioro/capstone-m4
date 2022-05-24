@@ -24,7 +24,6 @@ reviewRouter.post(
 );
 reviewRouter.get("/:idJob", listReviewController);
 reviewRouter.get("/supplier/:idSupplier", listReviewsSupplierController);
-
 reviewRouter.patch("/:idReview", generalCheckReview, updateReviewController);
 reviewRouter.delete("/:idReview", generalCheckReview, deleteReviewController);
 

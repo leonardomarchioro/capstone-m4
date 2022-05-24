@@ -1,7 +1,7 @@
 <!--
     Documento reservado para documentacao das rotas:
-        3 - Jobs
-        4 - Review
+        - 1 - User
+        - 2 - Candidates
  -->
 
 # API kenzie bicos.
@@ -17,67 +17,141 @@
   - [3.1 Instalando as dependencias:](#31-instalando-as-dependencias)
   - [3.2 Configurando as variaveis de ambiente](#32-configurando-as-variaveis-de-ambiente)
   - [3.3 Ligando o servidor](#33-ligando-o-servidor)
+  - [4. Users](#4-users)
+    - [Endpoints da rota users](#endpoints-da-rota-users)
+  - [4.1. Criação de Usuário](#41-criação-de-usuário)
+    - [Exemplo de Request:](#exemplo-de-request)
+    - [Corpo da Requisição:](#corpo-da-requisição)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup)
+    - [Exemplo de Response:](#exemplo-de-response)
+    - [Possíveis Erros:](#possíveis-erros)
+  - [4.2. Login do usuário](#42-login-do-usuário)
+    - [Exemplo de Request:](#exemplo-de-request-1)
+    - [Corpo da Requisição:](#corpo-da-requisição-1)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-1)
+    - [Exemplo de Response:](#exemplo-de-response-1)
+    - [Possíveis Erros:](#possíveis-erros-1)
+  - [4.3. Lista um usuário usando seu token como parâmetro](#43-lista-um-usuário-usando-seu-token-como-parâmetro)
+    - [Exemplo de Request:](#exemplo-de-request-2)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição)
+    - [Corpo da Requisição:](#corpo-da-requisição-2)
+    - [Exemplo de Response:](#exemplo-de-response-2)
+    - [Possíveis Erros:](#possíveis-erros-2)
+  - [4.4. Lista todos os fornecedores usando o token de login como parâmetro.](#44-lista-todos-os-fornecedores-usando-o-token-de-login-como-parâmetro)
+    - [Exemplo de Request:](#exemplo-de-request-3)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-1)
+    - [Corpo da Requisição:](#corpo-da-requisição-3)
+    - [Exemplo de Response:](#exemplo-de-response-3)
+    - [Possíveis Erros:](#possíveis-erros-3)
+  - [4.5. Atualizar nome e email de um usuário.](#45-atualizar-nome-e-email-de-um-usuário)
+    - [Exemplo de Request:](#exemplo-de-request-4)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-2)
+    - [Corpo da Requisição:](#corpo-da-requisição-4)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-2)
+    - [Exemplo de Response:](#exemplo-de-response-4)
+    - [Possíveis Erros:](#possíveis-erros-4)
+  - [4.6. Atualizar senha de um usuário.](#46-atualizar-senha-de-um-usuário)
+    - [Exemplo de Request:](#exemplo-de-request-5)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-3)
+    - [Corpo da Requisição:](#corpo-da-requisição-5)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-3)
+    - [Exemplo de Response:](#exemplo-de-response-5)
+    - [Possíveis Erros:](#possíveis-erros-5)
+  - [4.7. Atualizar função de um usuário.](#47-atualizar-função-de-um-usuário)
+    - [Exemplo de Request:](#exemplo-de-request-6)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-4)
+    - [Corpo da Requisição:](#corpo-da-requisição-6)
+    - [Schema de Validação com Yup:](#schema-de-validação-com-yup-4)
+    - [Exemplo de Response:](#exemplo-de-response-6)
+    - [Possíveis Erros:](#possíveis-erros-6)
+  - [4.8. Deletar um usuário.](#48-deletar-um-usuário)
+    - [Exemplo de Request:](#exemplo-de-request-7)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-5)
+    - [Corpo da Requisição:](#corpo-da-requisição-7)
+    - [Exemplo de Response:](#exemplo-de-response-7)
+    - [Possíveis Erros:](#possíveis-erros-7)
   - [5 Jobs](#5-jobs)
     - [Endpoints da rota jobs.](#endpoints-da-rota-jobs)
   - [5.1 Criacao de um servico](#51-criacao-de-um-servico)
-    - [Exemplo de request:](#exemplo-de-request)
+    - [Exemplo de request:](#exemplo-de-request-8)
     - [Corpo da requisicao:](#corpo-da-requisicao)
     - [Schema de validacao com Yup:](#schema-de-validacao-com-yup)
-    - [Exemplo de response:](#exemplo-de-response)
+    - [Exemplo de response:](#exemplo-de-response-8)
     - [Possiveis erros de requisicao:](#possiveis-erros-de-requisicao)
   - [5.2 Listagem dos meus servicos:](#52-listagem-dos-meus-servicos)
-    - [Parâmetros da Requisição:](#parâmetros-da-requisição)
-    - [Corpo da Requisição:](#corpo-da-requisição)
-    - [Exemplo de Response:](#exemplo-de-response-1)
-    - [Possiveis erros:](#possiveis-erros)
-  - [5.3 Listagem de todos os jobs](#53-listagem-de-todos-os-jobs)
-    - [Parâmetros da Requisição:](#parâmetros-da-requisição-1)
-    - [Corpo da Requisição:](#corpo-da-requisição-1)
-    - [Exemplo de Response:](#exemplo-de-response-2)
-    - [Possiveis erros:](#possiveis-erros-1)
-  - [5.4 Listagem de um job especifico pelo id.](#54-listagem-de-um-job-especifico-pelo-id)
-    - [Parâmetros da Requisição:](#parâmetros-da-requisição-2)
-    - [Corpo da Requisição:](#corpo-da-requisição-2)
-    - [Exemplo de Response:](#exemplo-de-response-3)
-    - [Possiveis erros:](#possiveis-erros-2)
-  - [5.5 Atualizacao das informacoes do job:](#55-atualizacao-das-informacoes-do-job)
-    - [Corpo da Requisição:](#corpo-da-requisição-3)
-    - [Exemplo de Response:](#exemplo-de-response-4)
-    - [Possiveis erros:](#possiveis-erros-3)
-  - [5.6 Atualizacao do candidato ao job:](#56-atualizacao-do-candidato-ao-job)
-    - [Corpo da Requisição:](#corpo-da-requisição-4)
-    - [Exemplo de Response:](#exemplo-de-response-5)
-    - [Possiveis erros:](#possiveis-erros-4)
-  - [5.7 Atualizacao para remover o supplier:](#57-atualizacao-para-remover-o-supplier)
-    - [Corpo da Requisição:](#corpo-da-requisição-5)
-    - [Exemplo de Response:](#exemplo-de-response-6)
-    - [Possiveis erros:](#possiveis-erros-5)
-  - [5.8 Atualizacao para finalizar o servico:](#58-atualizacao-para-finalizar-o-servico)
-    - [Corpo da Requisição:](#corpo-da-requisição-6)
-    - [Exemplo de Response:](#exemplo-de-response-7)
-    - [Possiveis erros:](#possiveis-erros-6)
-    - [5.9 Delete do job:](#59-delete-do-job)
-    - [Corpo da Requisição:](#corpo-da-requisição-7)
-    - [Exemplo de Response:](#exemplo-de-response-8)
-    - [Possiveis erros:](#possiveis-erros-7)
-  - [6 candidates:](#6-candidates)
-    - [Endpoints da rota jobs.](#endpoints-da-rota-jobs-1)
-    - [6.1 Criar candidatura para um job.](#61-criar-candidatura-para-um-job)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-6)
     - [Corpo da Requisição:](#corpo-da-requisição-8)
     - [Exemplo de Response:](#exemplo-de-response-9)
-    - [Possiveis erros:](#possiveis-erros-8)
-  - [6.2 Lista todas as aplicacoes de candidatura do usuario:](#62-lista-todas-as-aplicacoes-de-candidatura-do-usuario)
+    - [Possiveis erros:](#possiveis-erros)
+  - [5.3 Listagem de todos os jobs](#53-listagem-de-todos-os-jobs)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-7)
     - [Corpo da Requisição:](#corpo-da-requisição-9)
     - [Exemplo de Response:](#exemplo-de-response-10)
-    - [Possiveis erros:](#possiveis-erros-9)
-    - [6.3 Lista todos os candidatos para um job:](#63-lista-todos-os-candidatos-para-um-job)
+    - [Possiveis erros:](#possiveis-erros-1)
+  - [5.4 Listagem de um job especifico pelo id.](#54-listagem-de-um-job-especifico-pelo-id)
+    - [Parâmetros da Requisição:](#parâmetros-da-requisição-8)
     - [Corpo da Requisição:](#corpo-da-requisição-10)
     - [Exemplo de Response:](#exemplo-de-response-11)
-    - [Possiveis erros:](#possiveis-erros-10)
-    - [6.4 Deletar uma aplicacao:](#64-deletar-uma-aplicacao)
+    - [Possiveis erros:](#possiveis-erros-2)
+  - [5.5 Atualizacao das informacoes do job:](#55-atualizacao-das-informacoes-do-job)
     - [Corpo da Requisição:](#corpo-da-requisição-11)
     - [Exemplo de Response:](#exemplo-de-response-12)
+    - [Possiveis erros:](#possiveis-erros-3)
+  - [5.6 Atualizacao do candidato ao job:](#56-atualizacao-do-candidato-ao-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-12)
+    - [Exemplo de Response:](#exemplo-de-response-13)
+    - [Possiveis erros:](#possiveis-erros-4)
+  - [5.7 Atualizacao para remover o supplier:](#57-atualizacao-para-remover-o-supplier)
+    - [Corpo da Requisição:](#corpo-da-requisição-13)
+    - [Exemplo de Response:](#exemplo-de-response-14)
+    - [Possiveis erros:](#possiveis-erros-5)
+  - [5.8 Atualizacao para finalizar o servico:](#58-atualizacao-para-finalizar-o-servico)
+    - [Corpo da Requisição:](#corpo-da-requisição-14)
+    - [Exemplo de Response:](#exemplo-de-response-15)
+    - [Possiveis erros:](#possiveis-erros-6)
+    - [5.9 Delete do job:](#59-delete-do-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-15)
+    - [Exemplo de Response:](#exemplo-de-response-16)
+    - [Possiveis erros:](#possiveis-erros-7)
+  - [6 Candidates:](#6-candidates)
+    - [Endpoints da rota candidates.](#endpoints-da-rota-candidates)
+  - [6.1 Criar candidatura para um job.](#61-criar-candidatura-para-um-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-16)
+    - [Exemplo de Response:](#exemplo-de-response-17)
+    - [Possiveis erros:](#possiveis-erros-8)
+  - [6.2 Lista todas as aplicacoes de candidatura do usuario:](#62-lista-todas-as-aplicacoes-de-candidatura-do-usuario)
+    - [Corpo da Requisição:](#corpo-da-requisição-17)
+    - [Exemplo de Response:](#exemplo-de-response-18)
+    - [Possiveis erros:](#possiveis-erros-9)
+  - [6.3 Lista todos os candidatos para um job:](#63-lista-todos-os-candidatos-para-um-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-18)
+    - [Exemplo de Response:](#exemplo-de-response-19)
+    - [Possiveis erros:](#possiveis-erros-10)
+  - [6.4 Deletar uma candidatura:](#64-deletar-uma-candidatura)
+    - [Corpo da Requisição:](#corpo-da-requisição-19)
+    - [Exemplo de Response:](#exemplo-de-response-20)
     - [Possiveis erros:](#possiveis-erros-11)
+  - [7 Reviews:](#7-reviews)
+    - [Endpoints da rota candidates.](#endpoints-da-rota-candidates-1)
+  - [7.1 Postar uma review:](#71-postar-uma-review)
+    - [Corpo da Requisição:](#corpo-da-requisição-20)
+    - [Exemplo de Response:](#exemplo-de-response-21)
+    - [Possiveis erros:](#possiveis-erros-12)
+  - [7.2 Listar uma review de um supplier](#72-listar-uma-review-de-um-supplier)
+    - [Corpo da Requisição:](#corpo-da-requisição-21)
+    - [Exemplo de Response:](#exemplo-de-response-22)
+    - [Possiveis erros:](#possiveis-erros-13)
+  - [7.3 Listar uma review de um job:](#73-listar-uma-review-de-um-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-22)
+    - [Exemplo de Response:](#exemplo-de-response-23)
+  - [7.4 Atualizar um review pelo id:](#74-atualizar-um-review-pelo-id)
+    - [Corpo da Requisição:](#corpo-da-requisição-23)
+    - [Exemplo de Response:](#exemplo-de-response-24)
+    - [Possiveis erros:](#possiveis-erros-14)
+  - [7.5 Deletar uma review pelo id:](#75-deletar-uma-review-pelo-id)
+    - [Corpo da Requisição:](#corpo-da-requisição-24)
+    - [Exemplo de Response:](#exemplo-de-response-25)
+    - [Possiveis erros:](#possiveis-erros-15)
 
 ---
 
@@ -147,6 +221,502 @@ sudo docker-compose up postgres
 yarn prisma migrate dev
 yarn dev
 ```
+
+## 4. Users
+
+O objeto User é definido como:
+
+| Campo      | Tipo    | Descrição                         |
+| ---------- | ------- | --------------------------------- |
+| id         | string  | Identificador único do usuário    |
+| name       | string  | O nome do usuário.                |
+| email      | string  | O e-mail do usuário.              |
+| password   | string  | A senha de acesso do usuário      |
+| phone      | string  | O telefone do usuário             |
+| isSupplier | boolean | Informa se o usuário é fornecedor |
+
+### Endpoints da rota users
+
+| Método | Rota            | Descrição                                                           |
+| ------ | --------------- | ------------------------------------------------------------------- |
+| POST   | /user/signup    | Criação de um usuário.                                              |
+| POST   | /user/signin    | Login do usuário.                                                   |
+| GET    | /user/me        | Lista um usuário usando seu token como parâmetro.                   |
+| GET    | /user/suppliers | Lista todos os fornecedores usando o token de login como parâmetro. |
+| PATCH  | /user/me        | Atualizar nome e email de um usuário.                               |
+| PATCH  | /user/password  | Atualizar senha de um usuário.                                      |
+| PATCH  | /user/role      | Atualizar função de um usuário.                                     |
+| DELETE | /user/me        | Deletar um usuário.                                                 |
+
+---
+
+## 4.1. Criação de Usuário
+
+### Exemplo de Request:
+
+```
+POST /user/signup
+Host: http://localhost:3000
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "name": "Bico",
+  "email": "bico@mail.com",
+  "password": "1234",
+  "phone": "1234-5678"
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          name: string().required("name is required"),
+          email: string()
+            .required("email is required")
+            .email("Invalid email format"),
+          password: string().required("password is required"),
+          phone: string().required("Phone is required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+```
+
+### Exemplo de Response:
+
+```
+201 Created
+```
+
+```json
+{
+  "id": "abfe0aca-f0f4-43d6-be13-2419fa172f19",
+  "name": "Bico",
+  "email": "bico@email.com",
+  "phone": "1234-5678",
+  "isSupplier": false
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro  | Descrição                 |
+| --------------- | ------------------------- |
+| 409 Conflict    | Email already registered. |
+| 400 Bad Request | Key is required.          |
+
+---
+
+## 4.2. Login do usuário
+
+### Exemplo de Request:
+
+```
+POST /user/signin
+Host: http://localhost:3000
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "email": "bico@mail.com",
+  "password": "1234"
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+schema: {
+    body: {
+      yupSchema:object()
+        .shape({
+          email: string()
+            .required("email is required")
+            .email("Invalid email format"),
+          password: string().required("password is required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJiNDBkMTA1ZC1mYTIwLTQ0NGQtOTY4YS05OGNhNWMwODMzZDIiLCJpYXQiOjE2NTMyNjAxNzEsImV4cCI6MTY1MzM0NjU3MX0.aysXmx2fEiTyNzJ_V4S7x5T61Ms8QGLpd3VZlwKScHA"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição             |
+| ---------------- | --------------------- |
+| 401 Unauthorized | Wrong email/password. |
+| 400 Bad Request  | Key is required.      |
+
+---
+
+## 4.3. Lista um usuário usando seu token como parâmetro
+
+### Exemplo de Request:
+
+```
+GET /user/me
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "id": "b40d105d-fa20-444d-968a-98ca5c0833d2",
+  "name": "Bico",
+  "email": "bico@mail.com",
+  "phone": "1234-5678",
+  "isSupplier": false
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 4.4. Lista todos os fornecedores usando o token de login como parâmetro.
+
+### Exemplo de Request:
+
+```
+GET /user/suppliers
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+	{
+		"id": "b40d105d-fa20-444d-968a-98ca5c0833d2",
+		"name": "Bico Supplier",
+		"email": "bico_supplier@mail.com",
+		"phone": "1234-5678",
+		"isSupplier": true
+	}
+]
+
+OU
+
+[]
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 4.5. Atualizar nome e email de um usuário.
+
+### Exemplo de Request:
+
+```
+PATCH /user/me
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+{
+  "name": "Bico Updated",
+  "email": "bico_updated@email.com"
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          name: string(),
+          email: string().email("Invalid email format"),
+          phone: string(),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "Profile updated!",
+  "updatedUser": {
+    "id": "b40d105d-fa20-444d-968a-98ca5c0833d2",
+    "name": "Bico Updated",
+    "email": "bico_updated@email.com",
+    "phone": "5678-1234",
+    "isSupplier": true
+  }
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição             |
+| ---------------- | --------------------- |
+| 401 Unauthorized | Unauthorized.         |
+| 400 Bad Request  | Invalid email format. |
+
+## 4.6. Atualizar senha de um usuário.
+
+### Exemplo de Request:
+
+```
+PATCH /user/password
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+{
+  "currentPassword": "1234",
+  "newPassword": "12345"
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          currentPassword: string().required("currentPassword is required"),
+          newPassword: string().required("newPassword is required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "Password updated!"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição                 |
+| ---------------- | ------------------------- |
+| 401 Unauthorized | Unauthorized.             |
+| 400 Bad Request  | New Password is required. |
+
+## 4.7. Atualizar função de um usuário.
+
+### Exemplo de Request:
+
+```
+PATCH /user/role
+Host: http://localhost:3000 -- **MUDAR**
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+{
+  "currentPassword": "12345",
+  "role": true
+}
+```
+
+### Schema de Validação com Yup:
+
+```javascript
+schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          currentPassword: string().required("password is required"),
+          role: boolean().required("role is required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "Role updated!"
+}
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição                     |
+| ---------------- | ----------------------------- |
+| 401 Unauthorized | Unauthorized.                 |
+| 400 Bad Request  | Current password is required. |
+| 400 Bad Request  | Role is required.             |
+
+## 4.8. Deletar um usuário.
+
+### Exemplo de Request:
+
+```
+DELETE /user/me
+Host: http://localhost:3000 -- **MUDAR**
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+### Exemplo de Response:
+
+```
+204 OK
+```
+
+```json
+Vazio
+```
+
+### Possíveis Erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
 
 ## 5 Jobs
 
@@ -853,7 +1423,7 @@ vazio
 | 401 Unauthorized   | Unauthorized.  |
 | 500 QUERBRA PAGINA | QUERBRA PAGINA |
 
-## 6 candidates:
+## 6 Candidates:
 
 O objeto de candidates e definido como:
 
@@ -861,7 +1431,7 @@ O objeto de candidates e definido como:
 | ----- | ------ | ------------------------------------------- |
 | jobId | string | id do job que o user pretende se candidatar |
 
-### Endpoints da rota jobs.
+### Endpoints da rota candidates.
 
 | Método | Rota                  | Descrição                              |
 | ------ | --------------------- | -------------------------------------- |
@@ -870,7 +1440,7 @@ O objeto de candidates e definido como:
 | get    | /candidate/me         | lista todas minhas candidaturas        |
 | delete | /candidate/job/:idJob | deleta uma candidatura                 |
 
-### 6.1 Criar candidatura para um job.
+## 6.1 Criar candidatura para um job.
 
 ```
 POST /candidate/
@@ -996,7 +1566,7 @@ vazio
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-### 6.3 Lista todos os candidatos para um job:
+## 6.3 Lista todos os candidatos para um job:
 
 ```
 GET /candidate/job/:idJob
@@ -1033,19 +1603,13 @@ vazio
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-### 6.4 Deletar uma aplicacao:
+## 6.4 Deletar uma candidatura:
 
 ```
 DELETE /candidate/job/:idJob
 Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
-```
-
-### Corpo da Requisição:
-
-```json
-vazio
 ```
 
 **Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
@@ -1064,6 +1628,274 @@ verifyIsSupplier
 }
 
 
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "message": "Deleted candidacy"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7 Reviews:
+
+O objeto de reviews e definido como:
+
+| Campo   | Tipo   | Descrição                          |
+| ------- | ------ | ---------------------------------- |
+| score   | string | nota do servico                    |
+| comment | string | feedback comentado sobre o servico |
+
+### Endpoints da rota candidates.
+
+| Método | Rota                         | Descrição                       |
+| ------ | ---------------------------- | ------------------------------- |
+| post   | /review/:idJob               | cria uma review de algum job    |
+| get    | /review/:idJob               | lista uma review pelo id        |
+| get    | /review/supplier/:idSupplier | lista reviews de um supplier    |
+| patch  | /review/:idReview            | atualiza uma review pelo seu id |
+| delete | /review/:idReview            | deleta uma review pelo seu id   |
+
+## 7.1 Postar uma review:
+
+```
+POST /review/:idJob
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+
+
+verifyJobIsFinished
+
+{
+	"message": "User jobs",
+	"Jobs": [
+		{
+			"infos": {
+				"id": "5a63b42e-ab6f-4aa6-8524-142c7235b2be",
+				"title": "teste 2",
+				"description": "teste",
+				"category": "Autos",
+				"deliveryDate": "2024-07-21T00:00:00.000Z",
+				"status": "finished", // <- verifica se o status esta como finished
+				"cep": "1234567"
+			},
+			"supplier": {},// <- campo preenchido com supplier
+			"review": {
+				"id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+				"score": 4,
+				"comment": "muito bom"
+			}
+		}
+	]
+}
+
+verifyIfExistsReview
+
+{
+	"message": "User jobs",
+	"Jobs": [
+		{
+			"infos": {
+				"id": "5a63b42e-ab6f-4aa6-8524-142c7235b2be",
+				"title": "teste 2",
+				"description": "teste",
+				"category": "Autos",
+				"deliveryDate": "2024-07-21T00:00:00.000Z",
+				"status": "finished",
+				"cep": "1234567"
+			},
+			"supplier": {},  // <- campo preenchido com supplier
+			"review": {   // <- verifica se a review ja existe
+				"id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+				"score": 4,
+				"comment": "muito bom"
+			}
+		}
+	]
+}
+
+generalCheckReview // <- impede que o dono do job faca a review de seu trabalho.
+
+
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "score": 4,
+  "comment": "muito bom"
+}
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+  "score": 4,
+  "comment": "muito bom"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição              |
+| ---------------- | ---------------------- |
+| 401 Unauthorized | Unauthorized.          |
+| 400 Bad Request  | Job unfinished.        |
+| 409 Conflict     | Review already exists! |
+
+## 7.2 Listar uma review de um supplier
+
+```
+GET /review/supplier/:idSupplier
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+
+```
+
+### Exemplo de Response:
+
+```json
+[
+  {
+    "jobs": {
+      "reviews": {
+        "id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+        "score": 4,
+        "comment": "muito bom"
+      }
+    }
+  }
+]
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7.3 Listar uma review de um job:
+
+```
+GET /review/:idJob
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "review": {
+    "id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+    "score": 4,
+    "comment": "muito bom"
+  },
+  "supplier": {
+    "id": "db581608-3cfe-409e-ad7c-8d7f0ebf2dbc",
+    "jobId": "5a63b42e-ab6f-4aa6-8524-142c7235b2be",
+    "userId": "a81e1dd3-cc09-4d08-acc4-b6b20172b611"
+  }
+}
+```
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7.4 Atualizar um review pelo id:
+
+```
+PATCH /review/:idReview
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+generalCheckReview; // <- impede que o dono do job faca a review de seu trabalho.
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  // as keys de score e comments podem receber update
+  "score": 3
+}
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "message": "Review updated!"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7.5 Deletar uma review pelo id:
+
+```
+DELETE /review/:idReview
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+generalCheckReview; // <- impede que o dono do job faca a review de seu trabalho.
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
 ```
 
 ### Exemplo de Response:

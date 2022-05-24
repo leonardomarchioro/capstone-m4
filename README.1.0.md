@@ -17,98 +17,141 @@
   - [3.1 Instalando as dependencias:](#31-instalando-as-dependencias)
   - [3.2 Configurando as variaveis de ambiente](#32-configurando-as-variaveis-de-ambiente)
   - [3.3 Ligando o servidor](#33-ligando-o-servidor)
-  - [4. **Users**](#4-users)
-    - [Endpoints](#endpoints)
-    - [4.1. **Criação de Usuário**](#41-criação-de-usuário)
-    - [`/user/signup`](#usersignup)
+  - [4. Users](#4-users)
+    - [Endpoints da rota users](#endpoints-da-rota-users)
+  - [4.1. Criação de Usuário](#41-criação-de-usuário)
     - [Exemplo de Request:](#exemplo-de-request)
     - [Corpo da Requisição:](#corpo-da-requisição)
     - [Schema de Validação com Yup:](#schema-de-validação-com-yup)
     - [Exemplo de Response:](#exemplo-de-response)
     - [Possíveis Erros:](#possíveis-erros)
-    - [4.2. **Login do usuário**](#42-login-do-usuário)
-    - [`/user/signin`](#usersignin)
+  - [4.2. Login do usuário](#42-login-do-usuário)
     - [Exemplo de Request:](#exemplo-de-request-1)
     - [Corpo da Requisição:](#corpo-da-requisição-1)
     - [Schema de Validação com Yup:](#schema-de-validação-com-yup-1)
     - [Exemplo de Response:](#exemplo-de-response-1)
     - [Possíveis Erros:](#possíveis-erros-1)
-    - [4.3. **Lista um usuário usando seu token como parâmetro**](#43-lista-um-usuário-usando-seu-token-como-parâmetro)
-    - [`/user/me`](#userme)
+  - [4.3. Lista um usuário usando seu token como parâmetro](#43-lista-um-usuário-usando-seu-token-como-parâmetro)
     - [Exemplo de Request:](#exemplo-de-request-2)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição)
     - [Corpo da Requisição:](#corpo-da-requisição-2)
     - [Exemplo de Response:](#exemplo-de-response-2)
     - [Possíveis Erros:](#possíveis-erros-2)
-    - [4.4. **Lista todos os fornecedores usando o token de login como parâmetro.**](#44-lista-todos-os-fornecedores-usando-o-token-de-login-como-parâmetro)
-    - [`/user/suppliers`](#usersuppliers)
+  - [4.4. Lista todos os fornecedores usando o token de login como parâmetro.](#44-lista-todos-os-fornecedores-usando-o-token-de-login-como-parâmetro)
     - [Exemplo de Request:](#exemplo-de-request-3)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-1)
     - [Corpo da Requisição:](#corpo-da-requisição-3)
     - [Exemplo de Response:](#exemplo-de-response-3)
     - [Possíveis Erros:](#possíveis-erros-3)
-    - [4.5. **Atualizar nome e email de um usuário.**](#45-atualizar-nome-e-email-de-um-usuário)
-    - [`/user/me`](#userme-1)
+  - [4.5. Atualizar nome e email de um usuário.](#45-atualizar-nome-e-email-de-um-usuário)
     - [Exemplo de Request:](#exemplo-de-request-4)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-2)
     - [Corpo da Requisição:](#corpo-da-requisição-4)
     - [Schema de Validação com Yup:](#schema-de-validação-com-yup-2)
     - [Exemplo de Response:](#exemplo-de-response-4)
     - [Possíveis Erros:](#possíveis-erros-4)
-    - [4.6. **Atualizar senha de um usuário.**](#46-atualizar-senha-de-um-usuário)
-    - [`/user/password`](#userpassword)
+  - [4.6. Atualizar senha de um usuário.](#46-atualizar-senha-de-um-usuário)
     - [Exemplo de Request:](#exemplo-de-request-5)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-3)
     - [Corpo da Requisição:](#corpo-da-requisição-5)
     - [Schema de Validação com Yup:](#schema-de-validação-com-yup-3)
     - [Exemplo de Response:](#exemplo-de-response-5)
     - [Possíveis Erros:](#possíveis-erros-5)
-    - [4.7. **Atualizar função de um usuário.**](#47-atualizar-função-de-um-usuário)
-    - [`/user/role`](#userrole)
+  - [4.7. Atualizar função de um usuário.](#47-atualizar-função-de-um-usuário)
     - [Exemplo de Request:](#exemplo-de-request-6)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-4)
     - [Corpo da Requisição:](#corpo-da-requisição-6)
     - [Schema de Validação com Yup:](#schema-de-validação-com-yup-4)
     - [Exemplo de Response:](#exemplo-de-response-6)
     - [Possíveis Erros:](#possíveis-erros-6)
-    - [4.8. **Deletar um usuário.**](#48-deletar-um-usuário)
-    - [`/user/me`](#userme-2)
+  - [4.8. Deletar um usuário.](#48-deletar-um-usuário)
     - [Exemplo de Request:](#exemplo-de-request-7)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-5)
     - [Corpo da Requisição:](#corpo-da-requisição-7)
     - [Exemplo de Response:](#exemplo-de-response-7)
     - [Possíveis Erros:](#possíveis-erros-7)
-  - [5. **Candidates**](#5-candidates)
-    - [Endpoints](#endpoints-1)
-    - [5.1. **Solicitação da candidatura.**](#51-solicitação-da-candidatura)
-    - [`/candidate`](#candidate)
-    - [Exemplo de Request:](#exemplo-de-request-8)
+  - [5 Jobs](#5-jobs)
+    - [Endpoints da rota jobs.](#endpoints-da-rota-jobs)
+  - [5.1 Criacao de um servico](#51-criacao-de-um-servico)
+    - [Exemplo de request:](#exemplo-de-request-8)
+    - [Corpo da requisicao:](#corpo-da-requisicao)
+    - [Schema de validacao com Yup:](#schema-de-validacao-com-yup)
+    - [Exemplo de response:](#exemplo-de-response-8)
+    - [Possiveis erros de requisicao:](#possiveis-erros-de-requisicao)
+  - [5.2 Listagem dos meus servicos:](#52-listagem-dos-meus-servicos)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-6)
     - [Corpo da Requisição:](#corpo-da-requisição-8)
-    - [Exemplo de Response:](#exemplo-de-response-8)
-    - [Possíveis Erros:](#possíveis-erros-8)
-    - [5.2. **Listar todas as solicitações de candidatura.**](#52-listar-todas-as-solicitações-de-candidatura)
-    - [`/candidate/job/:idJob`](#candidatejobidjob)
-    - [Exemplo de Request:](#exemplo-de-request-9)
+    - [Exemplo de Response:](#exemplo-de-response-9)
+    - [Possiveis erros:](#possiveis-erros)
+  - [5.3 Listagem de todos os jobs](#53-listagem-de-todos-os-jobs)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-7)
     - [Corpo da Requisição:](#corpo-da-requisição-9)
-    - [Exemplo de Response:](#exemplo-de-response-9)
-    - [Possíveis Erros:](#possíveis-erros-9)
-    - [5.3. **Listar as solicitações de candidaturas de um usuário.**](#53-listar-as-solicitações-de-candidaturas-de-um-usuário)
-    - [`/candidate/me`](#candidateme)
-    - [Exemplo de Request:](#exemplo-de-request-10)
+    - [Exemplo de Response:](#exemplo-de-response-10)
+    - [Possiveis erros:](#possiveis-erros-1)
+  - [5.4 Listagem de um job especifico pelo id.](#54-listagem-de-um-job-especifico-pelo-id)
     - [Parâmetros da Requisição:](#parâmetros-da-requisição-8)
     - [Corpo da Requisição:](#corpo-da-requisição-10)
-    - [Exemplo de Response:](#exemplo-de-response-10)
-    - [Possíveis Erros:](#possíveis-erros-10)
-    - [5.4. **Deletar uma solicitação de candidatura.**](#54-deletar-uma-solicitação-de-candidatura)
-    - [`/candidate/job/:idJob`](#candidatejobidjob-1)
-    - [Exemplo de Request:](#exemplo-de-request-11)
-    - [Parâmetros da Requisição:](#parâmetros-da-requisição-9)
-    - [Corpo da Requisição:](#corpo-da-requisição-11)
     - [Exemplo de Response:](#exemplo-de-response-11)
-    - [Possíveis Erros:](#possíveis-erros-11)
-  - [7. **JSON**](#7-json)
+    - [Possiveis erros:](#possiveis-erros-2)
+  - [5.5 Atualizacao das informacoes do job:](#55-atualizacao-das-informacoes-do-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-11)
+    - [Exemplo de Response:](#exemplo-de-response-12)
+    - [Possiveis erros:](#possiveis-erros-3)
+  - [5.6 Atualizacao do candidato ao job:](#56-atualizacao-do-candidato-ao-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-12)
+    - [Exemplo de Response:](#exemplo-de-response-13)
+    - [Possiveis erros:](#possiveis-erros-4)
+  - [5.7 Atualizacao para remover o supplier:](#57-atualizacao-para-remover-o-supplier)
+    - [Corpo da Requisição:](#corpo-da-requisição-13)
+    - [Exemplo de Response:](#exemplo-de-response-14)
+    - [Possiveis erros:](#possiveis-erros-5)
+  - [5.8 Atualizacao para finalizar o servico:](#58-atualizacao-para-finalizar-o-servico)
+    - [Corpo da Requisição:](#corpo-da-requisição-14)
+    - [Exemplo de Response:](#exemplo-de-response-15)
+    - [Possiveis erros:](#possiveis-erros-6)
+    - [5.9 Delete do job:](#59-delete-do-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-15)
+    - [Exemplo de Response:](#exemplo-de-response-16)
+    - [Possiveis erros:](#possiveis-erros-7)
+  - [6 candidates:](#6-candidates)
+    - [Endpoints da rota candidates.](#endpoints-da-rota-candidates)
+  - [6.1 Criar candidatura para um job.](#61-criar-candidatura-para-um-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-16)
+    - [Exemplo de Response:](#exemplo-de-response-17)
+    - [Possiveis erros:](#possiveis-erros-8)
+  - [6.2 Lista todas as aplicacoes de candidatura do usuario:](#62-lista-todas-as-aplicacoes-de-candidatura-do-usuario)
+    - [Corpo da Requisição:](#corpo-da-requisição-17)
+    - [Exemplo de Response:](#exemplo-de-response-18)
+    - [Possiveis erros:](#possiveis-erros-9)
+  - [6.3 Lista todos os candidatos para um job:](#63-lista-todos-os-candidatos-para-um-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-18)
+    - [Exemplo de Response:](#exemplo-de-response-19)
+    - [Possiveis erros:](#possiveis-erros-10)
+  - [6.4 Deletar uma aplicacao:](#64-deletar-uma-aplicacao)
+    - [Corpo da Requisição:](#corpo-da-requisição-19)
+    - [Exemplo de Response:](#exemplo-de-response-20)
+    - [Possiveis erros:](#possiveis-erros-11)
+  - [7 Reviews:](#7-reviews)
+    - [Endpoints da rota candidates.](#endpoints-da-rota-candidates-1)
+  - [7.1 Postar uma review:](#71-postar-uma-review)
+    - [Corpo da Requisição:](#corpo-da-requisição-20)
+    - [Exemplo de Response:](#exemplo-de-response-21)
+    - [Possiveis erros:](#possiveis-erros-12)
+  - [7.2 Listar uma review de um supplier](#72-listar-uma-review-de-um-supplier)
+    - [Corpo da Requisição:](#corpo-da-requisição-21)
+    - [Exemplo de Response:](#exemplo-de-response-22)
+    - [Possiveis erros:](#possiveis-erros-13)
+  - [7.3 Listar uma review de um job:](#73-listar-uma-review-de-um-job)
+    - [Corpo da Requisição:](#corpo-da-requisição-22)
+    - [Exemplo de Response:](#exemplo-de-response-23)
+  - [7.4 Atualizar um review pelo id:](#74-atualizar-um-review-pelo-id)
+    - [Corpo da Requisição:](#corpo-da-requisição-23)
+    - [Exemplo de Response:](#exemplo-de-response-24)
+    - [Possiveis erros:](#possiveis-erros-14)
+  - [7.5 Deletar uma review pelo id:](#75-deletar-uma-review-pelo-id)
+    - [Corpo da Requisição:](#corpo-da-requisição-24)
+    - [Exemplo de Response:](#exemplo-de-response-25)
+    - [Possiveis erros:](#possiveis-erros-15)
 
 ---
 
@@ -179,9 +222,7 @@ yarn prisma migrate dev
 yarn dev
 ```
 
-## 4. **Users**
-
-[ Voltar para os Endpoints ](#5-endpoints)
+## 4. Users
 
 O objeto User é definido como:
 
@@ -194,7 +235,7 @@ O objeto User é definido como:
 | phone      | string  | O telefone do usuário             |
 | isSupplier | boolean | Informa se o usuário é fornecedor |
 
-### Endpoints
+### Endpoints da rota users
 
 | Método | Rota            | Descrição                                                           |
 | ------ | --------------- | ------------------------------------------------------------------- |
@@ -209,11 +250,7 @@ O objeto User é definido como:
 
 ---
 
-### 4.1. **Criação de Usuário**
-
-[ Voltar para os Endpoints ](#5-endpoints)
-
-### `/user/signup`
+## 4.1. Criação de Usuário
 
 ### Exemplo de Request:
 
@@ -283,11 +320,7 @@ schema: {
 
 ---
 
-### 4.2. **Login do usuário**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/signin`
+## 4.2. Login do usuário
 
 ### Exemplo de Request:
 
@@ -349,17 +382,13 @@ schema: {
 
 ---
 
-### 4.3. **Lista um usuário usando seu token como parâmetro**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/me`
+## 4.3. Lista um usuário usando seu token como parâmetro
 
 ### Exemplo de Request:
 
 ```
 GET /user/me
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -398,17 +427,13 @@ Vazio
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-### 4.4. **Lista todos os fornecedores usando o token de login como parâmetro.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/suppliers`
+## 4.4. Lista todos os fornecedores usando o token de login como parâmetro.
 
 ### Exemplo de Request:
 
 ```
 GET /user/suppliers
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -453,17 +478,13 @@ OU
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-### 4.5. **Atualizar nome e email de um usuário.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/me`
+## 4.5. Atualizar nome e email de um usuário.
 
 ### Exemplo de Request:
 
 ```
 PATCH /user/me
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -529,17 +550,13 @@ schema: {
 | 401 Unauthorized | Unauthorized.         |
 | 400 Bad Request  | Invalid email format. |
 
-### 4.6. **Atualizar senha de um usuário.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/password`
+## 4.6. Atualizar senha de um usuário.
 
 ### Exemplo de Request:
 
 ```
 PATCH /user/password
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -597,17 +614,13 @@ schema: {
 | 401 Unauthorized | Unauthorized.             |
 | 400 Bad Request  | New Password is required. |
 
-### 4.7. **Atualizar função de um usuário.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/role`
+## 4.7. Atualizar função de um usuário.
 
 ### Exemplo de Request:
 
 ```
 PATCH /user/role
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000 -- **MUDAR**
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -666,17 +679,13 @@ schema: {
 | 400 Bad Request  | Current password is required. |
 | 400 Bad Request  | Role is required.             |
 
-### 4.8. **Deletar um usuário.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/user/me`
+## 4.8. Deletar um usuário.
 
 ### Exemplo de Request:
 
 ```
 DELETE /user/me
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000 -- **MUDAR**
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -709,89 +718,117 @@ Vazio
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-## 5. **Candidates**
+## 5 Jobs
 
-[ Voltar para os Endpoints ](#5-endpoints)
+O objeto jobs e definido como:
 
-O objeto User é definido como:
+| Campo        | Tipo   | Descrição                                |
+| ------------ | ------ | ---------------------------------------- |
+| title        | string | titulo do trabalho requisitado           |
+| description  | string | descricao do servico requisitado         |
+| cep          | string | cep de onde o servico sera feito         |
+| deliveryDate | string | data prevista para realizacao do servico |
+| category     | string | id da categoria do servico               |
 
-| Campo  | Tipo   | Descrição                                         |
-| ------ | ------ | ------------------------------------------------- |
-| id     | string | Identificador único da solicitação de candidatura |
-| userId | string | Identificador único do usuário                    |
-| jobId  | string | Identificado único da tarefa                      |
+### Endpoints da rota jobs.
 
-### Endpoints
+| Método | Rota                     | Descrição                                |
+| ------ | ------------------------ | ---------------------------------------- |
+| post   | /job/                    | cria um servico                          |
+| get    | /job/me                  | lista meus servicos                      |
+| get    | /job/all                 | lista todos os servicos                  |
+| get    | /job/one/:jobId          | lista todos os servicos do user logado   |
+| patch  | /job/:id                 | atualiza dados de servico do user logado |
+| patch  | /job/:jobId/supplier     | atualiza quem ira realizar o servico     |
+| patch  | /job/:id/remove/supplier | remove o realiador atual do servico      |
+| patch  | /job/:id/end             | finaliza o servico                       |
+| delete | /job/:id                 | deleta o servico pedido pelo user logado |
 
-| Método | Rota                  | Descrição                                                                                    |
-| ------ | --------------------- | -------------------------------------------------------------------------------------------- |
-| POST   | /candidate            | Solicitação da candidatura.                                                                  |
-| GET    | /candidate/job/:idJob | Listar todas as solicitações de candidatura.                                                 |
-| GET    | /candidate/me         | Listar as solicitações de candidaturas de um usuário usando o token de login como parâmetro. |
-| DELETE | /candidate/job/:idJob | Deletar uma solicitação de candidatura.                                                      |
+## 5.1 Criacao de um servico
 
----
-
-### 5.1. **Solicitação da candidatura.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/candidate`
-
-### Exemplo de Request:
+### Exemplo de request:
 
 ```
-POST /candidate
-Host: http://suaapi.com/v1 -- **MUDAR**
-Authorization: Bearer Token
+POST /job/
+Host: http://localhost:3000
+Authorization: bearer token
 Content-type: application/json
 ```
 
-### Parâmetros da Requisição:
-
-| Parâmetro    | Tipo   | Descrição                             |
-| ------------ | ------ | ------------------------------------- |
-| Bearer Token | string | Token de acesso temporário do usuário |
-
-### Corpo da Requisição:
+### Corpo da requisicao:
 
 ```json
 {
-  "jobId": "7cdade61-0c0e-45fa-8f75-2e387779ef1b"
+  "title": "Aula de matematica",
+  "description": "Preciso aprender a fazer contas de porcentagem.",
+  "cep": "1234567",
+  "deliveryDate": "2024-07-21",
+  "category": 2
 }
 ```
 
-### Exemplo de Response:
+### Schema de validacao com Yup:
+
+```javascript
+
+  schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          title: string().required("title is required"),
+          description: string().required("description "),
+          deliveryDate: string().required("deliveryDate is required"),
+          cep: string().required("cep is required"),
+          category: string().required("category is required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+};
+```
+
+### Exemplo de response:
 
 ```
-201 CREATED
+201 Created
 ```
 
 ```json
 {
-  "id": "c0a22dfe-c3d0-4a9e-b4f7-3ea579539b05",
-  "userId": "c6b21ba1-395c-4f05-afaa-1da6a03b1dd2",
-  "jobId": "7cdade61-0c0e-45fa-8f75-2e387779ef1b"
+  "message": "jobs has been sucessfully created!",
+  "Job": {
+    "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+    "title": "Aula de matematica",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "category": "Aulas Particulares",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "cep": "1234567",
+    "status": "available"
+  },
+  "Client": {
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "name": " Gabriel",
+    "email": "gabriel@email.com",
+    "phone": "1234-5678"
+  }
 }
 ```
 
-### Possíveis Erros:
+### Possiveis erros de requisicao:
 
-| Código do Erro   | Descrição     |
-| ---------------- | ------------- |
-| 401 Unauthorized | Unauthorized. |
+| Código do Erro  | Descrição        |
+| --------------- | ---------------- |
+| 400 Bad Request | Key is required. |
 
-### 5.2. **Listar todas as solicitações de candidatura.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/candidate/job/:idJob`
-
-### Exemplo de Request:
+## 5.2 Listagem dos meus servicos:
 
 ```
-POST /candidate/job/:idJob
-Host: http://suaapi.com/v1 -- **MUDAR**
+GET /job/me
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -816,34 +853,106 @@ Vazio
 
 ```json
 {
-  "candidatesQuantity": 1,
-  "candidates": [
+  "message": "User jobs",
+  "Jobs": [
     {
-      "id": "c0a22dfe-c3d0-4a9e-b4f7-3ea579539b05",
-      "userId": "c6b21ba1-395c-4f05-afaa-1da6a03b1dd2",
-      "jobId": "7cdade61-0c0e-45fa-8f75-2e387779ef1b"
+      "infos": {
+        "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+        "title": "Aula de matematica",
+        "description": "Preciso aprender a fazer contas de porcentagem.",
+        "category": "Aulas Particulares",
+        "deliveryDate": "2024-07-21T00:00:00.000Z",
+        "status": "available",
+        "cep": "1234567"
+      },
+      "supplier": {},
+      "review": {}
     }
   ]
 }
 ```
 
-### Possíveis Erros:
+### Possiveis erros:
 
 | Código do Erro   | Descrição     |
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-### 5.3. **Listar as solicitações de candidaturas de um usuário.**
-
-[ Voltar aos Endpoints ](#5-endpoints)
-
-### `/candidate/me`
-
-### Exemplo de Request:
+## 5.3 Listagem de todos os jobs
 
 ```
-POST /candidate/me
-Host: http://suaapi.com/v1 -- **MUDAR**
+GET /job/all
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+
+| Parâmetro    | Tipo   | Descrição                             |
+| ------------ | ------ | ------------------------------------- |
+| Bearer Token | string | Token de acesso temporário do usuário |
+
+### Corpo da Requisição:
+
+```json
+Vazio
+```
+
+**Importante ressaltar que essa rota passa por um middleware de verificacao alem do bearer token**
+
+```typescript
+// esse middleware verifica se o user logado e um supplier
+
+verifyAlreadySupplier:
+
+{
+	"id": "3177dc8a-75d8-42bf-80be-20fd79cd945f",
+	"name": "Bico Updated",
+	"email": "bico_updated@kenzie.com",
+	"phone": "5678-1234",
+	"isSupplier": true // <- deve ser true
+}
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+  {
+    "id": "7b71cf03-9c5a-41c8-ae56-9e1a06fd5ac0",
+    "title": "Aula de matematica",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "categories": "{ name: Aulas Particulares }",
+    "deliveryDate": " 2024-07-21T00:00:00.000Z",
+    "status": "available", // ... <- Todos os jobs cadastrados como avaiable estarao registrados aqui
+    "cep": "1234567",
+    "userId": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "users": {
+      "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+      "name": "Gabriel ",
+      "email": "biel@email.com",
+      "phone": "1234-5678"
+    }
+  }
+]
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 5.4 Listagem de um job especifico pelo id.
+
+```
+GET /job/one/:jobId
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
@@ -868,60 +977,666 @@ Vazio
 
 ```json
 {
-  "candidacysQuantity": "you have 2 applications for service(s)",
+  "message": "Job are listed",
+  "job": {
+    "category": "Aulas Particulares",
+    "cep": "1234567",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+    "status": "doing",
+    "title": "Aula de matematica"
+  },
+  "Client": {
+    "name": "Gabriel ",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Supplier": {
+    "name": "Gabriel Martelada",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Review": {}
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro     | Descrição      |
+| ------------------ | -------------- |
+| 401 Unauthorized   | Unauthorized.  |
+| 404 Page not found | Job not found! |
+
+## 5.5 Atualizacao das informacoes do job:
+
+```
+PATCH /job/:id
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por dois middlewares de verificacao alem do bearer token**
+
+```typescript
+// esse middleware verifica se o user logado e um supplier
+
+verifyAlreadySupplier:
+
+{
+	"id": "3177dc8a-75d8-42bf-80be-20fd79cd945f",
+	"name": "Bico Updated",
+	"email": "bico_updated@kenzie.com",
+	"phone": "5678-1234",
+	"isSupplier": true // <- deve ser true
+}
+```
+
+```typescript
+// esse middleware verifica se o user logado e um supplier
+
+verifyAlreadyStarted:
+
+{
+  "message": "Job are listed",
+  "job": {
+    "category": "Aulas Particulares",
+    "cep": "1234567",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+    "status": "doing",  // <- verifica se o status e diferente de avaiable
+    "title": "Aula de matematica"
+  },
+  "Client": {
+    "name": "Gabriel ",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Supplier": {
+    "name": "Gabriel Martelada",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Review": {}
+}
+```
+
+```typescript
+ schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          title: string(),
+          description: string(),
+          categoryId: number(),
+          cep: string(),
+          deliveryDate: string(),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+
+```
+
+### Corpo da Requisição:
+
+```json
+// Meramente um exemplo
+
+{
+  "title": "Novo titulo",
+  "description": "Nova descricao",
+  "categoryId": 6
+}
+
+// Keys que podem receber update:
+// title
+// description
+// categoryId
+// cep
+// deliveryDate
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "Job updated",
+  "Job": {
+    "id": "7b71cf03-9c5a-41c8-ae56-9e1a06fd5ac0",
+    "title": "Novo titulo",
+    "description": "Nova descricao",
+    "category": "Reforma",
+    "cep": "1234567",
+    "deliveryDate": "2024-07-21T00:00:00.000Z"
+  }
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro     | Descrição            |
+| ------------------ | -------------------- |
+| 401 Unauthorized   | Unauthorized.        |
+| 404 Page not found | Job not found!       |
+| 409 Conflict       | Job already started! |
+
+## 5.6 Atualizacao do candidato ao job:
+
+```
+PATCH /job/:jobId/supplier
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por dois middlewares de verificacao alem do bearer token**
+
+```typescript
+// esse middleware verifica se ja existe um supplier para o job.
+
+verifyAlreadySupplier:
+
+{
+	"id": "3177dc8a-75d8-42bf-80be-20fd79cd945f",
+	"name": "Bico Updated",
+	"email": "bico_updated@kenzie.com",
+	"phone": "5678-1234",
+	"isSupplier": true // <- deve ser true
+}
+```
+
+```typescript
+// esse middleware verifica se o user logado e um supplier && se o job realmente existe.
+
+verifyAlreadyStarted:
+
+{
+  "message": "Job are listed",
+  "job": {
+    "category": "Aulas Particulares",
+    "cep": "1234567",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+    "status": "doing",  // <- verifica se o status e diferente de avaiable
+    "title": "Aula de matematica"
+  },
+  "Client": {
+    "name": "Gabriel ",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Supplier": {
+    "name": "Gabriel Martelada",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Review": {}
+}
+```
+
+```typescript
+// esse middleware verifica se o supplier e candidato a vaga do job.
+
+verifyIsCandidate:
+
+{
+	"candidatesQuantity": 1,
+	"candidates": [
+		{
+			"id": "b43fbfe9-df7b-4cc4-b801-d2a654ccde8e",
+			"userId": "6fb3f08f-66d5-4a79-a742-666b69baea23", // <- verifica se o userId e igual ao supplierId recebido pelo body
+			"jobId": "0c120968-3975-409c-a220-af63ee7d76be"
+		}
+	]
+}
+```
+
+```typescript
+ schema: {
+    body: {
+      yupSchema: object()
+        .shape({
+          supplierId: string().required("supplier id required"),
+        })
+        .noUnknown(true),
+      validateOptions: {
+        abortEarly: false,
+        stripUnknown: false,
+      },
+    },
+  },
+
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "supplierId": "6fb3f08f-66d5-4a79-a742-666b69baea23"
+}
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "message": "Select supplier!",
+  "job": {
+    "category": "Aulas Particulares",
+    "cep": "1234567",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+    "status": "doing",
+    "title": "Aula de matematica"
+  },
+  "Client": {
+    "name": "Gabriel Martelada",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Supplier": {
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "name": "Gabriel ",
+    "email": "biel1@email.com",
+    "phone": "1234-5678"
+  }
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro     | Descrição                  |
+| ------------------ | -------------------------- |
+| 401 Unauthorized   | Unauthorized.              |
+| 404 Page not found | Job not exists!            |
+| 409 Conflict       | Supplier already selected! |
+
+## 5.7 Atualizacao para remover o supplier:
+
+```
+PATCH /job/:id/remove/supplier
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```
+{
+	"message": "Supplier removed!"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro      | Descrição       |
+| ------------------- | --------------- |
+| 401 Unauthorized    | Unauthorized.   |
+| 500 QUEBRA A PAGINA | QUEBRA A PAGINA |
+
+## 5.8 Atualizacao para finalizar o servico:
+
+```
+PATCH /job/:jobId/end
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+// esse middleware verifica se:
+
+// o  status e igual a avaiable, caso sim, o servico nao pode ser finalizado sem um supplier.
+
+// o status e igual a finished, caso sim, o servico ja foi finalizado e nao pode ser finalziado novamente.
+
+verifyJobAlreadyUpToFinish:
+{
+  "message": "Job are listed",
+  "job": {
+    "category": "Aulas Particulares",
+    "cep": "1234567",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "description": "Preciso aprender a fazer contas de porcentagem.",
+    "id": "5b97ca0e-bd55-4983-b9c1-d12ee3c3eba6",
+    "status": "doing", // <- status a ser avaliado deve ser igual a doing
+    "title": "Aula de matematica"
+  },
+  "Client": {
+    "name": "Gabriel ",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Supplier": {
+    "name": "Gabriel Martelada",
+    "id": "6fb3f08f-66d5-4a79-a742-666b69baea23",
+    "email": "biel@email.com",
+    "phone": "1234-5678"
+  },
+  "Review": {}
+}
+
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```typescript
+{
+	"message": "Job finished!",
+	"job": {
+		"category": "Aulas Particulares",
+		"cep": "1234567",
+		"deliveryDate": "2024-07-21T00:00:00.000Z",
+		"description": "teste",
+		"id": "0f9e0fae-114f-42f7-bb47-761d6a760e99",
+		"status": "finished",
+		"title": "123456"
+	},
+	"Client": {
+		"name": "leo",
+		"id": "f138b315-b32c-400e-9312-e2012efb89e6",
+		"email": "leo@email.com",
+		"phone": "1234-5678"
+	},
+	"Supplier": {
+		"name": "leo",
+		"id": "f138b315-b32c-400e-9312-e2012efb89e6",
+		"email": "leo@email.com",
+		"phone": "1234-5678"
+	}
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição                                     |
+| ---------------- | --------------------------------------------- |
+| 401 Unauthorized | Unauthorized.                                 |
+| 409 Conflict     | service cannot be finished without a supplier |
+| 409 Conflict     | service already finished                      |
+
+### 5.9 Delete do job:
+
+```
+PATCH /job/:id
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+vazio
+```
+
+### Possiveis erros:
+
+| Código do Erro     | Descrição      |
+| ------------------ | -------------- |
+| 401 Unauthorized   | Unauthorized.  |
+| 500 QUERBRA PAGINA | QUERBRA PAGINA |
+
+## 6 candidates:
+
+O objeto de candidates e definido como:
+
+| Campo | Tipo   | Descrição                                   |
+| ----- | ------ | ------------------------------------------- |
+| jobId | string | id do job que o user pretende se candidatar |
+
+### Endpoints da rota candidates.
+
+| Método | Rota                  | Descrição                              |
+| ------ | --------------------- | -------------------------------------- |
+| post   | /candidate/           | cria uma candidatura                   |
+| get    | candidate/job/:idJob  | lista todos candidatos para um servico |
+| get    | /candidate/me         | lista todas minhas candidaturas        |
+| delete | /candidate/job/:idJob | deleta uma candidatura                 |
+
+## 6.1 Criar candidatura para um job.
+
+```
+POST /candidate/
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+
+verifyCandidateNotExists // <- verifica se o candidato ja nao existe
+
+verifyIsSupplier
+
+{
+	"id": "ac765dae-f724-49fa-83fb-50bdc985d946",
+	"name": "biel",
+	"email": "biel33@email.com",
+	"phone": "1234-5678",
+	"isSupplier": true // <- faz a verificacao se o possivel candidato e um supplier.
+}
+
+verifyOwnJob // <- verifica se o job instanciado pertece ao candidato, caso sim, nao e possivel a candidatura.
+
+
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  "jobId": "1c1bac07-e3f7-48d7-a2b3-8f3c671677cc"
+}
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "Candidate": {
+    "id": "ac765dae-f724-49fa-83fb-50bdc985d946",
+    "name": "biel",
+    "email": "biel33@email.com",
+    "phone": "1234-5678"
+  },
+  "Job": {
+    "id": "1c1bac07-e3f7-48d7-a2b3-8f3c671677cc",
+    "title": "teste 2",
+    "description": "teste",
+    "deliveryDate": "2024-07-21T00:00:00.000Z",
+    "cep": "1234567",
+    "category": "Autos"
+  },
+  "Client": {
+    "id": "ac765dae-f724-49fa-83fb-50bdc985d946",
+    "name": "biel",
+    "email": "biel33@email.com",
+    "phone": "1234-5678"
+  }
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição                             |
+| ---------------- | ------------------------------------- |
+| 401 Unauthorized | Unauthorized.                         |
+| 409 Conflict     | You have already applied for this job |
+
+## 6.2 Lista todas as aplicacoes de candidatura do usuario:
+
+```
+GET /candidate/me
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+
+
+verifyIsSupplier
+
+{
+	"id": "ac765dae-f724-49fa-83fb-50bdc985d946",
+	"name": "biel",
+	"email": "biel33@email.com",
+	"phone": "1234-5678",
+	"isSupplier": true // <- faz a verificacao se o possivel candidato e um supplier.
+}
+
+
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "candidacysQuantity": "you have 1 applications for service(s)",
   "candidacys": [
     {
-      "id": "c0a22dfe-c3d0-4a9e-b4f7-3ea579539b05",
-      "userId": "c6b21ba1-395c-4f05-afaa-1da6a03b1dd2",
-      "jobId": "7cdade61-0c0e-45fa-8f75-2e387779ef1b"
-    },
-    {
-      "id": "5d4f9fc7-4d4c-43bc-9617-739090118f61",
-      "userId": "c6b21ba1-395c-4f05-afaa-1da6a03b1dd2",
-      "jobId": "e34a4115-5d3e-4ab8-aa71-3b9f7ba35b44"
+      "id": "56cbe15f-5373-49d0-ae50-e22e0b552744",
+      "userId": "ac765dae-f724-49fa-83fb-50bdc985d946",
+      "jobId": "1c1bac07-e3f7-48d7-a2b3-8f3c671677cc"
     }
   ]
 }
 ```
 
-### Possíveis Erros:
+### Possiveis erros:
 
 | Código do Erro   | Descrição     |
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-### 5.4. **Deletar uma solicitação de candidatura.**
+## 6.3 Lista todos os candidatos para um job:
 
-[ Voltar aos Endpoints ](#5-endpoints)
+```
+GET /candidate/job/:idJob
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
 
-### `/candidate/job/:idJob`
+### Corpo da Requisição:
 
-### Exemplo de Request:
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+{
+	"candidatesQuantity": 1,
+	"candidates": [
+		{
+			"id": "56cbe15f-5373-49d0-ae50-e22e0b552744",
+			"userId": "ac765dae-f724-49fa-83fb-50bdc985d946",
+			"jobId": "1c1bac07-e3f7-48d7-a2b3-8f3c671677cc"
+		}
+	]
+}
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 6.4 Deletar uma aplicacao:
 
 ```
 DELETE /candidate/job/:idJob
-Host: http://suaapi.com/v1 -- **MUDAR**
+Host: http://localhost:3000
 Authorization: Bearer Token
 Content-type: application/json
 ```
 
-### Parâmetros da Requisição:
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
 
-| Parâmetro    | Tipo   | Descrição                             |
-| ------------ | ------ | ------------------------------------- |
-| Bearer Token | string | Token de acesso temporário do usuário |
+```typescript
+
+
+verifyIsSupplier
+
+{
+	"id": "ac765dae-f724-49fa-83fb-50bdc985d946",
+	"name": "biel",
+	"email": "biel33@email.com",
+	"phone": "1234-5678",
+	"isSupplier": true // <- faz a verificacao se o possivel candidato e um supplier.
+}
+
+
+```
 
 ### Corpo da Requisição:
 
 ```json
-Vazio
+vazio
 ```
 
 ### Exemplo de Response:
-
-```
-200 OK
-```
 
 ```json
 {
@@ -929,16 +1644,270 @@ Vazio
 }
 ```
 
-### Possíveis Erros:
+### Possiveis erros:
 
 | Código do Erro   | Descrição     |
 | ---------------- | ------------- |
 | 401 Unauthorized | Unauthorized. |
 
-## 7. **JSON**
+## 7 Reviews:
 
-[ Voltar para os Endpoints ](#5-endpoints)
+O objeto de reviews e definido como:
+
+| Campo   | Tipo   | Descrição                          |
+| ------- | ------ | ---------------------------------- |
+| score   | string | nota do servico                    |
+| comment | string | feedback comentado sobre o servico |
+
+### Endpoints da rota candidates.
+
+| Método | Rota                         | Descrição                       |
+| ------ | ---------------------------- | ------------------------------- |
+| post   | /review/:idJob               | cria uma review de algum job    |
+| get    | /review/:idJob               | lista uma review pelo id        |
+| get    | /review/supplier/:idSupplier | lista reviews de um supplier    |
+| patch  | /review/:idReview            | atualiza uma review pelo seu id |
+| delete | /review/:idReview            | deleta uma review pelo seu id   |
+
+## 7.1 Postar uma review:
+
+```
+POST /review/:idJob
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+
+
+verifyJobIsFinished
+
+{
+	"message": "User jobs",
+	"Jobs": [
+		{
+			"infos": {
+				"id": "5a63b42e-ab6f-4aa6-8524-142c7235b2be",
+				"title": "teste 2",
+				"description": "teste",
+				"category": "Autos",
+				"deliveryDate": "2024-07-21T00:00:00.000Z",
+				"status": "finished", // <- verifica se o status esta como finished
+				"cep": "1234567"
+			},
+			"supplier": {},// <- campo preenchido com supplier
+			"review": {
+				"id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+				"score": 4,
+				"comment": "muito bom"
+			}
+		}
+	]
+}
+
+verifyIfExistsReview
+
+{
+	"message": "User jobs",
+	"Jobs": [
+		{
+			"infos": {
+				"id": "5a63b42e-ab6f-4aa6-8524-142c7235b2be",
+				"title": "teste 2",
+				"description": "teste",
+				"category": "Autos",
+				"deliveryDate": "2024-07-21T00:00:00.000Z",
+				"status": "finished",
+				"cep": "1234567"
+			},
+			"supplier": {},  // <- campo preenchido com supplier
+			"review": {   // <- verifica se a review ja existe
+				"id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+				"score": 4,
+				"comment": "muito bom"
+			}
+		}
+	]
+}
+
+generalCheckReview // <- impede que o dono do job faca a review de seu trabalho.
+
+
+```
+
+### Corpo da Requisição:
 
 ```json
-![JSON:](json-example.json)
+{
+  "score": 4,
+  "comment": "muito bom"
+}
 ```
+
+### Exemplo de Response:
+
+```json
+{
+  "id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+  "score": 4,
+  "comment": "muito bom"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição              |
+| ---------------- | ---------------------- |
+| 401 Unauthorized | Unauthorized.          |
+| 400 Bad Request  | Job unfinished.        |
+| 409 Conflict     | Review already exists! |
+
+## 7.2 Listar uma review de um supplier
+
+```
+GET /review/supplier/:idSupplier
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+
+```
+
+### Exemplo de Response:
+
+```json
+[
+  {
+    "jobs": {
+      "reviews": {
+        "id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+        "score": 4,
+        "comment": "muito bom"
+      }
+    }
+  }
+]
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7.3 Listar uma review de um job:
+
+```
+GET /review/:idJob
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "review": {
+    "id": "a94b30a5-baed-429a-b016-0fb9558e9610",
+    "score": 4,
+    "comment": "muito bom"
+  },
+  "supplier": {
+    "id": "db581608-3cfe-409e-ad7c-8d7f0ebf2dbc",
+    "jobId": "5a63b42e-ab6f-4aa6-8524-142c7235b2be",
+    "userId": "a81e1dd3-cc09-4d08-acc4-b6b20172b611"
+  }
+}
+```
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7.4 Atualizar um review pelo id:
+
+```
+PATCH /review/:idReview
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+generalCheckReview; // <- impede que o dono do job faca a review de seu trabalho.
+```
+
+### Corpo da Requisição:
+
+```json
+{
+  // as keys de score e comments podem receber update
+  "score": 3
+}
+```
+
+### Exemplo de Response:
+
+```json
+{
+  "message": "Review updated!"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
+
+## 7.5 Deletar uma review pelo id:
+
+```
+DELETE /review/:idReview
+Host: http://localhost:3000
+Authorization: Bearer Token
+Content-type: application/json
+```
+
+**Importante ressaltar que essa rota passa por outro middleware de verificacao alem do bearer token**
+
+```typescript
+generalCheckReview; // <- impede que o dono do job faca a review de seu trabalho.
+```
+
+### Corpo da Requisição:
+
+```json
+vazio
+```
+
+### Exemplo de Response:
+
+```json
+{
+	"message": "Deleted candidacy"
+}
+```
+
+### Possiveis erros:
+
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
