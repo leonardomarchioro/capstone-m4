@@ -3,7 +3,22 @@ import { prisma } from "@PrismaClient";
 const listMyJobsService = async (userId: string) => {
   const allJobs = await prisma.job.findMany({
     where: {
-      id: userId,
+      userId,
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      categories: { select: { name: true } },
+      deliveryDate: true,
+      status: true,
+      cep: true,
+      supplierTaken: {
+        select: {
+          users: { select: { id: true, name: true, email: true, phone: true } },
+        },
+      },
+      reviews: true,
     },
   });
 

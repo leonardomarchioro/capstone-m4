@@ -7,6 +7,18 @@ const createReviewController = async (request: Request, response: Response) => {
 
   const newReview = await createReviewService(idJob, { score, comment });
 
-  return response.status(201).json(newReview);
+  const formatReview = {
+    id: newReview.id,
+    score: newReview.score,
+    comment: newReview.comment,
+  };
+
+  if (formatReview.comment === null) {
+    delete formatReview.comment;
+  }
+
+  return response
+    .status(201)
+    .json({ message: "review published successfully!", data: formatReview });
 };
 export default createReviewController;

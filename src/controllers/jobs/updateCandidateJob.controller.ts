@@ -5,14 +5,35 @@ const updateCandidateJobController = async (
   request: Request,
   response: Response
 ) => {
-  const { userId } = request;
-  const { id } = request.params;
+  const { jobId } = request.params;
+  const { supplierId } = request.body;
 
-  const supplier = await updateCandidateJobService({ userId, id });
+  const { jobs, users } = await updateCandidateJobService({
+    supplierId,
+    jobId,
+  });
+
+  const { id, cep, categories, deliveryDate, description, title, status } =
+    jobs;
 
   return response.status(200).json({
-    message: "Supplier updated!",
-    supplier,
+    message: "Select supplier!",
+    Job: {
+      id,
+      title,
+      description,
+      category: categories.name,
+      deliveryDate,
+      cep,
+      status,
+    },
+    Client: jobs.users,
+    Supplier: {
+      id: users.id,
+      name: users.name,
+      email: users.email,
+      phone: users.phone,
+    },
   });
 };
 

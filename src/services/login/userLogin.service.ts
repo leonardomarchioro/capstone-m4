@@ -10,7 +10,8 @@ const userLoginService = async ({ email, password }: IUserLogin) => {
   if (!user) {
     throw new AppError(401, "Wrong email/password");
   }
-  if (!compare(password, user.password)) {
+  const verify = await compare(password, user.password);
+  if (!verify) {
     throw new AppError(401, "Wrong email/password");
   }
 

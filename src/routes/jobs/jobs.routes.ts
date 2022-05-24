@@ -14,24 +14,53 @@ import updateFinishJobController from "src/controllers/jobs/updateFinishJob.cont
 import deleteJobController from "src/controllers/jobs/deleteJob.controller";
 
 import ensureAuth from "src/middlewares/ensureAuth.middleware";
-import verifyIsSupplier from "src/middlewares/jobsMiddlewares/verifyIsSupplier.middleware";
+import verifyIsSupplier from "src/middlewares/candidateMiddlewares/verifyIsSupplier.middleware";
+import verifyIsCandidate from "src/middlewares/jobsMiddlewares/verifyIsCandidate.middleware";
+
+import { expressYupMiddleware } from "express-yup-middleware";
+import createJobSchema from "src/validations/jobs/createJob.validation";
+import updateJobInfoSchema from "src/validations/jobs/jobsUpdate.validation";
+import updateCandidateJobSchema from "src/validations/jobs/updateCandidateJob.validation";
+import verifyAlreadySupplier from "src/middlewares/jobsMiddlewares/verifyAlreadySupplier";
+import verifyAlreadyStarted from "src/middlewares/jobsMiddlewares/verifyJobAlredyStarted";
+import verifyJobAlreadyUpToFinish from "src/middlewares/jobsMiddlewares/verifyJobAlredyUpToFinish";
 
 const jobRoutes = Router();
 
 jobRoutes.use(ensureAuth);
 
-jobRoutes.post("/", createJobController);
+jobRoutes.post(
+  "/",
+  expressYupMiddleware({ schemaValidator: createJobSchema }),
+  createJobController
+);
 
 jobRoutes.get("/me", listMyJobsController);
 jobRoutes.get("/all", verifyIsSupplier, listAllJobsController);
-jobRoutes.get("/one/:id", listOneJobController);
+jobRoutes.get("/one/:jobId", listOneJobController);
 
-jobRoutes.patch("/:id", UpdateInfosJobController);
+jobRoutes.patch(
+  "/:id",
+  expressYupMiddleware({ schemaValidator: updateJobInfoSchema }),
+  verifyAlreadyStarted,
+  UpdateInfosJobController
+);
 
-// jobRoutes.patch(":id/supplier", updateCandidateJobController);
-// jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
+jobRoutes.patch(
+  "/:jobId/supplier",
+  expressYupMiddleware({ schemaValidator: updateCandidateJobSchema }),
+  verifyAlreadySupplier,
+  verifyIsCandidate,
+  updateCandidateJobController
+);
 
-jobRoutes.patch("/:id/end", updateFinishJobController);
+jobRoutes.patch("/:id/remove/supplier", updateRemoveCandidateJobController);
+
+jobRoutes.patch(
+  "/:jobId/end",
+  verifyJobAlreadyUpToFinish,
+  updateFinishJobController
+);
 
 jobRoutes.delete("/:id", deleteJobController);
 

@@ -4,11 +4,19 @@ import AppError from "src/errors/appError";
 const listReviewService = async (idJob: string) => {
   const review = await prisma.job.findUnique({
     where: { id: idJob },
-    select: { reviews: true, supplierTaken: true },
+    select: {
+      reviews: true,
+      id: true,
+      supplierTaken: {
+        select: {
+          users: { select: { id: true, name: true, email: true, phone: true } },
+        },
+      },
+    },
   });
 
-  if (!review.reviews) {
-    throw new AppError(401, "There is any review!");
+  if (!review) {
+    throw new AppError(404, "Review not founded!");
   }
 
   return review;

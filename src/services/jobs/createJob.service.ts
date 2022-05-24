@@ -18,7 +18,19 @@ const createJobService = async ({
     categoryId,
   };
 
-  const newJob = await prisma.job.create({ data: jobData });
+  const newJob = await prisma.job.create({
+    data: jobData,
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      categories: true,
+      deliveryDate: true,
+      status: true,
+      cep: true,
+      users: { select: { id: true, name: true, email: true, phone: true } },
+    },
+  });
 
   return newJob;
 };

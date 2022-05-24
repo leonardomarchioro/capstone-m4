@@ -5,6 +5,10 @@ const getAllCandidatesService = async (jobId: string) => {
     where: {
       jobId,
     },
+    select: {
+      id: true,
+      users: { select: { id: true, name: true, email: true, phone: true } },
+    },
   });
 
   return candidates;

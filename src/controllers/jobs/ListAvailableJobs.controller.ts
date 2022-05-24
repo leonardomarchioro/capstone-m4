@@ -6,7 +6,22 @@ const listAllJobsController = async (request: Request, response: Response) => {
 
   const allJobs = (await listAllJobsService(userId)) || [];
 
-  return response.status(200).json(allJobs);
+  const formatData = allJobs.map((job) => {
+    return {
+      infos: {
+        id: job.id,
+        title: job.title,
+        description: job.description,
+        category: job.categories.name,
+        deliveryDate: job.deliveryDate,
+        status: job.status,
+        cep: job.cep,
+      },
+      client: job.users,
+    };
+  });
+
+  return response.status(200).json(formatData);
 };
 
 export default listAllJobsController;

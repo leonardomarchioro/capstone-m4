@@ -1,5 +1,3 @@
-// import { AppDataSource } from "../../data-source";
-// import { User } from "../../entities/User/user.entity";
 import { IUserCreate } from "../../interfaces/user";
 import { hash } from "bcryptjs";
 import { prisma } from "../../prisma/client";
@@ -18,6 +16,13 @@ const userCreateService = async ({
       name,
       password: hashPassword,
       phone,
+    },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      isSupplier: true,
     },
   });
 

@@ -1,3 +1,4 @@
+import { Job } from "@prisma/client";
 import { Request, Response } from "express";
 import listMyJobsService from "../../services/jobs/listMyJobs.service";
 
@@ -6,15 +7,25 @@ const listMyJobsController = async (request: Request, response: Response) => {
 
   const myJobs = await listMyJobsService(userId);
 
-  if (!myJobs) {
-    return response.status(400).json({
-      message: "Bad request",
-    });
-  }
+  const formatData = myJobs.map((job) => {
+    return {
+      infos: {
+        id: job.id,
+        title: job.title,
+        description: job.description,
+        category: job.categories.name,
+        deliveryDate: job.deliveryDate,
+        status: job.status,
+        cep: job.cep,
+      },
+      supplier: job.supplierTaken === null ? {} : job.supplierTaken.users,
+      review: job.reviews || {},
+    };
+  });
 
   return response.status(200).json({
-    message: "User jobs.",
-    myJobs,
+    message: "User jobs",
+    Jobs: formatData,
   });
 };
 

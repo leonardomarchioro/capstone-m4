@@ -5,12 +5,23 @@ const listAllJobsService = async (userId: string) => {
     where: {
       status: "available",
       users: {
-        id: userId
-      }
+        id: userId,
+      },
+    },
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      categories: { select: { name: true } },
+      deliveryDate: true,
+      status: true,
+      cep: true,
+      userId: true,
+      users: { select: { id: true, name: true, email: true, phone: true } },
     },
   });
 
-  return avaiableJobs;
+  return avaiableJobs.filter((job) => job.userId !== userId);
 };
 
 export default listAllJobsService;
