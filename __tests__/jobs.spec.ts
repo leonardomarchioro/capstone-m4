@@ -46,14 +46,36 @@ describe("Job routes", () => {
   describe("Happy end", () => {
     describe("POST", () => {
       it("Should create new job", async () => {
-        const { status, body } = await jobRequests.createJob(userData);
-
+        const { response } = await jobRequests.createJob(userData);
+        const { status, body } = response;
         expect(status).toBe(201);
         expect(body).toBeDefined();
-        expect(body).not.toHaveProperty("id");
+        expect(body).toHaveProperty("Job");
       });
     });
-    describe("GET", () => {});
+    describe("GET", () => {
+      it("Should list my jobs", async () => {
+        const { response } = await jobRequests.listMyJobs(userData);
+        const { status, body } = response;
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("Jobs");
+      });
+    });
+    describe("GET", () => {
+      it("Should list all jobs is available", async () => {
+        const { response } = await jobRequests.listAllJobsAvailable(
+          userData,
+          supplierData
+        );
+        const { status, body } = response;
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveLength(1);
+      });
+    });
     describe("PATCH", () => {});
     describe("DELETE", () => {});
   });

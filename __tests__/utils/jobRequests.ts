@@ -5,8 +5,6 @@ import { UserRequests } from "./userRequests";
 import { IJobsCreate } from "../../src/interfaces/jobs/index";
 import { app } from "../../src/app";
 
-let token: string;
-
 const userRequests = new UserRequests(app);
 
 const JobData: IJobsCreate = {
@@ -25,13 +23,34 @@ export class JobRequests {
   }
 
   async createJob(userData: IUserCreate) {
-    const { body } = await userRequests.signIn(userData);
-    token = body.token;
+    const { token } = await userRequests.signIn(userData);
+
     const response = await request(this.app)
       .post("/job")
       .send(JobData)
       .set("Authorization", `Bearer ${token}`);
 
-    return response;
+    return { response, token };
+  }
+
+  async listMyJobs(userData: IUserCreate) {
+    const { token } = await this.createJob(userData);
+
+    const response = await request(this.app)
+      .get("/job/me")
+      .set("Authorization", `Bearer ${token}`);
+
+    return { response, token };
+  }
+
+  async listAllJobsAvailable(userData: IUserCreate, supplierData: IUserCreate) {
+    await this.createJob(userData);
+    const { token } = await userRequests.updateRole(supplierData);
+
+    const response = await request(this.app)
+      .get("/job/all")
+      .set("Authorization", `Bearer ${token}`);
+
+    return { response, token };
   }
 }
