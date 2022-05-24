@@ -12,7 +12,7 @@ const verifyJobExists = async (
   if (!jobId) {
     jobId = request.params.idJob;
   }
-  console.log(jobId);
+
   const verify = await prisma.job.findUnique({ where: { id: jobId } });
 
   if (!verify) {

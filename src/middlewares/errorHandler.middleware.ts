@@ -14,7 +14,7 @@ const errorHandler = (
     });
   }
 
-  console.log(error)
+  console.log(error);
 
   return response.status(500).json({
     status: "error",

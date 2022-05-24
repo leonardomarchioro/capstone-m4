@@ -45,7 +45,25 @@ describe("User routes", () => {
         expect(body).not.toHaveProperty("password");
       });
     });
-    describe("GET", () => {});
+
+    describe("LOGIN", () => {
+      it("Should login", async () => {
+        const { status, body } = await userRequests.signIn(userData);
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("token");
+      });
+    });
+
+    describe("GET", () => {
+      it("Should list my data", async () => {
+        const { status, body } = await userRequests.listMe(userData);
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("user");
+      });
+    });
     describe("DELETE", () => {});
     describe("PATCH", () => {});
   });
