@@ -19,3 +19,15 @@ export interface ISupplier {
   supplierId: string;
   jobId: string;
 }
+
+export interface IJobsReturn {
+  infos: {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    deliveryDate: string;
+    status: string;
+    cep: string;
+  };
+}

@@ -76,7 +76,50 @@ describe("Job routes", () => {
         expect(body).toHaveLength(1);
       });
     });
-    describe("PATCH", () => {});
-    describe("DELETE", () => {});
+    describe("GET", () => {
+      it("Should list one jobs", async () => {
+        const { response } = await jobRequests.listOneJob(userData);
+        const { status, body } = response;
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("job.id");
+      });
+    });
+    describe("PATCH", () => {
+      it("Should update infos jobs", async () => {
+        const { response } = await jobRequests.updateInfosJob(userData);
+        const { status, body } = response;
+
+        expect(status).toBe(200);
+        expect(body).toBeDefined();
+        expect(body).toHaveProperty("Job.id");
+        expect(body.Job.title).toBe("Teste Update");
+      });
+    });
+    ///////////////
+    ////////// Necessário os requests de Candidatos para implementar
+    ////
+    describe("PATCH", () => {
+      it("Should select one candidate", async () => {});
+    });
+    describe("PATCH", () => {
+      it("Should remove candidate", async () => {});
+    });
+    describe("PATCH", () => {
+      it("Should finish job", async () => {});
+    });
+    ////
+    ////////
+    ////////////
+    describe("DELETE", () => {
+      it("Should select one candidate", async () => {
+        const { response } = await jobRequests.deleteJob(userData);
+        const { status, body } = response;
+
+        expect(status).toBe(204);
+        expect(body).toBeDefined();
+      });
+    });
   });
 });

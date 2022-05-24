@@ -2,8 +2,9 @@ import request from "supertest";
 import { Express } from "express";
 import { IUserCreate } from "../../src/interfaces/user";
 import { UserRequests } from "./userRequests";
-import { IJobsCreate } from "../../src/interfaces/jobs/index";
+import { IJobsCreate, IJobsReturn } from "../../src/interfaces/jobs/index";
 import { app } from "../../src/app";
+import { string } from "yup";
 
 const userRequests = new UserRequests(app);
 
@@ -52,5 +53,40 @@ export class JobRequests {
       .set("Authorization", `Bearer ${token}`);
 
     return { response, token };
+  }
+
+  async listOneJob(userData: IUserCreate) {
+    const { response, token } = await this.createJob(userData);
+
+    const id: string = response.body.Job.id;
+
+    const list = await request(this.app)
+      .get(`/job/one/${id}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    return { response: list, token };
+  }
+  async updateInfosJob(userData: IUserCreate) {
+    const { response, token } = await this.createJob(userData);
+    const id: string = response.body.Job.id;
+
+    const update = await request(this.app)
+      .patch(`/job/${id}`)
+      .send({
+        title: "Teste Update",
+      })
+      .set("Authorization", `Bearer ${token}`);
+
+    return { response: update, token };
+  }
+  async deleteJob(userData: IUserCreate) {
+    const { response, token } = await this.createJob(userData);
+    const id: string = response.body.Job.id;
+
+    const deleteJob = await request(this.app)
+      .delete(`/job/${id}`)
+      .set("Authorization", `Bearer ${token}`);
+
+    return { response: deleteJob, token };
   }
 }
