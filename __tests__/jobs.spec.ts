@@ -50,7 +50,7 @@ describe("Job routes", () => {
 
         expect(status).toBe(201);
         expect(body).toBeDefined();
-        expect(body).not.toHaveProperty("id");
+        expect(body).toHaveProperty("id");
       });
     });
     describe("GET", () => {});
