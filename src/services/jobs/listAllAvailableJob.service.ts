@@ -4,9 +4,6 @@ const listAllJobsService = async (userId: string) => {
   const avaiableJobs = await prisma.job.findMany({
     where: {
       status: "available",
-      users: {
-        id: userId,
-      },
     },
     select: {
       id: true,

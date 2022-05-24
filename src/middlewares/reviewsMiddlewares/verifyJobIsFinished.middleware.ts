@@ -8,18 +8,19 @@ const verifyJobIsFinished = async (
   next: NextFunction
 ) => {
   const { idJob } = request.params;
-  const { userId } = request;
 
-  const verifyStatus = await prisma.job.findUnique({
+  const verify = await prisma.job.findUnique({
     where: { id: idJob },
-
   });
 
-  if (verifyStatus.status === "finished") {
+  if (!verify) {
+    throw new AppError(404, "Job nout founded!");
+  }
+
+  if (verify.status === "finished") {
     return next();
   }
 
   throw new AppError(400, "Job unfinished");
-  
 };
 export default verifyJobIsFinished;

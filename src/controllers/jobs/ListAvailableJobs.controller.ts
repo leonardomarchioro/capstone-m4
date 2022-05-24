@@ -4,7 +4,7 @@ import listAllJobsService from "../../services/jobs/listAllAvailableJob.service"
 const listAllJobsController = async (request: Request, response: Response) => {
   const { userId } = request;
 
-  const allJobs = (await listAllJobsService(userId)) || [];
+  const allJobs = await listAllJobsService(userId);
 
   const formatData = allJobs.map((job) => {
     return {

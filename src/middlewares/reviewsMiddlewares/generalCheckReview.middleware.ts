@@ -13,6 +13,12 @@ const generalCheckReview = async (
   if (!id) {
     id = request.params.idReview;
 
+    const reviewVerify = await prisma.review.findUnique({ where: { id } });
+
+    if (!reviewVerify) {
+      throw new AppError(404, "Review not founded!");
+    }
+
     const checkIfIsClient = await prisma.job.findUnique({
       where: { reviewId: id },
       select: { userId: true },
