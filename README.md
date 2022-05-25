@@ -171,7 +171,7 @@ Todo o codigo da api foi feito a partir do typescript. Por isso, para instalar a
 
 ### URL da API:
 
-https://nossaurlaqui.com
+https://capstone-m4.herokuapp.com/
 
 ## 2. Diagrama de entidades relacionais
 
@@ -1294,10 +1294,9 @@ vazio
 
 ### Possiveis erros:
 
-| Código do Erro      | Descrição       |
-| ------------------- | --------------- |
-| 401 Unauthorized    | Unauthorized.   |
-| 500 QUEBRA A PAGINA | QUEBRA A PAGINA |
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
 
 ## 5.8 Atualizacao para finalizar o servico:
 
@@ -1412,10 +1411,9 @@ vazio
 
 ### Possiveis erros:
 
-| Código do Erro     | Descrição      |
-| ------------------ | -------------- |
-| 401 Unauthorized   | Unauthorized.  |
-| 500 QUERBRA PAGINA | QUERBRA PAGINA |
+| Código do Erro   | Descrição     |
+| ---------------- | ------------- |
+| 401 Unauthorized | Unauthorized. |
 
 ## 6 Candidates:
 
