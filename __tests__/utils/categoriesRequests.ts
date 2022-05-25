@@ -1,6 +1,5 @@
 import request from "supertest";
 import { Express } from "express";
-import { app } from "../../src/app";
 import { userRequests } from "../index.spec";
 import { IUserCreate } from "../../src/interfaces/user";
 

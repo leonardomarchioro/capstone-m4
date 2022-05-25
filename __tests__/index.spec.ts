@@ -12,10 +12,14 @@ import { prisma } from "../src/prisma/client";
 import { clearDatabase } from "./utils/clearDatabase";
 import CandidatesRequests from "./utils/candidatesRequests";
 import { JobRequests } from "./utils/jobRequests";
+import { CategoriesRequests } from "./utils/categoriesRequests";
+import { ReviewsRequests } from "./utils/reviewsRequest";
 
 export const userRequests = new UserRequests(app);
 export const candidatesRequests = new CandidatesRequests(app);
 export const jobRequests = new JobRequests(app);
+export const reviewRequest = new ReviewsRequests(app);
+const categoryRequests = new CategoriesRequests(app);
 
 beforeAll(async () => {
   await prisma.$connect();
@@ -281,6 +285,87 @@ describe("Job routes", () => {
   describe("DELETE", () => {
     it("Should delete one job", async () => {
       const { response } = await jobRequests.deleteJob(userData);
+      const { status, body } = response;
+
+      expect(status).toBe(204);
+      expect(body).toBeDefined();
+    });
+  });
+});
+
+describe("Category route", () => {
+  describe("GET", () => {
+    it("Should list all categories", async () => {
+      const { status, body } = await categoryRequests.listAllCategories(
+        userData
+      );
+
+      expect(status).toBe(200);
+      expect(body).toBeDefined();
+    });
+  });
+});
+
+describe("Reviews route", () => {
+  describe("POST", () => {
+    it("Should create review", async () => {
+      const { response } = await reviewRequest.createReview(
+        userData,
+        supplierData
+      );
+      const { status, body } = response;
+      expect(status).toBe(201);
+      expect(body).toBeDefined();
+      expect(body).toHaveProperty("data.id");
+    });
+  });
+  describe("GET", () => {
+    it("Should list review from job", async () => {
+      const { response } = await reviewRequest.listJobReview(
+        userData,
+        supplierData
+      );
+      const { status, body } = response;
+
+      expect(status).toBe(200);
+      expect(body).toBeDefined();
+      expect(body).toHaveProperty("review");
+      expect(body).toHaveProperty("supplier");
+    });
+  });
+  describe("GET", () => {
+    it("Should list review from supplier", async () => {
+      const { response } = await reviewRequest.listSupplierReviews(
+        userData,
+        supplierData
+      );
+      const { status, body } = response;
+
+      expect(status).toBe(200);
+      expect(body).toBeDefined();
+      expect(body).toHaveLength(1);
+    });
+  });
+  describe("PATCH", () => {
+    it("Should update review", async () => {
+      const { response } = await reviewRequest.updateReview(
+        userData,
+        supplierData
+      );
+      const { status, body } = response;
+
+      expect(status).toBe(200);
+      expect(body).toBeDefined();
+      expect(body).toHaveProperty("message");
+      expect(body.message).toBe("Review updated!");
+    });
+  });
+  describe("DELETE", () => {
+    it("Should delete review", async () => {
+      const { response } = await reviewRequest.deleteReview(
+        userData,
+        supplierData
+      );
       const { status, body } = response;
 
       expect(status).toBe(204);
