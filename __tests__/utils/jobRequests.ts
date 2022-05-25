@@ -1,11 +1,9 @@
 import request from "supertest";
 import { Express } from "express";
 import { IUserCreate } from "../../src/interfaces/user";
-import { UserRequests } from "./userRequests";
-import { IJobsCreate, IJobsReturn } from "../../src/interfaces/jobs/index";
-import { app } from "../../src/app";
-
-const userRequests = new UserRequests(app);
+import { userRequests } from "../index.spec";
+import { IJobsCreate } from "../../src/interfaces/jobs/index";
+import { candidatesRequests } from "../index.spec";
 
 const JobData: IJobsCreate = {
   title: "Me ajuda de novo",
@@ -87,5 +85,32 @@ export class JobRequests {
       .set("Authorization", `Bearer ${token}`);
 
     return { response: deleteJob, token };
+  }
+  async selectcandidate(userData: IUserCreate, supplierData: IUserCreate) {
+    const { jobId, clientToken, supplierId } =
+      await candidatesRequests.createCandidate(userData, supplierData);
+
+    const select = await request(this.app)
+      .patch(`/job/${jobId}/supplier`)
+      .send({ supplierId })
+      .set("Authorization", `Bearer ${clientToken}`);
+
+    return { response: select, token: clientToken, jobId };
+  }
+  async removeCandidate(userData: IUserCreate, supplierData: IUserCreate) {
+    const { token, jobId } = await this.selectcandidate(userData, supplierData);
+
+    const response = await request(this.app)
+      .patch(`/job/${jobId}/remove/supplier`)
+      .set("Authorization", `Bearer ${token}`);
+    return { response, token };
+  }
+  async finishJob(userData: IUserCreate, supplierData: IUserCreate) {
+    const { token, jobId } = await this.selectcandidate(userData, supplierData);
+    const response = await request(this.app)
+      .patch(`/job/${jobId}/end`)
+      .set("Authorization", `Bearer ${token}`);
+
+    return { response, token };
   }
 }
