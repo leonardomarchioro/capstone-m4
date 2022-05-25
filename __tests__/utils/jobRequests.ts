@@ -4,7 +4,6 @@ import { IUserCreate } from "../../src/interfaces/user";
 import { UserRequests } from "./userRequests";
 import { IJobsCreate, IJobsReturn } from "../../src/interfaces/jobs/index";
 import { app } from "../../src/app";
-import { string } from "yup";
 
 const userRequests = new UserRequests(app);
 
