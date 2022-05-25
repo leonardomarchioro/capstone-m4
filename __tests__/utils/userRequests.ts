@@ -2,8 +2,6 @@ import request from "supertest";
 import { Express } from "express";
 import { IUserCreate } from "../../src/interfaces/user";
 
-let token: string;
-
 export class UserRequests {
   app: Express;
 
@@ -27,22 +25,21 @@ export class UserRequests {
       .post("/user/signin")
       .send(loginData);
 
-    token = response.body.token;
-    return response;
+    return { response, token: response.body.token };
   }
 
   async listProfile(userData: IUserCreate) {
-    const { body } = await this.signIn(userData);
+    const { token } = await this.signIn(userData);
 
     const response = await request(this.app)
       .get("/user/me")
-      .set("Authorization", `Bearer ${body.token}`);
+      .set("Authorization", `Bearer ${token}`);
 
-    return response;
+    return { response, token };
   }
 
   async updateRole(userData: IUserCreate) {
-    await this.signIn(userData);
+    const { token } = await this.signIn(userData);
 
     const updatedRole = {
       currentPassword: userData.password,
@@ -54,43 +51,47 @@ export class UserRequests {
       .send(updatedRole)
       .set("Authorization", `Bearer ${token}`);
 
-    return response;
+    return { response, token };
   }
 
   async listAllSuppliers(userData: IUserCreate) {
-    await this.updateRole(userData);
+    const { token } = await this.updateRole(userData);
 
-    return await request(this.app)
+    const response = await request(this.app)
       .get("/user/suppliers")
       .set("Authorization", `Bearer ${token}`);
+    return { response, token };
   }
 
   async updateProfile(userData: IUserCreate) {
-    await this.signIn(userData);
+    const { token } = await this.signIn(userData);
 
-    return await request(this.app)
+    const response = await request(this.app)
       .patch("/user/me")
       .send({ name: "João" })
       .set("Authorization", `Bearer ${token}`);
+    return { response, token };
   }
 
   async updatePassword(userData: IUserCreate) {
-    await this.signIn(userData);
+    const { token } = await this.signIn(userData);
 
-    return await request(this.app)
+    const response = await request(this.app)
       .patch("/user/password")
       .send({
         currentPassword: userData.password,
         newPassword: "13579",
       })
       .set("Authorization", `Bearer ${token}`);
+    return { response, token };
   }
 
   async deleteUser(userData: IUserCreate) {
-    await this.signIn(userData);
+    const { token } = await this.signIn(userData);
 
-    return await request(this.app)
+    const response = await request(this.app)
       .delete("/user/me")
       .set("Authorization", `Bearer ${token}`);
+    return { response, token };
   }
 }
