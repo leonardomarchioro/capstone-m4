@@ -10,10 +10,12 @@ services:
 
   postgres-tests:
     image: postgres:14.2-alpine
-    env_file:
-      - ./.env
     ports:
       - 5433:5432
+    environment:
+      - POSTGRES_PASSWORD=prisma
+      - POSTGRES_USER=prisma
+      - POSTGRES_DB=tests
 
   node:
     build: ./

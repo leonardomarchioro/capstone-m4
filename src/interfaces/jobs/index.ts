@@ -1,5 +1,5 @@
 export interface IJobsCreate {
-  userId: string;
+  userId?: string;
   title: string;
   description: string;
   deliveryDate: string;
@@ -18,4 +18,16 @@ export interface IUpdate {
 export interface ISupplier {
   supplierId: string;
   jobId: string;
+}
+
+export interface IJobsReturn {
+  infos: {
+    id: string;
+    title: string;
+    description: string;
+    category: string;
+    deliveryDate: string;
+    status: string;
+    cep: string;
+  };
 }
