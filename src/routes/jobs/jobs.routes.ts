@@ -30,7 +30,7 @@ const jobRoutes = Router();
 jobRoutes.use(ensureAuth);
 
 jobRoutes.post(
-  "",
+  "/",
   expressYupMiddleware({ schemaValidator: createJobSchema }),
   createJobController
 );
