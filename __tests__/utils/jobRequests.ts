@@ -1,9 +1,8 @@
 import request from "supertest";
 import { Express } from "express";
 import { IUserCreate } from "../../src/interfaces/user";
-import { UserRequests } from "./userRequests";
+import { userRequests } from "../index.spec";
 import { IJobsCreate } from "../../src/interfaces/jobs/index";
-import { app } from "../../src/app";
 import { candidatesRequests } from "../index.spec";
 
 const JobData: IJobsCreate = {
@@ -13,8 +12,6 @@ const JobData: IJobsCreate = {
   deliveryDate: "2024-07-21",
   categoryId: 2,
 };
-
-const userRequests = new UserRequests(app);
 
 export class JobRequests {
   app: Express;

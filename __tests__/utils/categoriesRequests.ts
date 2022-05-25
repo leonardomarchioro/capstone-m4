@@ -1,10 +1,8 @@
 import request from "supertest";
 import { Express } from "express";
 import { app } from "../../src/app";
-import { UserRequests } from "./userRequests";
+import { userRequests } from "../index.spec";
 import { IUserCreate } from "../../src/interfaces/user";
-
-const userRequests = new UserRequests(app);
 
 export class CategoriesRequests {
   app: Express;
