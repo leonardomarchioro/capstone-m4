@@ -10,22 +10,29 @@ export class UserRequests {
   }
 
   async signUp(userData: IUserCreate) {
-    return await request(this.app).post("/user/signup").send(userData);
+    const response = await request(this.app)
+      .post("/user/signup")
+      .send(userData);
+    return { response };
   }
 
   async signIn(userData: IUserCreate) {
-    await this.signUp(userData);
+    const { response } = await this.signUp(userData);
 
     const loginData = {
       email: userData.email,
       password: userData.password,
     };
 
-    const response = await request(this.app)
+    const responseReq = await request(this.app)
       .post("/user/signin")
       .send(loginData);
 
-    return { response, token: response.body.token };
+    return {
+      response: responseReq,
+      token: responseReq.body.token,
+      userId: response.body.id,
+    };
   }
 
   async listProfile(userData: IUserCreate) {
@@ -39,7 +46,7 @@ export class UserRequests {
   }
 
   async updateRole(userData: IUserCreate) {
-    const { token } = await this.signIn(userData);
+    const { token, userId } = await this.signIn(userData);
 
     const updatedRole = {
       currentPassword: userData.password,
@@ -51,7 +58,7 @@ export class UserRequests {
       .send(updatedRole)
       .set("Authorization", `Bearer ${token}`);
 
-    return { response, token };
+    return { response, token, supplierId: userId };
   }
 
   async listAllSuppliers(userData: IUserCreate) {
@@ -74,16 +81,16 @@ export class UserRequests {
   }
 
   async updatePassword(userData: IUserCreate) {
-    const { token } = await this.signIn(userData);
+    const { token, response } = await this.signIn(userData);
 
-    const response = await request(this.app)
+    const responseReq = await request(this.app)
       .patch("/user/password")
       .send({
         currentPassword: userData.password,
         newPassword: "13579",
       })
       .set("Authorization", `Bearer ${token}`);
-    return { response, token };
+    return { response: responseReq, token, supplierId: response.body.id };
   }
 
   async deleteUser(userData: IUserCreate) {

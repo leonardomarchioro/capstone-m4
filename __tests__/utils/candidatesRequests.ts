@@ -1,16 +1,9 @@
 import request from "supertest";
 import { Express } from "express";
-import { ICandidateCreate } from "../../src/interfaces/candidate";
-import { UserRequests } from "./userRequests";
-import { app } from "../../src/app";
-import { JobRequests } from "./jobRequests";
 import { IUserCreate } from "../../src/interfaces/user";
+import { jobRequests, userRequests } from "../index.spec";
 
-const userRequests = new UserRequests(app);
-
-const jobRequests = new JobRequests(app);
-
-export class CandidatesRequests {
+class CandidatesRequests {
   app: Express;
 
   constructor(app: Express) {
@@ -18,19 +11,22 @@ export class CandidatesRequests {
   }
 
   async createCandidate(userData: IUserCreate, supplierData: IUserCreate) {
-    const { response } = await jobRequests.createJob(userData);
-    const { token } = await userRequests.updateRole(supplierData);
+    const { response, token } = await jobRequests.createJob(userData);
+    const supplier = await userRequests.updateRole(supplierData);
 
     const jobId = response.body.Job.id;
 
     const candidate = await request(this.app)
       .post("/candidate")
       .send({ jobId })
-      .set("Authorization", `Bearer ${token}`);
+      .set("Authorization", `Bearer ${supplier.token}`);
 
     return {
       response: candidate,
-      token,
+      token: supplier.token,
+      clientToken: token,
+      jobId,
+      supplierId: supplier.supplierId,
     };
   }
 
@@ -79,3 +75,5 @@ export class CandidatesRequests {
     };
   }
 }
+
+export default CandidatesRequests;

@@ -10,13 +10,12 @@ import {
 } from "@jest/globals";
 import { prisma } from "../src/prisma/client";
 import { clearDatabase } from "./utils/clearDatabase";
-import { CandidatesRequests } from "./utils/candidatesRequests";
+import CandidatesRequests from "./utils/candidatesRequests";
 import { JobRequests } from "./utils/jobRequests";
 
-const userRequests = new UserRequests(app);
-const candidateReq = new CandidatesRequests(app);
-const jobRequests = new JobRequests(app);
-
+export const userRequests = new UserRequests(app);
+export const candidatesRequests = new CandidatesRequests(app);
+export const jobRequests = new JobRequests(app);
 
 beforeAll(async () => {
   await prisma.$connect();
@@ -48,8 +47,8 @@ const supplierData = {
 describe("User routes", () => {
   describe("POST", () => {
     it("Should create a user", async () => {
-      const { status, body } = await userRequests.signUp(userData);
-
+      const { response } = await userRequests.signUp(userData);
+      const { status, body } = response;
       expect(status).toBe(201);
       expect(body).toBeDefined();
       expect(body).not.toHaveProperty("password");
@@ -58,7 +57,7 @@ describe("User routes", () => {
 
   describe("LOGIN", () => {
     it("Should login", async () => {
-      const { response, token } = await userRequests.signIn(userData);
+      const { response } = await userRequests.signIn(userData);
       const { status, body } = response;
       expect(status).toBe(200);
       expect(body).toBeDefined();
@@ -68,7 +67,7 @@ describe("User routes", () => {
 
   describe("GET", () => {
     it("Should list my profile", async () => {
-      const { response, token } = await userRequests.listProfile(userData);
+      const { response } = await userRequests.listProfile(userData);
       const { status, body } = response;
 
       expect(status).toBe(200);
@@ -89,9 +88,7 @@ describe("User routes", () => {
   });
   describe("GET", () => {
     it("Should list all Suppliers", async () => {
-      const { response, token } = await userRequests.listAllSuppliers(
-        userData
-      );
+      const { response, token } = await userRequests.listAllSuppliers(userData);
       const { status, body } = response;
 
       expect(status).toBe(200);
@@ -133,12 +130,10 @@ describe("User routes", () => {
   });
 });
 
-
 describe("Candidate routes", () => {
-
   describe("POST", () => {
     it("Should create a candidate for a job", async () => {
-      const { response } = await candidateReq.createCandidate(
+      const { response } = await candidatesRequests.createCandidate(
         userData,
         supplierData
       );
@@ -152,7 +147,7 @@ describe("Candidate routes", () => {
 
   describe("GET", () => {
     it("Should list all my applications", async () => {
-      const { response } = await candidateReq.listAllApplication(
+      const { response } = await candidatesRequests.listAllApplication(
         userData,
         supplierData
       );
@@ -166,7 +161,7 @@ describe("Candidate routes", () => {
 
   describe("GET", () => {
     it("Should list all the candidates", async () => {
-      const { response } = await candidateReq.listAllCandidates(
+      const { response } = await candidatesRequests.listAllCandidates(
         userData,
         supplierData
       );
@@ -180,7 +175,7 @@ describe("Candidate routes", () => {
 
   describe("DELETE", () => {
     it("Should delete a candidate", async () => {
-      const { response } = await candidateReq.deleteCandidate(
+      const { response } = await candidatesRequests.deleteCandidate(
         userData,
         supplierData
       );
@@ -192,7 +187,6 @@ describe("Candidate routes", () => {
     });
   });
 });
-
 
 describe("Job routes", () => {
   describe("POST", () => {
@@ -248,23 +242,44 @@ describe("Job routes", () => {
       expect(body.Job.title).toBe("Teste Update");
     });
   });
-  ///////////////
-  ////////// Necessário os requests de Candidatos para implementar
-  ////
   describe("PATCH", () => {
-    it("Should select one candidate", async () => {});
-  });
-  describe("PATCH", () => {
-    it("Should remove candidate", async () => {});
-  });
-  describe("PATCH", () => {
-    it("Should finish job", async () => {});
-  });
-  ////
-  ////////
-  ////////////
-  describe("DELETE", () => {
     it("Should select one candidate", async () => {
+      const { response } = await jobRequests.selectcandidate(
+        userData,
+        supplierData
+      );
+      const { status, body } = response;
+
+      expect(status).toBe(200);
+      expect(body).toHaveProperty("Supplier.id");
+    });
+  });
+  describe("PATCH", () => {
+    it("Should remove candidate", async () => {
+      const { response } = await jobRequests.removeCandidate(
+        userData,
+        supplierData
+      );
+      const { status, body } = response;
+
+      expect(status).toBe(200);
+      expect(body).toBeDefined();
+      expect(body).toHaveProperty("message");
+    });
+  });
+  describe("PATCH", () => {
+    it("Should finish job", async () => {
+      const { response } = await jobRequests.finishJob(userData, supplierData);
+      const { status, body } = response;
+
+      expect(status).toBe(200);
+      expect(body).toBeDefined();
+      expect(body).toHaveProperty("message");
+      expect(body.message).toBe("Job finished!");
+    });
+  });
+  describe("DELETE", () => {
+    it("Should delete one job", async () => {
       const { response } = await jobRequests.deleteJob(userData);
       const { status, body } = response;
 
